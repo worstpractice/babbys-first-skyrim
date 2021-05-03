@@ -1,0 +1,11 @@
+come up with attributes for character view
+
+use corner wheel for something (2d map maybe?)
+
+add collisions
+
+add enemies
+
+crossfade animations
+
+make it so press MMB starts orbitcontroller (and release MMB stops orbitcontroller), cycling between that and third person camera

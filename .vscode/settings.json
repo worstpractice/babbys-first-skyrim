@@ -1,0 +1,6 @@
+{
+  "javascript.preferences.importModuleSpecifier": "project-relative",
+  "npm.packageManager": "pnpm",
+  "typescript.preferences.importModuleSpecifier": "project-relative",
+  "typescript.tsserver.experimental.enableProjectDiagnostics": false
+}
