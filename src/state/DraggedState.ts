@@ -10,8 +10,6 @@ export type Actions = {
   readonly setCurrentlyDraggedElement: (to: HTMLDivElement | null) => void;
 };
 
-// NOTE: Remember to create a`DraggedState.d.ts` file under typings/state and import type `DraggedState` from there.
-
 export const useDraggedState = create<DraggedState>(
   combine<Data, Actions>(
     {
