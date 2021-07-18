@@ -9,6 +9,7 @@
     "disableSolutionSearching": false,
     "disableSourceOfProjectReferenceRedirect": false,
     "esModuleInterop": false,
+    // "exactOptionalPropertyTypes": true,
     "forceConsistentCasingInFileNames": true,
     "importsNotUsedAsValues": "error",
     "isolatedModules": true,
@@ -22,7 +23,7 @@
     "noImplicitOverride": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
-    "noPropertyAccessFromIndexSignature": false,
+    "noPropertyAccessFromIndexSignature": true,
     "noStrictGenericChecks": false,
     "noUncheckedIndexedAccess": true,
     "noUnusedLocals": false,
@@ -43,7 +44,8 @@
     "suppressExcessPropertyErrors": false,
     "suppressImplicitAnyIndexErrors": false,
     "target": "esnext",
-    "useDefineForClassFields": true
+    "useDefineForClassFields": true,
+    // "useUnknownInCatchVariables": true
   },
   "exclude": [
     "**/node_modules",

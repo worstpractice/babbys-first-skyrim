@@ -1,3 +1,4 @@
+import { entries } from "../../utils/object/entries";
 import { keys } from "../../utils/object/keys";
 import type { SetEvent } from "../typings/obset/SetEvent";
 import type { SetEventListener } from "../typings/obset/SetEventListener";
@@ -10,6 +11,18 @@ import type { SetOperationEventListeners } from "../typings/obset/SetOperationEv
 import type { SetOperationListeners } from "../typings/obset/SetOperationListeners";
 import { swapPop } from "../utils/swapPop";
 
+const ONCE = {
+  once: true,
+} as const;
+
+type ObSetOptions = {
+  readonly freeUnusedResources: boolean;
+};
+
+const DEFAULT_OPTIONS: ObSetOptions = {
+  freeUnusedResources: true,
+} as const;
+
 export class ObSet<T extends string> extends Set<T> implements SetEventTarget<T> {
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -17,27 +30,37 @@ export class ObSet<T extends string> extends Set<T> implements SetEventTarget<T>
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  private onValueHandlers = new Map<T, SetOperationListeners<T>>();
+  private readonly onValueHandlers = new Map<T, SetOperationListeners<T>>();
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  private toBeRanOnlyOnce: SetEventListener<T>[] = [];
+  private readonly toBeRanOnlyOnce: SetEventListener<T>[] = [];
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  private onAnyHandlers: SetOperationEventListeners<T> = {
+  private readonly onAnyHandlers: SetOperationEventListeners<T> = {
     add: new Set<SetOperationEventListener<T>>(),
     delete: new Set<SetOperationEventListener<T>>(),
   } as const;
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  private onEmptyHandlers = new Set<SetOperationEventListener<T>>();
+  private readonly onEmptyHandlers = new Set<SetOperationEventListener<T>>();
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  // @ts-expect-error Remove this when all the tools (Prettier, eslint, etc) can parse the new TS 4.3 (tsconfig-mandated) `override` syntax
-  add(this: this, value: T): this {
+  private readonly options: ObSetOptions = DEFAULT_OPTIONS;
+
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  constructor(values?: readonly T[] | null, options: ObSetOptions = DEFAULT_OPTIONS) {
+    super(values);
+    this.options = options;
+  }
+
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  override add(this: this, value: T): this {
     if (super.has(value)) return this;
 
     super.add(value);
@@ -59,7 +82,7 @@ export class ObSet<T extends string> extends Set<T> implements SetEventTarget<T>
       const operationListeners: SetOperationListeners<T> = {
         add: undefined,
         delete: undefined,
-      };
+      } as const;
 
       this.onValueHandlers.set(value, operationListeners);
     }
@@ -83,8 +106,8 @@ export class ObSet<T extends string> extends Set<T> implements SetEventTarget<T>
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  // @ts-expect-error Remove this when all the tools (Prettier, eslint, etc) can parse the new TS 4.3 (tsconfig-mandated) `override` syntax
-  delete(this: this, value: T): this {
+  // @ts-expect-error Our implementation of `delete` is chainable, unlike the one we're overriding.
+  override delete(this: this, value: T): this {
     if (!this.has(value)) return this;
 
     super.delete(value);
@@ -157,8 +180,24 @@ export class ObSet<T extends string> extends Set<T> implements SetEventTarget<T>
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+  private findOperationsWithoutListenersIn(this: this, operationListeners: SetOperationListeners<T>): readonly SetOperation[] {
+    const operationSetPairs = entries(operationListeners);
+
+    const operationsWithoutListeners: SetOperation[] = [];
+
+    for (const [operation, set] of operationSetPairs) {
+      if (set.size) continue;
+
+      operationsWithoutListeners.push(operation);
+    }
+
+    return operationsWithoutListeners;
+  }
+
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
   /** NOTE: Syntactic sugar for `addEventListener`. */
-  on = this.addEventListener;
+  readonly on = this.addEventListener;
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -170,9 +209,8 @@ export class ObSet<T extends string> extends Set<T> implements SetEventTarget<T>
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  /** NOTE: Convenience method. */
   once(this: this, operation: SetOperation, value: T, listener: SetEventListener<T>): this {
-    return this.on(operation, value, listener, { once: true });
+    return this.on(operation, value, listener, ONCE);
   }
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -195,6 +233,25 @@ export class ObSet<T extends string> extends Set<T> implements SetEventTarget<T>
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+  /** NOTE: keeps memory usage as low as possible, at the cost of some extra cleanup work.
+   *
+   * See: https://en.wikipedia.org/wiki/Space%E2%80%93time_tradeoff */
+  private freeUnusedResourcesIn(this: this, operationListeners: SetOperationListeners<T>, value: T): void {
+    const operationsWithoutListeners = this.findOperationsWithoutListenersIn(operationListeners);
+
+    // Free any sets without listeners
+    for (const operation of operationsWithoutListeners) {
+      operationListeners[operation] = undefined;
+    }
+
+    if (keys(operationListeners).length) return;
+
+    // Free any values without sets
+    this.onValueHandlers.delete(value);
+  }
+
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
   removeEventListener(this: this, operation: SetOperation, value: T, listener: SetEventListener<T>): this {
     const operationListeners = this.onValueHandlers.get(value);
 
@@ -207,22 +264,7 @@ export class ObSet<T extends string> extends Set<T> implements SetEventTarget<T>
     eventListeners.delete(listener);
     this.deleteOneTimeListener(listener);
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // * Garbage Collection Shenanigans *
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    const operationSetPairs = Object.entries(operationListeners) as readonly (readonly [SetOperation, Set<SetEventListener<T>>])[];
-
-    // Free any sets without listeners
-    for (const [operation, set] of operationSetPairs) {
-      if (!set.size) {
-        operationListeners[operation] = undefined;
-      }
-    }
-
-    // Free any values without sets
-    if (!keys(operationListeners).length) {
-      this.onValueHandlers.delete(value);
-    }
+    if (this.options.freeUnusedResources) this.freeUnusedResourcesIn(operationListeners, value);
 
     return this;
   }

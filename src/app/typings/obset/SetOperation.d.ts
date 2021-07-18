@@ -1,1 +1,5 @@
-export type SetOperation = "add" | "delete";
+// prettier-ignore
+export type SetOperation =
+  | "add"
+  | "delete"
+;
