@@ -23,7 +23,7 @@ const DEFAULT_OPTIONS: ObSetOptions = {
 export class ObSet<T extends string> extends Set<T> implements SetEventTarget<T> {
   declare readonly prototype: Set<T>;
 
-  private readonly onValueHandlers = new Map<T, SetOperationListeners<T>>();
+  private readonly onValueHandlers: { [key in T]?: SetOperationListeners<T> } = {};
 
   private readonly toBeRanOnlyOnce: SetEventListener<T>[] = [];
 
@@ -56,29 +56,33 @@ export class ObSet<T extends string> extends Set<T> implements SetEventTarget<T>
     return this;
   }
 
+  initOperationListenersFor(this: this, value: T): SetOperationListeners<T> {
+    const operationListeners: SetOperationListeners<T> = {
+      add: undefined,
+      delete: undefined,
+    } as const;
+
+    this.onValueHandlers[value] = operationListeners;
+
+    return operationListeners;
+  }
+
+  initEventListenersFor(this: this, operation: SetOperation, operationListeners: SetOperationListeners<T>): Set<SetEventListener<T>> {
+    const eventListeners = new Set<SetEventListener<T>>();
+
+    operationListeners[operation] = eventListeners;
+
+    return eventListeners;
+  }
+
   addEventListener(this: this, operation: SetOperation, value: T, listener: SetEventListener<T>, options?: SetEventListenerOptions): this {
-    if (!this.onValueHandlers.has(value)) {
-      const operationListeners: SetOperationListeners<T> = {
-        add: undefined,
-        delete: undefined,
-      } as const;
+    const operationListeners = this.onValueHandlers[value] ?? this.initOperationListenersFor(value);
 
-      this.onValueHandlers.set(value, operationListeners);
-    }
+    const eventListeners = operationListeners[operation] ?? this.initEventListenersFor(operation, operationListeners);
 
-    const operationListeners = this.onValueHandlers.get(value) as SetOperationListeners<T>;
+    eventListeners.add(listener);
 
-    if (!operationListeners[operation]) {
-      operationListeners[operation] = new Set<SetEventListener<T>>();
-    }
-
-    const eventListeners = operationListeners[operation];
-
-    eventListeners?.add(listener);
-
-    if (options?.once) {
-      this.toBeRanOnlyOnce.push(listener);
-    }
+    if (options?.once) this.toBeRanOnlyOnce.push(listener);
 
     return this;
   }
@@ -122,12 +126,8 @@ export class ObSet<T extends string> extends Set<T> implements SetEventTarget<T>
 
     const anyListeners = this.onAnyHandlers[operation];
 
-    const operationEvent: SetOperationEvent<T> = {
-      value,
-    } as const;
-
     for (const listener of anyListeners) {
-      listener.call(this, operationEvent);
+      listener.call(this, { value } as const);
 
       if (!this.toBeRanOnlyOnce.includes(listener)) continue;
 
@@ -135,7 +135,7 @@ export class ObSet<T extends string> extends Set<T> implements SetEventTarget<T>
       this.deleteOneTimeListener(listener);
     }
 
-    const eventListeners = this.onValueHandlers.get(value)?.[operation];
+    const eventListeners = this.onValueHandlers[value]?.[operation];
 
     if (!eventListeners) return this;
 
@@ -156,8 +156,8 @@ export class ObSet<T extends string> extends Set<T> implements SetEventTarget<T>
 
     const operationsWithoutListeners: SetOperation[] = [];
 
-    for (const [operation, set] of operationSetPairs) {
-      if (set.size) continue;
+    for (const [operation, { size }] of operationSetPairs) {
+      if (size) continue;
 
       operationsWithoutListeners.push(operation);
     }
@@ -206,15 +206,15 @@ export class ObSet<T extends string> extends Set<T> implements SetEventTarget<T>
     if (keys(operationListeners).length) return;
 
     // Free any values without sets
-    this.onValueHandlers.delete(value);
+    this.onValueHandlers[value] = undefined;
   }
 
   removeEventListener(this: this, operation: SetOperation, value: T, listener: SetEventListener<T>): this {
-    const operationListeners = this.onValueHandlers.get(value);
+    const operationListeners = this.onValueHandlers[value];
 
     if (!operationListeners) return this;
 
-    const eventListeners = operationListeners?.[operation];
+    const eventListeners = operationListeners[operation];
 
     if (!eventListeners) return this;
 
