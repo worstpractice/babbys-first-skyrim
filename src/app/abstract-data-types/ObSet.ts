@@ -127,8 +127,12 @@ export class ObSet<T extends string> extends Set<T> implements SetEventTarget<T>
 
     const anyListeners = this.onAnyHandlers[operation];
 
+    const operationEvent: SetOperationEvent<T> = {
+      value,
+    } as const;
+
     for (const listener of anyListeners) {
-      listener.call(this, { value } as const);
+      listener.call(this, operationEvent);
 
       if (!this.toBeRanOnlyOnce.includes(listener)) continue;
 
