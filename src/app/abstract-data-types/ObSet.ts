@@ -41,7 +41,8 @@ export class ObSet<T extends string> extends Set<T> implements SetEventTarget<T>
     this.options = options;
   }
 
-  override add(this: this, value: T): this {
+  // @ts-expect-error add `override` keyword here when tools finally support it.
+  add(this: this, value: T): this {
     if (super.has(value)) return this;
 
     super.add(value);
@@ -87,8 +88,8 @@ export class ObSet<T extends string> extends Set<T> implements SetEventTarget<T>
     return this;
   }
 
-  // @ts-expect-error Our implementation of `delete` is chainable, unlike the one we're overriding.
-  override delete(this: this, value: T): this {
+  // @ts-expect-error add `override` keyword here when tools finally support it.
+  delete(this: this, value: T): this {
     if (!this.has(value)) return this;
 
     super.delete(value);
