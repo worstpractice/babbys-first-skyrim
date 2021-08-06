@@ -57,7 +57,7 @@ export class ObSet<T extends string> extends Set<T> implements SetEventTarget<T>
     return this;
   }
 
-  initOperationListenersFor(this: this, value: T): SetOperationListeners<T> {
+  private initOperationListenersFor(this: this, value: T): SetOperationListeners<T> {
     const operationListeners: SetOperationListeners<T> = {
       add: undefined,
       delete: undefined,
@@ -68,7 +68,7 @@ export class ObSet<T extends string> extends Set<T> implements SetEventTarget<T>
     return operationListeners;
   }
 
-  initEventListenersFor(this: this, operation: SetOperation, operationListeners: SetOperationListeners<T>): Set<SetEventListener<T>> {
+  private initEventListenersFor(this: this, operation: SetOperation, operationListeners: SetOperationListeners<T>): Set<SetEventListener<T>> {
     const eventListeners = new Set<SetEventListener<T>>();
 
     operationListeners[operation] = eventListeners;
