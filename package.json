@@ -30,7 +30,8 @@
     "fmt": "prettier -u --config .prettierrc -w src/**/*.{d.ts,ts,tsx,json}",
     "lint": "eslint ./src --ext .d.ts,.ts,.tsx",
     "lint:fix": "eslint ./src --ext .d.ts,.ts,.tsx --fix",
-    "start": "snowpack dev",
+    "nuke": "\"rd /q /s .\\node_modules\\.cache\\snowpack\" | cmd",
+    "start": "pnpm nuke && snowpack dev",
     "tidy": "pnpm run lint:fix && pnpm run fmt"
   },
   "type": "module"
