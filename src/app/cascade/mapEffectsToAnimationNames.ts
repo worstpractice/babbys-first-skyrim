@@ -4,10 +4,8 @@ import { itemToAnimationDuo } from "../../lookup-tables/itemToAnimationDuo";
 import type { SlotNumber } from "../../typings/phantom-types/number/SlotNumber";
 import { input } from "../input/input";
 import { player } from "../player/player";
-import type { StartStopDuo } from "../typings/StartStopDuo";
 import type { AnimationMixerEvent } from "../typings/AnimationMixerEvent";
 import type { AnimationMixerListener } from "../typings/AnimationMixerListener";
-import type { AnimationName } from "../typings/AnimationName";
 import { startIdling } from "./animations/idling";
 import { startRunning, stopRunning } from "./animations/running";
 import { startWalking, stopWalking } from "./animations/walking";
@@ -65,11 +63,11 @@ export const mapEffectsToAnimationNames = () => {
   //////////////////////////////////////////////////////////////////////
   player.activeEffects.on("add", "using", () => {
     /** NOTE: We consult the currently equipped item about what pair of start/stop functions to actually call here. */
-    const currentItem = indexToItem.get(0 as SlotNumber) ?? "";
+    const currentItem = indexToItem[0 as SlotNumber] ?? "";
 
-    const { start, stop } = itemToAnimationDuo.get(currentItem) as StartStopDuo;
+    const { start, stop } = itemToAnimationDuo[currentItem];
 
-    const animation = itemToAnimation.get(currentItem) as AnimationName;
+    const animation = itemToAnimation[currentItem];
 
     start();
 

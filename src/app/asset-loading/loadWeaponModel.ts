@@ -22,7 +22,7 @@ export const loadWeaponModel = async (playerModel: Group) => {
   weaponModel.rotateX(-Math.PI / 2);
   weaponModel.rotateY(-1);
   weaponModel.position.add(vec3(-10, 13.37, -0.5));
-  itemToModel.set(ITEM_NAME, weaponModel);
+  itemToModel[ITEM_NAME] = weaponModel;
   playerModel.children[0]?.traverse((child) => {
     if (child.name !== "RightHandIndex1") return;
     child.attach(weaponModel);

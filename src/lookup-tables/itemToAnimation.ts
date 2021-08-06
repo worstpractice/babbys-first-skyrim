@@ -1,6 +1,7 @@
 import type { AnimationName } from "../app/typings/AnimationName";
 import type { ItemName } from "../typings/ItemName";
 
-export const itemToAnimation = new Map<ItemName, AnimationName>();
-
-itemToAnimation.set("sword", "attacking");
+export const itemToAnimation: { readonly [key in ItemName]: AnimationName } = {
+  "": "idling",
+  sword: "attacking",
+} as const;

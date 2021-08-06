@@ -35,7 +35,7 @@ type Props = {
 const handleItem = ({ index, item }: SlotEvent) => {
   const isBeingEquipped = index < 8;
 
-  const weaponModel = itemToModel.get("sword");
+  const weaponModel = itemToModel["sword"];
 
   if (!weaponModel) {
     console.warn(`No weapon model for sword!`);
@@ -53,7 +53,7 @@ export const InventorySlot = ({ onItem = handleItem, index }: Props) => {
   const { currentlyClickedElement, setCurrentlyClickedElement } = useClickedState(fromClicked);
   const { currentlyDraggedElement, setCurrentlyDraggedElement } = useDraggedState(fromDragged);
   const slotRef = useRef<HTMLDivElement | null>(null);
-  const item = indexToItem.get(index) ?? "";
+  const item = indexToItem[index] ?? "";
 
   ///////////////////////////////////////////////////////////////////////////
 
@@ -84,16 +84,16 @@ export const InventorySlot = ({ onItem = handleItem, index }: Props) => {
     const myBackgroundImage = me.style.backgroundImage;
     const theirBackgroundImage = them.style.backgroundImage;
 
-    const myItem = indexToItem.get(myIndex) ?? "";
-    const theirItem = indexToItem.get(theirIndex) ?? "";
+    const myItem = indexToItem[myIndex] ?? "";
+    const theirItem = indexToItem[theirIndex] ?? "";
 
     // Swap background images
     me.style.backgroundImage = theirBackgroundImage;
     them.style.backgroundImage = myBackgroundImage;
 
     // Swap game items
-    indexToItem.set(theirIndex, myItem);
-    indexToItem.set(myIndex, theirItem);
+    indexToItem[theirIndex] = myItem;
+    indexToItem[myIndex] = theirItem;
 
     setCurrentlyClickedElement(null);
     setCurrentlyDraggedElement(null);
