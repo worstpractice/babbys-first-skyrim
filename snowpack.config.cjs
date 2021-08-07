@@ -14,9 +14,9 @@ module.exports = {
     },
   },
   optimize: {
-    treeshake: true,
     minify: true,
     preload: true,
+    treeshake: true,
   },
   plugins: [
     //
