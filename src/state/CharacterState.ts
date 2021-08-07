@@ -22,17 +22,15 @@ export const useCharacterState = create<CharacterState>(
       return {
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         equipInMainHand: (item: ItemName) => {
-          set(
-            (state): Data => {
-              const { mainHand } = state;
+          set((state): Data => {
+            const { mainHand } = state;
 
-              if (mainHand === item) {
-                return state;
-              }
+            if (mainHand === item) {
+              return state;
+            }
 
-              return { mainHand: item } as const;
-            },
-          );
+            return { mainHand: item } as const;
+          });
         },
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       } as const;

@@ -23,7 +23,9 @@ const fromClicked = ({ setCurrentlyClickedElement }: ClickedState) => {
 };
 
 const fromDragged = ({ setCurrentlyDraggedElement }: DraggedState) => {
-  return { setCurrentlyDraggedElement } as const;
+  return {
+    setCurrentlyDraggedElement,
+  } as const;
 };
 
 const fromUi = ({ currentOpenMenu }: UiState) => {

@@ -21,17 +21,15 @@ export const useDraggedState = create<DraggedState>(
       return {
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         setCurrentlyDraggedElement: (to: HTMLDivElement | null) => {
-          set(
-            (state): Data => {
-              const { currentlyDraggedElement } = state;
+          set((state): Data => {
+            const { currentlyDraggedElement } = state;
 
-              if (currentlyDraggedElement === to) {
-                return state;
-              }
+            if (currentlyDraggedElement === to) {
+              return state;
+            }
 
-              return { ...state, currentlyDraggedElement: to } as const;
-            },
-          );
+            return { ...state, currentlyDraggedElement: to } as const;
+          });
         },
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       } as const;

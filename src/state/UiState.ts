@@ -22,21 +22,19 @@ export const useUiState = create<UiState>(
       return {
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         toggleCurrentOpenMenu: (to: Exclude<MenuName, "">) => {
-          set(
-            (state): Data => {
-              const { currentOpenMenu } = state;
+          set((state): Data => {
+            const { currentOpenMenu } = state;
 
-              /** Support switching directly from one menu to another. */
-              if (currentOpenMenu && currentOpenMenu !== to) {
-                return { currentOpenMenu: to } as const;
-              }
+            /** Support switching directly from one menu to another. */
+            if (currentOpenMenu && currentOpenMenu !== to) {
+              return { currentOpenMenu: to } as const;
+            }
 
-              /** If a given menu is showing, clicking its menu button again closes it. */
-              const newOpenMenu = currentOpenMenu ? "" : to;
+            /** If a given menu is showing, clicking its menu button again closes it. */
+            const newOpenMenu = currentOpenMenu ? "" : to;
 
-              return { currentOpenMenu: newOpenMenu } as const;
-            },
-          );
+            return { currentOpenMenu: newOpenMenu } as const;
+          });
         },
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       } as const;

@@ -13,36 +13,36 @@ import { vec3 } from "../utils/vec3";
 /** NOTE: gets initialized at animation load time. */
 const animations: Animations = {
   attacking: {
-    action: (undefined as any) as AnimationAction, // Every action has one clip
-    clip: (undefined as any) as AnimationClip, // Every clip has one action
+    action: undefined as any as AnimationAction, // Every action has one clip
+    clip: undefined as any as AnimationClip, // Every clip has one action
   },
   idling: {
-    action: (undefined as any) as AnimationAction,
-    clip: (undefined as any) as AnimationClip,
+    action: undefined as any as AnimationAction,
+    clip: undefined as any as AnimationClip,
   },
   jumping: {
-    action: (undefined as any) as AnimationAction,
-    clip: (undefined as any) as AnimationClip,
+    action: undefined as any as AnimationAction,
+    clip: undefined as any as AnimationClip,
   },
   running: {
-    action: (undefined as any) as AnimationAction,
-    clip: (undefined as any) as AnimationClip,
+    action: undefined as any as AnimationAction,
+    clip: undefined as any as AnimationClip,
   },
   walking: {
-    action: (undefined as any) as AnimationAction,
-    clip: (undefined as any) as AnimationClip,
+    action: undefined as any as AnimationAction,
+    clip: undefined as any as AnimationClip,
   },
 } as const;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /** NOTE: gets initialized at animation load time. */
-const mixer = (undefined as any) as AnimationMixer; // Every mixer has one model
+const mixer = undefined as any as AnimationMixer; // Every mixer has one model
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /** NOTE: gets initialized at model load time. */
-const model = (undefined as any) as Group; // Every model has one mixer
+const model = undefined as any as Group; // Every model has one mixer
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 

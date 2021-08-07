@@ -21,17 +21,15 @@ export const useClickedState = create<ClickedState>(
       return {
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         setCurrentlyClickedElement: (to: HTMLDivElement | null): void => {
-          set(
-            (state): Data => {
-              const { currentlyClickedElement } = state;
+          set((state): Data => {
+            const { currentlyClickedElement } = state;
 
-              if (currentlyClickedElement === to) {
-                return state;
-              }
+            if (currentlyClickedElement === to) {
+              return state;
+            }
 
-              return { ...state, currentlyClickedElement: to } as const;
-            },
-          );
+            return { ...state, currentlyClickedElement: to } as const;
+          });
         },
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       } as const;
