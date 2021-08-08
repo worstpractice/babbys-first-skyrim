@@ -25,7 +25,6 @@ window.oncontextmenu = toFalse;
 window.ondrag = toFalse;
 window.ondragend = toFalse;
 window.ondragenter = toFalse;
-window.ondragexit = toFalse;
 window.ondragleave = toFalse;
 window.ondragover = toFalse;
 window.ondragstart = toFalse;
