@@ -1,3 +1,4 @@
+import { ONCE_PASSIVE } from "../constants/event-listener-options/ONCE_PASSIVE";
 import { main } from "./main";
 import type { App } from "./typings/App";
 
@@ -12,8 +13,5 @@ window.addEventListener(
   () => {
     loadApp().catch(console.error);
   },
-  {
-    once: true,
-    passive: true,
-  },
+  ONCE_PASSIVE,
 );
