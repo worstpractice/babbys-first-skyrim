@@ -1,12 +1,12 @@
 import type { CSSProperties, MouseEventHandler } from "react";
 import { default as React } from "react";
-import { BottomCard } from "./components/BottomCard";
-import { Character } from "./components/Character";
-import { Inventory } from "./components/Inventory";
-import { Portrait } from "./components/Portrait";
-import { Quests } from "./components/Quests";
-import { useUiState } from "./state/UiState";
-import type { UiState } from "./typings/state/UiState";
+import { BottomCard } from "src/components/BottomCard";
+import { Character } from "src/components/Character";
+import { Inventory } from "src/components/Inventory";
+import { Portrait } from "src/components/Portrait";
+import { Quests } from "src/components/Quests";
+import { useUiState } from "src/state/UiState";
+import type { UiState } from "src/typings/state/UiState";
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // * Selectors *

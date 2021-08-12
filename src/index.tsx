@@ -1,14 +1,14 @@
 import "normalize.css";
 import { default as React, StrictMode } from "react";
 import { render } from "react-dom";
-import "./app";
-import { CAPTURE } from "./constants/event-listener-options/CAPTURE";
-import { CAPTURE_PASSIVE } from "./constants/event-listener-options/CAPTURE_PASSIVE";
-import { closeMenusOnAttack } from "./handlers/closeMenusOnAttack";
-import { disableSaveShortcut } from "./handlers/disableSaveShortcut";
-import { handleHotkeys } from "./handlers/handleHotkeys";
-import { Ui } from "./Ui";
-import { toFalse } from "./utils/state-setters/toFalse";
+import "src/game";
+import { CAPTURE } from "src/constants/event-listener-options/CAPTURE";
+import { CAPTURE_PASSIVE } from "src/constants/event-listener-options/CAPTURE_PASSIVE";
+import { closeMenusOnAttack } from "src/handlers/closeMenusOnAttack";
+import { disableSaveShortcut } from "src/handlers/disableSaveShortcut";
+import { handleHotkeys } from "src/handlers/handleHotkeys";
+import { Ui } from "src/Ui";
+import { toFalse } from "src/utils/state-setters/toFalse";
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // * Register Event Listeners *

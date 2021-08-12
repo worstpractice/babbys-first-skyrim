@@ -1,7 +1,7 @@
 import create from "zustand";
 import { combine } from "zustand/middleware";
-import type { ItemName } from "../typings/ItemName";
-import type { CharacterState } from "../typings/state/CharacterState";
+import type { ItemName } from "src/typings/ItemName";
+import type { CharacterState } from "src/typings/state/CharacterState";
 
 export type Data = {
   readonly mainHand: ItemName;

@@ -9,7 +9,7 @@
     "disableSolutionSearching": false,
     "disableSourceOfProjectReferenceRedirect": false,
     "esModuleInterop": false,
-    // "exactOptionalPropertyTypes": true,
+    "exactOptionalPropertyTypes": true,
     "forceConsistentCasingInFileNames": true,
     "importsNotUsedAsValues": "error",
     "isolatedModules": true,
@@ -30,7 +30,7 @@
     "noUnusedParameters": false,
     "paths": {
       "*": [
-        "./src/*"
+        "./*"
       ]
     },
     "resolveJsonModule": true,
@@ -45,7 +45,7 @@
     "suppressImplicitAnyIndexErrors": false,
     "target": "esnext",
     "useDefineForClassFields": true,
-    // "useUnknownInCatchVariables": true
+    "useUnknownInCatchVariables": true
   },
   "exclude": [
     "**/node_modules",

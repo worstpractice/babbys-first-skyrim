@@ -1,4 +1,4 @@
-import type { ItemName } from "../typings/ItemName";
+import type { ItemName } from "src/typings/ItemName";
 
 const ROW_LENGTH = {
   length: 8,

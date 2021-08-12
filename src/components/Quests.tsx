@@ -1,8 +1,8 @@
 import type { CSSProperties } from "react";
 import { default as React } from "react";
-import { useUiState } from "../state/UiState";
-import { BACKGROUND } from "../styles";
-import type { UiState } from "../typings/state/UiState";
+import { useUiState } from "src/state/UiState";
+import { BACKGROUND } from "src/styles";
+import type { UiState } from "src/typings/state/UiState";
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // * Selectors *

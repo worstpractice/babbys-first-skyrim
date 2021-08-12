@@ -2,21 +2,19 @@
 
 /** @type {import("snowpack").SnowpackUserConfig} */
 module.exports = {
+  alias: {
+    'src': './src',
+  },
   mount: {
     assets: {
-      url: "/assets",
+      url: '/assets',
     },
     public: {
-      url: "/",
+      url: '/',
     },
     src: {
-      url: "/dist",
+      url: '/dist',
     },
-  },
-  optimize: {
-    minify: true,
-    preload: true,
-    treeshake: true,
   },
   plugins: [
     //

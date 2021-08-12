@@ -1,5 +1,5 @@
-import type { AnimationName } from "../app/typings/AnimationName";
-import type { ItemName } from "../typings/ItemName";
+import type { AnimationName } from "src/game/typings/AnimationName";
+import type { ItemName } from "src/typings/ItemName";
 
 export const itemToAnimation: { readonly [key in ItemName]: AnimationName } = {
   "": "idling",

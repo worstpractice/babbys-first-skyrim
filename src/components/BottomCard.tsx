@@ -1,7 +1,7 @@
 import type { CSSProperties, MouseEventHandler } from "react";
 import { default as React } from "react";
-import { BACKGROUND } from "../styles";
-import type { MenuName } from "../typings/MenuName";
+import { BACKGROUND } from "src/styles";
+import type { MenuName } from "src/typings/MenuName";
 
 type Props = {
   iconName: MenuName;

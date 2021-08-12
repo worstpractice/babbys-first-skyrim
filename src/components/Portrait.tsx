@@ -1,6 +1,6 @@
 import type { CSSProperties } from "react";
 import { default as React } from "react";
-import { BACKGROUND } from "../styles";
+import { BACKGROUND } from "src/styles";
 
 type Props = {};
 

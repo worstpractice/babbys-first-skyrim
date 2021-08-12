@@ -1,4 +1,4 @@
-import { useUiState } from "../state/UiState";
+import { useUiState } from "src/state/UiState";
 
 const canvas = document.getElementById("canvas") as HTMLCanvasElement;
 

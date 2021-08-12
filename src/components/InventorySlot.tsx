@@ -1,15 +1,15 @@
 import type { CSSProperties } from "react";
 import { default as React, useRef } from "react";
-import { indexToItem } from "../lookup-tables/indexToItem";
-import { itemToModel } from "../lookup-tables/itemToModel";
-import { useClickedState } from "../state/ClickedState";
-import { useDraggedState } from "../state/DraggedState";
-import type { ItemName } from "../typings/ItemName";
-import type { SlotNumber } from "../typings/phantom-types/number/SlotNumber";
-import type { SlotEvent } from "../typings/SlotEvent";
-import type { ClickedState } from "../typings/state/ClickedState";
-import type { DraggedState } from "../typings/state/DraggedState";
-import { toIconUrl } from "../utils/urls/toIconUrl";
+import { indexToItem } from "src/lookup-tables/indexToItem";
+import { itemToModel } from "src/lookup-tables/itemToModel";
+import { useClickedState } from "src/state/ClickedState";
+import { useDraggedState } from "src/state/DraggedState";
+import type { ItemName } from "src/typings/ItemName";
+import type { SlotNumber } from "src/typings/phantom-types/number/SlotNumber";
+import type { SlotEvent } from "src/typings/SlotEvent";
+import type { ClickedState } from "src/typings/state/ClickedState";
+import type { DraggedState } from "src/typings/state/DraggedState";
+import { toIconUrl } from "src/utils/urls/toIconUrl";
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // * Selectors *

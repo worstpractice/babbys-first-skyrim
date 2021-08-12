@@ -1,4 +1,4 @@
-import { useUiState } from "../state/UiState";
+import { useUiState } from "src/state/UiState";
 
 export type Hotkey = "KeyI" | "KeyC" | "KeyQ";
 
