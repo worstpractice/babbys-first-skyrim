@@ -1,5 +1,4 @@
-import { keys } from "src/utils/object/keys";
-import type { RelevantMouseButton } from "src/typings/input/RelevantMouseButton";
+import type { RelevantMouseButton } from "src/game/typings/RelevantMouseButton";
 
 type EarlyWarningSystem = {
   readonly [key in RelevantMouseButton]: true;
@@ -11,4 +10,4 @@ const warnMeIfIForgotAKey: EarlyWarningSystem = {
   RMB: true,
 } as const;
 
-export const RELEVANT_MOUSE_BUTTONS = new Set<RelevantMouseButton>(keys(warnMeIfIForgotAKey));
+export const RELEVANT_MOUSE_BUTTONS = new Set<RelevantMouseButton>(Object.keys(warnMeIfIForgotAKey));

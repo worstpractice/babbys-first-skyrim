@@ -1,5 +1,5 @@
-import type { SetEventListener } from "./SetEventListener";
-import type { SetOperation } from "./SetOperation";
+import type { SetEventListener } from "src/game/typings/obset/SetEventListener";
+import type { SetOperation } from "src/game/typings/obset/SetOperation";
 
 export interface SetEventTarget<T extends string> {
   readonly addEventListener: (this: this, type: SetOperation, value: T, listener: SetEventListener<T>) => this;

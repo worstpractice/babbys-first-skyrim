@@ -1,15 +1,15 @@
-import type { Group } from "three";
-import { itemToModel } from "src/lookup-tables/itemToModel";
-import { FBXLoader } from "../shims/FbxLoader";
-import { enableShadows } from "src/utils/mapping/enableShadows";
-import { enableSrgbEncoding } from "src/utils/mapping/enableSrgbEncoding";
+import { FBXLoader } from "src/game/shims/FbxLoader";
+import { enableShadows } from "src/game/utils/mapping/enableShadows";
+import { enableSrgbEncoding } from "src/game/utils/mapping/enableSrgbEncoding";
 import { vec3 } from "src/game/utils/vec3";
+import { itemToModel } from "src/lookup-tables/itemToModel";
+import type { Group } from "three";
 
-const WEAPONS_PATH = `./assets/models/weapons/`;
+const WEAPONS_PATH = `./assets/models/weapons/` as const;
 
-const ITEM_NAME = "sword";
+const ITEM_NAME = "sword" as const;
 
-export const loadWeaponModel = async (playerModel: Group) => {
+export const loadWeaponModel = async (playerModel: Group): Promise<void> => {
   const weaponLoader = new FBXLoader();
   weaponLoader.setPath(WEAPONS_PATH);
   const weaponModel = await weaponLoader.loadAsync(`${ITEM_NAME}.fbx`);

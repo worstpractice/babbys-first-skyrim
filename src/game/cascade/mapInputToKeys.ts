@@ -1,5 +1,5 @@
-import { input } from "../input/input";
-import type { TestSetPair } from "src/typings/TestSetPair";
+import { input } from "src/game/input/input";
+import type { TestSetPair } from "src/game/typings/TestSetPair";
 
 export const mapInputToKeys = <T extends string>(testSetPairs: readonly TestSetPair<T>[]): void => {
   input.heldKeys.onAny("add", ({ value }) => {

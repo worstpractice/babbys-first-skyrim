@@ -1,7 +1,7 @@
-import { scene } from "src/game/engine/scene";
-import { createAmbientLight } from "./createAmbientLight";
-import { createDirectionalLight } from "./createDirectionalLight";
-import { createGroundPlane } from "./createGroundPlane";
+import { createAmbientLight } from "src/game/world/createAmbientLight";
+import { createDirectionalLight } from "src/game/world/createDirectionalLight";
+import { createGroundPlane } from "src/game/world/createGroundPlane";
+import type { Scene } from "three";
 
 const thingsToAddToScene = [
   //
@@ -10,9 +10,9 @@ const thingsToAddToScene = [
   createDirectionalLight,
 ] as const;
 
-export const createWorld = (): void => {
+export const createWorld = async (scene: Scene): Promise<void> => {
   for (const each of thingsToAddToScene) {
-    const thing = each();
+    const thing = await each();
 
     scene.add(thing);
   }

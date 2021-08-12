@@ -1,5 +1,4 @@
-import { keys } from "src/utils/object/keys";
-import type { TurnKey } from "src/typings/input/TurnKey";
+import type { TurnKey } from "src/game/typings/keys/TurnKey";
 
 type EarlyWarningSystem = {
   readonly [key in TurnKey]: true;
@@ -10,4 +9,4 @@ const warnMeIfIForgotAKey: EarlyWarningSystem = {
   KeyD: true,
 } as const;
 
-export const TURN_KEYS = new Set<TurnKey>(keys(warnMeIfIForgotAKey));
+export const TURN_KEYS = new Set<TurnKey>(Object.keys(warnMeIfIForgotAKey));

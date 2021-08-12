@@ -1,4 +1,4 @@
-import { player } from "../../player/player";
+import { player } from "src/game/player/player";
 
 export const startIdling = () => {
   const isDoingSomething = Boolean(player.activeEffects.size);

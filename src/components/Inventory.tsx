@@ -1,5 +1,8 @@
 import type { CSSProperties } from "react";
 import { default as React } from "react";
+import { InventorySlot } from "src/components/InventorySlot";
+import { Flex } from "src/components/layout/Flex";
+import { Statue } from "src/components/Statue";
 import { FIRST_ROW, LEFT_COLUMN, RIGHT_COLUMN, SECOUND_ROW, THIRD_ROW } from "src/constants/INVENTORY";
 import { useClickedState } from "src/state/ClickedState";
 import { useDraggedState } from "src/state/DraggedState";
@@ -9,9 +12,6 @@ import type { SlotNumber } from "src/typings/phantom-types/number/SlotNumber";
 import type { ClickedState } from "src/typings/state/ClickedState";
 import type { DraggedState } from "src/typings/state/DraggedState";
 import type { UiState } from "src/typings/state/UiState";
-import { InventorySlot } from "./InventorySlot";
-import { Flex } from "./layout/Flex";
-import { Statue } from "./Statue";
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // * Selectors *

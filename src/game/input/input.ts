@@ -1,21 +1,21 @@
-import { ObSet } from "../abstract-data-types/ObSet";
-import { mapAnimationNamesToAnimations } from "../cascade/mapAnimationNamestoAnimations";
-import { mapEffectsToAnimationNames } from "../cascade/mapEffectsToAnimationNames";
-import { mapInputToKeys } from "../cascade/mapInputToKeys";
-import { mapKeysToEffects } from "../cascade/mapKeysToEffects";
-import type { Input } from "src/typings/Input";
-import type { ActionKey } from "src/typings/input/ActionKey";
-import type { ModifierKey } from "src/typings/input/ModifierKey";
-import type { MovementKey } from "src/typings/input/MovementKey";
-import type { RelevantKey } from "src/typings/input/RelevantKey";
-import type { RelevantMouseButton } from "src/typings/input/RelevantMouseButton";
-import type { TurnKey } from "src/typings/input/TurnKey";
-import type { TestSetPair } from "src/typings/TestSetPair";
-import { isActionKey } from "src/utils/type-predicates/isActionKey";
-import { isModifierKey } from "src/utils/type-predicates/isModifierKey";
-import { isMovementKey } from "src/utils/type-predicates/isMovementKey";
-import { isRelevantMouseButton } from "src/utils/type-predicates/isRelevantMouseButton";
-import { isTurnKey } from "src/utils/type-predicates/isTurnKey";
+import { ObSet } from "src/game/abstract-data-types/ObSet";
+import { mapAnimationNamesToAnimations } from "src/game/cascade/mapAnimationNamestoAnimations";
+import { mapEffectsToAnimationNames } from "src/game/cascade/mapEffectsToAnimationNames";
+import { mapInputToKeys } from "src/game/cascade/mapInputToKeys";
+import { mapKeysToEffects } from "src/game/cascade/mapKeysToEffects";
+import type { Input } from "src/game/typings/Input";
+import type { ActionKey } from "src/game/typings/keys/ActionKey";
+import type { ModifierKey } from "src/game/typings/keys/ModifierKey";
+import type { MovementKey } from "src/game/typings/keys/MovementKey";
+import type { RelevantKey } from "src/game/typings/keys/RelevantKey";
+import type { TurnKey } from "src/game/typings/keys/TurnKey";
+import type { RelevantMouseButton } from "src/game/typings/RelevantMouseButton";
+import type { TestSetPair } from "src/game/typings/TestSetPair";
+import { isActionKey } from "src/game/utils/type-predicates/isActionKey";
+import { isModifierKey } from "src/game/utils/type-predicates/isModifierKey";
+import { isMovementKey } from "src/game/utils/type-predicates/isMovementKey";
+import { isRelevantMouseButton } from "src/game/utils/type-predicates/isRelevantMouseButton";
+import { isTurnKey } from "src/game/utils/type-predicates/isTurnKey";
 
 export const input: Input = {
   heldActionKeys: new ObSet<ActionKey>(),

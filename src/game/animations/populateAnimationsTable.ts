@@ -1,8 +1,8 @@
+import { player } from "src/game/player/player";
+import type { AnimationName } from "src/game/typings/AnimationName";
+import type { Mutable } from "src/game/typings/Mutable";
 import type { AnimationClip } from "three";
 import { LoopOnce } from "three";
-import { player } from "../player/player";
-import type { AnimationName } from "src/typings/AnimationName";
-import type { Mutable } from "src/typings/Mutable";
 
 export const populateAnimationsTable = (animationName: AnimationName, clip: AnimationClip): void => {
   clip.name = `${animationName}Clip`;

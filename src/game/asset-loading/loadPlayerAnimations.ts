@@ -1,12 +1,11 @@
-import type { AnimationClip } from "three";
+import { FBXLoader } from "src/game/shims/FbxLoader";
+import type { AnimationName } from "src/game/typings/AnimationName";
+import type { FbxFileName } from "src/game/typings/FbxFileName";
+import type { NameClipDuo } from "src/game/typings/NameClipDuo";
 import { toPromises } from "src/utils/mapping/toPromises";
-import { loadingManager } from "src/game/engine/loadingManager";
-import { FBXLoader } from "../shims/FbxLoader";
-import type { AnimationName } from "src/typings/AnimationName";
-import type { FbxFileName } from "src/typings/FbxFileName";
-import type { NameClipDuo } from "src/typings/NameClipDuo";
+import type { AnimationClip, LoadingManager } from "three";
 
-const ANIMATIONS_PATH = "./assets/animations/sword-and-shield/";
+const ANIMATIONS_PATH = "./assets/animations/sword-and-shield/" as const;
 
 const ANIMATIONS: readonly (readonly [FbxFileName, AnimationName])[] = [
   //
@@ -17,8 +16,9 @@ const ANIMATIONS: readonly (readonly [FbxFileName, AnimationName])[] = [
   ["walk.fbx", "walking"],
 ] as const;
 
-export const loadPlayerAnimations = async (): Promise<readonly NameClipDuo[]> => {
+export const loadPlayerAnimations = async (loadingManager: LoadingManager): Promise<readonly NameClipDuo[]> => {
   const animationLoader = new FBXLoader(loadingManager);
+
   animationLoader.setPath(ANIMATIONS_PATH);
 
   const asyncAnimationLoaders: readonly (() => Promise<NameClipDuo>)[] = ANIMATIONS.map(([path, name]) => {

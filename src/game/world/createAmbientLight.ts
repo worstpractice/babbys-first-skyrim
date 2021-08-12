@@ -1,7 +1,7 @@
+import { COLOR_SKY } from "src/game/constants/COLOR_SKY";
 import { AmbientLight } from "three";
-import { COLOR_SKY } from "src/constants/COLOR_SKY";
 
-export const createAmbientLight = (): AmbientLight => {
+export const createAmbientLight = async (): Promise<AmbientLight> => {
   const light = new AmbientLight(COLOR_SKY, 1);
 
   light.name = "ambientLight";

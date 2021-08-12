@@ -1,5 +1,4 @@
-import { keys } from "src/utils/object/keys";
-import type { ActionKey } from "src/typings/input/ActionKey";
+import type { ActionKey } from "src/game/typings/keys/ActionKey";
 
 type EarlyWarningSystem = {
   readonly [key in ActionKey]: true;
@@ -13,4 +12,4 @@ const warnMeIfIForgotAKey: EarlyWarningSystem = {
   Space: true,
 } as const;
 
-export const ACTION_KEYS = new Set<ActionKey>(keys(warnMeIfIForgotAKey));
+export const ACTION_KEYS = new Set<ActionKey>(Object.keys(warnMeIfIForgotAKey));

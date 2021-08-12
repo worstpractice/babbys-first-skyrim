@@ -1,5 +1,4 @@
-import { keys } from "src/utils/object/keys";
-import type { MovementKey } from "src/typings/input/MovementKey";
+import type { MovementKey } from "src/game/typings/keys/MovementKey";
 
 type EarlyWarningSystem = {
   readonly [key in MovementKey]: true;
@@ -10,4 +9,4 @@ const warnMeIfIForgotAKey: EarlyWarningSystem = {
   KeyW: true,
 } as const;
 
-export const MOVEMENT_KEYS = new Set<MovementKey>(keys(warnMeIfIForgotAKey));
+export const MOVEMENT_KEYS = new Set<MovementKey>(Object.keys(warnMeIfIForgotAKey));

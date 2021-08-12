@@ -1,17 +1,15 @@
-import type { Group } from "three";
-import { AnimationMixer } from "three";
-import { loadingManager } from "src/game/engine/loadingManager";
 import { mixers } from "src/game/engine/mixers";
-import { scene } from "src/game/engine/scene";
-import { player } from "../player/player";
-import { FBXLoader } from "../shims/FbxLoader";
-import type { Mutable } from "src/typings/Mutable";
-import { enableShadows } from "src/utils/mapping/enableShadows";
-import { enableSrgbEncoding } from "src/utils/mapping/enableSrgbEncoding";
+import { player } from "src/game/player/player";
+import { FBXLoader } from "src/game/shims/FbxLoader";
+import type { Mutable } from "src/game/typings/Mutable";
+import { enableShadows } from "src/game/utils/mapping/enableShadows";
+import { enableSrgbEncoding } from "src/game/utils/mapping/enableSrgbEncoding";
+import type { Group, LoadingManager, Scene } from "three";
+import { AnimationMixer } from "three";
 
-const CHARACTERS_PATH = "./assets/models/castle-guard/";
+const CHARACTERS_PATH = "./assets/models/castle-guard/" as const;
 
-export const loadPlayerModel = async (): Promise<Group> => {
+export const loadPlayerModel = async (loadingManager: LoadingManager, scene: Scene): Promise<Group> => {
   const modelLoader = new FBXLoader(loadingManager);
 
   modelLoader.setPath(CHARACTERS_PATH);

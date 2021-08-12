@@ -1,5 +1,5 @@
-import type { SetEventListener } from "./SetEventListener";
-import type { SetOperation } from "./SetOperation";
+import type { SetEventListener } from "src/game/typings/obset/SetEventListener";
+import type { SetOperation } from "src/game/typings/obset/SetOperation";
 
 export type SetOperationListeners<T extends string> = {
   [key in SetOperation]: Set<SetEventListener<T>> | undefined;

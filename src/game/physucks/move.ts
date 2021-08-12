@@ -1,5 +1,5 @@
-import { input } from "../input/input";
-import { player } from "../player/player";
+import { input } from "src/game/input/input";
+import { player } from "src/game/player/player";
 import { vec3 } from "src/game/utils/vec3";
 
 export const move = (deltaInSeconds: number) => {

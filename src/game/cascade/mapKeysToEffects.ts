@@ -1,11 +1,11 @@
-import { input } from "../input/input";
-import { player } from "../player/player";
-import type { AnimationMixerEvent } from "src/typings/AnimationMixerEvent";
-import type { AnimationMixerListener } from "src/typings/AnimationMixerListener";
-import { startJumping, stopJumping } from "./animations/jumping";
-import { startMoving, stopMoving } from "./effects/moving";
-import { startTurning, stopTurning } from "./effects/turning";
-import { startUsing, stopUsing } from "./effects/using";
+import { startJumping, stopJumping } from "src/game/cascade/animations/jumping";
+import { startMoving, stopMoving } from "src/game/cascade/effects/moving";
+import { startTurning, stopTurning } from "src/game/cascade/effects/turning";
+import { startUsing, stopUsing } from "src/game/cascade/effects/using";
+import { input } from "src/game/input/input";
+import { player } from "src/game/player/player";
+import type { AnimationMixerEvent } from "src/game/typings/AnimationMixerEvent";
+import type { AnimationMixerListener } from "src/game/typings/AnimationMixerListener";
 
 const stopJumpingAndCleanUp = ({ action }: AnimationMixerEvent) => {
   const clip = action.getClip();

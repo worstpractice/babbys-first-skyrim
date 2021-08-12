@@ -1,4 +1,4 @@
+import type { AnimationName } from "src/game/typings/AnimationName";
 import type { AnimationClip } from "three";
-import type { AnimationName } from "./AnimationName";
 
 export type NameClipDuo = readonly [AnimationName, AnimationClip];

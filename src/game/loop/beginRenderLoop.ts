@@ -1,28 +1,32 @@
 import { camera } from "src/game/engine/camera";
 import { renderer } from "src/game/engine/renderer";
-import { scene } from "src/game/engine/scene";
-import { tickGameLoop } from "./tickGameLoop";
+import { tickGameLoop } from "src/game/loop/tickGameLoop";
+import type { Scene } from "three";
 
-export const beginRenderLoop = (): void => {
-  let previousRafTime: DOMHighResTimeStamp = 0;
+export const createRenderLoop = (scene: Scene) => {
+  const beginRenderLoop = (): void => {
+    let previousRafTime: DOMHighResTimeStamp = 0;
 
-  const renderLoop = (elapsedTime: DOMHighResTimeStamp): void => {
-    requestAnimationFrame(renderLoop);
+    const renderLoop = (elapsedTime: DOMHighResTimeStamp): void => {
+      requestAnimationFrame(renderLoop);
 
-    // FIRST: we calculate the delta from our current value of `previousRaf`.
-    const deltaTime = elapsedTime - previousRafTime;
+      // FIRST: we calculate the delta from our current value of `previousRaf`.
+      const deltaTime = elapsedTime - previousRafTime;
 
-    // THEN: we destructively update `previousRaf` to the latest value.
-    previousRafTime = elapsedTime;
+      // THEN: we destructively update `previousRaf` to the latest value.
+      previousRafTime = elapsedTime;
 
-    tickGameLoop(deltaTime);
+      tickGameLoop(deltaTime);
 
-    renderer.render(scene, camera);
+      renderer.render(scene, camera);
+    };
+
+    /////////////////////////////////////////////////////////////////
+    // * Start Recursing *
+    /////////////////////////////////////////////////////////////////
+
+    return renderLoop(previousRafTime);
   };
 
-  /////////////////////////////////////////////////////////////////
-  // * Start Recursing *
-  /////////////////////////////////////////////////////////////////
-
-  return renderLoop(previousRafTime);
+  return beginRenderLoop;
 };

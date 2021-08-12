@@ -1,14 +1,14 @@
+import { startIdling } from "src/game/cascade/animations/idling";
+import { startRunning, stopRunning } from "src/game/cascade/animations/running";
+import { startWalking, stopWalking } from "src/game/cascade/animations/walking";
+import { input } from "src/game/input/input";
+import { player } from "src/game/player/player";
+import type { AnimationMixerEvent } from "src/game/typings/AnimationMixerEvent";
+import type { AnimationMixerListener } from "src/game/typings/AnimationMixerListener";
 import { indexToItem } from "src/lookup-tables/indexToItem";
 import { itemToAnimation } from "src/lookup-tables/itemToAnimation";
 import { itemToAnimationDuo } from "src/lookup-tables/itemToAnimationDuo";
 import type { SlotNumber } from "src/typings/phantom-types/number/SlotNumber";
-import { input } from "../input/input";
-import { player } from "../player/player";
-import type { AnimationMixerEvent } from "src/typings/AnimationMixerEvent";
-import type { AnimationMixerListener } from "src/typings/AnimationMixerListener";
-import { startIdling } from "./animations/idling";
-import { startRunning, stopRunning } from "./animations/running";
-import { startWalking, stopWalking } from "./animations/walking";
 
 const slowToWalk = () => {
   stopRunning();

@@ -1,5 +1,5 @@
-import { input } from "../../input/input";
-import { player } from "../../player/player";
+import { input } from "src/game/input/input";
+import { player } from "src/game/player/player";
 
 export const startTurning = () => {
   const isPlayerTurning = input.heldKeys.has("KeyA") || input.heldKeys.has("KeyD");

@@ -1,9 +1,9 @@
+import type { ObSet } from "src/game/abstract-data-types/ObSet";
+import type { AnimationName } from "src/game/typings/AnimationName";
+import type { Animations } from "src/game/typings/Animations";
+import type { Effect } from "src/game/typings/Effect";
+import type { Physics } from "src/game/typings/Physics";
 import type { AnimationMixer, Group } from "three";
-import type { ObSet } from "../abstract-data-types/ObSet";
-import type { AnimationName } from "./AnimationName";
-import type { Animations } from "./Animations";
-import type { Effect } from "./Effect";
-import type { Physics } from "./Physics";
 
 export type Player = {
   readonly activeEffects: ObSet<Effect>;

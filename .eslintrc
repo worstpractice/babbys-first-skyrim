@@ -137,7 +137,7 @@
     ],
     "no-alert": "off",
     "no-array-constructor": "warn",
-    "no-await-in-loop": "warn",
+    "no-await-in-loop": "off",
     "no-bitwise": "warn",
     "no-caller": "warn",
     "no-case-declarations": "warn",

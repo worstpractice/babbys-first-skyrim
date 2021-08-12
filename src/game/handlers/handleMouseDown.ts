@@ -1,7 +1,7 @@
 import { renderer } from "src/game/engine/renderer";
-import { input } from "../input/input";
-import type { RelevantMouseButton } from "src/typings/input/RelevantMouseButton";
-import { isRelevantMouseButton } from "src/utils/type-predicates/isRelevantMouseButton";
+import { input } from "src/game/input/input";
+import type { RelevantMouseButton } from "src/game/typings/RelevantMouseButton";
+import { isRelevantMouseButton } from "src/game/utils/type-predicates/isRelevantMouseButton";
 
 export const handleMouseDown = ({ button, target }: MouseEvent): void => {
   if (target !== renderer.domElement) return;

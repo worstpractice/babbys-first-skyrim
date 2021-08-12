@@ -1,16 +1,14 @@
-import { entries } from "src/utils/object/entries";
-import { keys } from "src/utils/object/keys";
-import type { ObSetOptions } from "src/typings/obset/ObSetOptions";
-import type { SetEvent } from "src/typings/obset/SetEvent";
-import type { SetEventListener } from "src/typings/obset/SetEventListener";
-import type { SetEventListenerOptions } from "src/typings/obset/SetEventListenerOptions";
-import type { SetEventTarget } from "src/typings/obset/SetEventTarget";
-import type { SetOperation } from "src/typings/obset/SetOperation";
-import type { SetOperationEvent } from "src/typings/obset/SetOperationEvent";
-import type { SetOperationEventListener } from "src/typings/obset/SetOperationEventListener";
-import type { SetOperationEventListeners } from "src/typings/obset/SetOperationEventListeners";
-import type { SetOperationListeners } from "src/typings/obset/SetOperationListeners";
-import { swapPop } from "src/utils/swapPop";
+import type { ObSetOptions } from "src/game/typings/obset/ObSetOptions";
+import type { SetEvent } from "src/game/typings/obset/SetEvent";
+import type { SetEventListener } from "src/game/typings/obset/SetEventListener";
+import type { SetEventListenerOptions } from "src/game/typings/obset/SetEventListenerOptions";
+import type { SetEventTarget } from "src/game/typings/obset/SetEventTarget";
+import type { SetOperation } from "src/game/typings/obset/SetOperation";
+import type { SetOperationEvent } from "src/game/typings/obset/SetOperationEvent";
+import type { SetOperationEventListener } from "src/game/typings/obset/SetOperationEventListener";
+import type { SetOperationEventListeners } from "src/game/typings/obset/SetOperationEventListeners";
+import type { SetOperationListeners } from "src/game/typings/obset/SetOperationListeners";
+import { swapPop } from "src/game/utils/swapPop";
 
 const ONCE = {
   once: true,
@@ -157,7 +155,7 @@ export class ObSet<T extends string> extends Set<T> implements SetEventTarget<T>
   }
 
   private findOperationsWithoutListenersIn(this: this, operationListeners: SetOperationListeners<T>): readonly SetOperation[] {
-    const operationSetPairs = entries(operationListeners);
+    const operationSetPairs = Object.entries(operationListeners);
 
     const operationsWithoutListeners: SetOperation[] = [];
 
@@ -208,7 +206,7 @@ export class ObSet<T extends string> extends Set<T> implements SetEventTarget<T>
       operationListeners[operation] = undefined;
     }
 
-    if (keys(operationListeners).length) return;
+    if (Object.keys(operationListeners).length) return;
 
     // Free any values without sets
     this.onValueHandlers[value] = undefined;

@@ -1,10 +1,10 @@
-import type { ObSet } from "../abstract-data-types/ObSet";
-import type { ActionKey } from "./input/ActionKey";
-import type { ModifierKey } from "./input/ModifierKey";
-import type { MovementKey } from "./input/MovementKey";
-import type { RelevantKey } from "./input/RelevantKey";
-import type { RelevantMouseButton } from "./input/RelevantMouseButton";
-import type { TurnKey } from "./input/TurnKey";
+import type { ObSet } from "src/game/abstract-data-types/ObSet";
+import type { ActionKey } from "src/game/typings/keys/ActionKey";
+import type { ModifierKey } from "src/game/typings/keys/ModifierKey";
+import type { MovementKey } from "src/game/typings/keys/MovementKey";
+import type { RelevantKey } from "src/game/typings/keys/RelevantKey";
+import type { TurnKey } from "src/game/typings/keys/TurnKey";
+import type { RelevantMouseButton } from "src/game/typings/RelevantMouseButton";
 
 export type Input = {
   readonly heldKeys: ObSet<RelevantKey>;

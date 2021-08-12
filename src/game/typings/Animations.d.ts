@@ -1,5 +1,5 @@
+import type { AnimationName } from "src/game/typings/AnimationName";
 import type { AnimationAction, AnimationClip } from "three";
-import type { AnimationName } from "./AnimationName";
 
 export type Animations = {
   readonly [key in AnimationName]: {

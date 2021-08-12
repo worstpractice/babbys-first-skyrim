@@ -1,1 +1,1 @@
-export const COLOR_SKY = 0xff_ff_ff;
+export const COLOR_SKY = 0xff_ff_ff as const;

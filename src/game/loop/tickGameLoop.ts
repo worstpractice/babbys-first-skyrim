@@ -1,6 +1,6 @@
-import { tickCamera } from "../tick/tickCamera";
-import { tickMixers } from "../tick/tickMixers";
-import { tickPhysics } from "../tick/tickPhysics";
+import { tickCamera } from "src/game/tick/tickCamera";
+import { tickMixers } from "src/game/tick/tickMixers";
+import { tickPhysics } from "src/game/tick/tickPhysics";
 
 export const tickGameLoop = (deltaTime: number): void => {
   const deltaInSeconds = deltaTime * 0.001;
