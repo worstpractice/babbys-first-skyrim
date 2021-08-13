@@ -1,3 +1,3 @@
 import type { SetEvent } from "src/game/typings/obset/SetEvent";
 
-export type SetEventListener<T extends string> = (event: SetEvent<T>) => void;
+export type SetEventListener<T extends PropertyKey> = (event: SetEvent<T>) => void;
