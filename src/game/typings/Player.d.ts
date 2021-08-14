@@ -1,4 +1,4 @@
-import type { ObSet } from "src/game/abstract-data-types/ObSet";
+import type { ObSet } from "obset";
 import type { AnimationName } from "src/game/typings/AnimationName";
 import type { Animations } from "src/game/typings/Animations";
 import type { Effect } from "src/game/typings/Effect";

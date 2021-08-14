@@ -1,4 +1,4 @@
-import { ObSet } from "src/game/abstract-data-types/ObSet";
+import { ObSet } from "obset";
 import { mapAnimationNamesToAnimations } from "src/game/cascade/mapAnimationNamestoAnimations";
 import { mapEffectsToAnimationNames } from "src/game/cascade/mapEffectsToAnimationNames";
 import { mapInputToKeys } from "src/game/cascade/mapInputToKeys";

@@ -1,4 +1,4 @@
-import type { ObSet } from "src/game/abstract-data-types/ObSet";
+import type { ObSet } from "obset";
 import type { ActionKey } from "src/game/typings/keys/ActionKey";
 import type { ModifierKey } from "src/game/typings/keys/ModifierKey";
 import type { MovementKey } from "src/game/typings/keys/MovementKey";

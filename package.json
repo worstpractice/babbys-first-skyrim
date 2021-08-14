@@ -1,10 +1,11 @@
 {
   "dependencies": {
     "normalize.css": "8.0.1",
+    "obset": "1.0.3",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "three": "0.131.3",
-    "zustand": "3.5.7"
+    "zustand": "3.5.8"
   },
   "devDependencies": {
     "@babel/runtime": "7.15.3",
@@ -23,7 +24,7 @@
     "eslint-plugin-unicorn": "35.0.0",
     "prettier": "2.3.2",
     "snowpack": "3.8.6",
-    "typescript": "4.5.0-dev.20210812"
+    "typescript": "4.5.0-dev.20210814"
   },
   "scripts": {
     "build": "snowpack build",
