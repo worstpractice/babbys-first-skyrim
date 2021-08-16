@@ -1,12 +1,12 @@
-import type { CSSProperties, MouseEventHandler } from "react";
-import { default as React } from "react";
-import { BottomCard } from "src/components/BottomCard";
-import { Character } from "src/components/Character";
-import { Inventory } from "src/components/Inventory";
-import { Portrait } from "src/components/Portrait";
-import { Quests } from "src/components/Quests";
-import { useUiState } from "src/state/UiState";
-import type { UiState } from "src/typings/state/UiState";
+import type { CSSProperties, MouseEventHandler } from 'react';
+import { default as React } from 'react';
+import { BottomCard } from 'src/components/BottomCard';
+import { Character } from 'src/components/Character';
+import { Inventory } from 'src/components/Inventory';
+import { Portrait } from 'src/components/Portrait';
+import { Quests } from 'src/components/Quests';
+import { useUiState } from 'src/state/UiState';
+import type { UiState } from 'src/typings/state/UiState';
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // * Selectors *
@@ -24,15 +24,15 @@ export const Ui = ({}: Props) => {
   const { toggleCurrentOpenMenu } = useUiState(fromUi);
 
   const handleClickCharacter: MouseEventHandler<HTMLElement> = () => {
-    toggleCurrentOpenMenu("character");
+    toggleCurrentOpenMenu('character');
   };
 
   const handleClickInventory: MouseEventHandler<HTMLElement> = () => {
-    toggleCurrentOpenMenu("inventory");
+    toggleCurrentOpenMenu('inventory');
   };
 
   const handleClickQuests: MouseEventHandler<HTMLElement> = () => {
-    toggleCurrentOpenMenu("quests");
+    toggleCurrentOpenMenu('quests');
   };
 
   return (
@@ -57,24 +57,24 @@ export const Ui = ({}: Props) => {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const styles = {
   bottomHalf: {
-    alignItems: "flex-end",
-    display: "flex",
+    alignItems: 'flex-end',
+    display: 'flex',
     gap: 10,
-    height: "100%",
-    justifyContent: "center",
-    width: "100%",
+    height: '100%',
+    justifyContent: 'center',
+    width: '100%',
   } as CSSProperties,
   topHalf: {
-    display: "flex",
-    height: "100%",
-    justifyContent: "space-between",
-    width: "100%",
+    display: 'flex',
+    height: '100%',
+    justifyContent: 'space-between',
+    width: '100%',
   } as CSSProperties,
   ui: {
-    display: "flex",
-    flexDirection: "column",
-    height: "100%",
-    justifyContent: "space-between",
-    width: "100%",
+    display: 'flex',
+    flexDirection: 'column',
+    height: '100%',
+    justifyContent: 'space-between',
+    width: '100%',
   } as CSSProperties,
 } as const;

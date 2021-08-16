@@ -1,7 +1,7 @@
-import { move } from "src/game/physucks/move";
-import { turn } from "src/game/physucks/turn";
-import { player } from "src/game/player/player";
-import { vec3 } from "src/game/utils/vec3";
+import { move } from 'src/game/physucks/move';
+import { turn } from 'src/game/physucks/turn';
+import { player } from 'src/game/player/player';
+import { vec3 } from 'src/game/utils/vec3';
 
 const applyFriction = (deltaInSeconds: number): void => {
   const y = player.physics.velocity.y * player.physics.decceleration.y;

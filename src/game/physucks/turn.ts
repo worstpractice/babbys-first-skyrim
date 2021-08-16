@@ -1,13 +1,13 @@
-import { input } from "src/game/input/input";
-import { player } from "src/game/player/player";
-import { vec3 } from "src/game/utils/vec3";
-import { Quaternion } from "three";
+import { input } from 'src/game/input/input';
+import { player } from 'src/game/player/player';
+import { vec3 } from 'src/game/utils/vec3';
+import { Quaternion } from 'three';
 
 const TO_THE_LEFT = Math.PI;
 const TO_THE_RIGHT = -Math.PI;
 
 export const turn = (deltaInSeconds: number) => {
-  if (!player.activeEffects.has("turning")) return;
+  if (!player.activeEffects.has('turning')) return;
 
   const turnQuaternion = new Quaternion();
   const axisAngle = vec3(0, 1, 0);
@@ -15,7 +15,7 @@ export const turn = (deltaInSeconds: number) => {
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // * Turn Left *
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  if (input.heldKeys.has("KeyA")) {
+  if (input.heldKeys.has('KeyA')) {
     const angle = TO_THE_LEFT * deltaInSeconds * player.physics.acceleration.y;
 
     turnQuaternion.setFromAxisAngle(axisAngle, angle);
@@ -24,7 +24,7 @@ export const turn = (deltaInSeconds: number) => {
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // * Turn Right *
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  if (input.heldKeys.has("KeyD")) {
+  if (input.heldKeys.has('KeyD')) {
     const angle = TO_THE_RIGHT * deltaInSeconds * player.physics.acceleration.y;
 
     turnQuaternion.setFromAxisAngle(axisAngle, angle);

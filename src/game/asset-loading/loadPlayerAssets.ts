@@ -1,8 +1,8 @@
-import { loadPlayerAnimations } from "src/game/asset-loading/loadPlayerAnimations";
-import { loadPlayerModel } from "src/game/asset-loading/loadPlayerModel";
-import { loadWeaponModel } from "src/game/asset-loading/loadWeaponModel";
-import type { NameClipDuo } from "src/game/typings/NameClipDuo";
-import type { LoadingManager, Scene } from "three";
+import { loadPlayerAnimations } from 'src/game/asset-loading/loadPlayerAnimations';
+import { loadPlayerModel } from 'src/game/asset-loading/loadPlayerModel';
+import { loadWeaponModel } from 'src/game/asset-loading/loadWeaponModel';
+import type { NameClipDuo } from 'src/game/typings/NameClipDuo';
+import type { LoadingManager, Scene } from 'three';
 
 export const loadPlayerAssets = async (loadingManager: LoadingManager, scene: Scene): Promise<readonly NameClipDuo[]> => {
   // Loading player model must complete before loading weapon model may commence

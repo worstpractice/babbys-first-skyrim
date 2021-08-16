@@ -1,3 +1,3 @@
-import type { AnimationMixer } from "three";
+import type { AnimationMixer } from 'three';
 
 export const mixers: AnimationMixer[] = [];

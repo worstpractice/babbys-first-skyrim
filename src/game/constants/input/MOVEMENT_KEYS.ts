@@ -1,4 +1,4 @@
-import type { MovementKey } from "src/game/typings/keys/MovementKey";
+import type { MovementKey } from 'src/game/typings/keys/MovementKey';
 
 type EarlyWarningSystem = {
   readonly [key in MovementKey]: true;

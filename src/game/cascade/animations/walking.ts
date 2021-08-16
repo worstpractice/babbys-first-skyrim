@@ -1,13 +1,13 @@
-import { player } from "src/game/player/player";
+import { player } from 'src/game/player/player';
 
 export const startWalking = () => {
-  const isMoving = player.activeEffects.has("moving");
+  const isMoving = player.activeEffects.has('moving');
 
   if (!isMoving) return;
 
-  player.activeAnimations.add("walking");
+  player.activeAnimations.add('walking');
 };
 
 export const stopWalking = () => {
-  player.activeAnimations.delete("walking");
+  player.activeAnimations.delete('walking');
 };

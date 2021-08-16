@@ -1,6 +1,6 @@
-import type { CSSProperties } from "react";
-import { default as React } from "react";
-import { BACKGROUND } from "src/styles";
+import type { CSSProperties } from 'react';
+import { default as React } from 'react';
+import { BACKGROUND } from 'src/styles';
 
 type Props = {};
 
@@ -14,9 +14,9 @@ export const Portrait = ({}: Props) => {
 const styles = {
   portrait: {
     ...BACKGROUND,
-    borderRadius: "50%",
+    borderRadius: '50%',
     height: 225,
-    pointerEvents: "all",
+    pointerEvents: 'all',
     width: 225,
   } as CSSProperties,
 } as const;

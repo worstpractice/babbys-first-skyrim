@@ -1,5 +1,5 @@
-import { camera } from "src/game/engine/camera";
-import { renderer } from "src/game/engine/renderer";
+import { camera } from 'src/game/engine/camera';
+import { renderer } from 'src/game/engine/renderer';
 
 export const handleResize = (event: UIEvent): void => {
   /** See: https://codepen.io/machal/pen/rrXNWO */

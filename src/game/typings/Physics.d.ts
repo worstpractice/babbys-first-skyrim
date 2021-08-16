@@ -1,4 +1,4 @@
-import type { Vector3 } from "three";
+import type { Vector3 } from 'three';
 
 export type Physics = {
   readonly acceleration: Vector3;

@@ -1,10 +1,10 @@
-import { ObSet } from "obset";
-import type { AnimationName } from "src/game/typings/AnimationName";
-import type { Animations } from "src/game/typings/Animations";
-import type { Effect } from "src/game/typings/Effect";
-import type { Player } from "src/game/typings/Player";
-import { vec3 } from "src/game/utils/vec3";
-import type { AnimationAction, AnimationClip, AnimationMixer, Group } from "three";
+import { ObSet } from 'obset';
+import type { AnimationName } from 'src/game/typings/AnimationName';
+import type { Animations } from 'src/game/typings/Animations';
+import type { Effect } from 'src/game/typings/Effect';
+import type { Player } from 'src/game/typings/Player';
+import { vec3 } from 'src/game/utils/vec3';
+import type { AnimationAction, AnimationClip, AnimationMixer, Group } from 'three';
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 // * Dynamic Dependencies (Initialized At Runtime) *

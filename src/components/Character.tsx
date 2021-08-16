@@ -1,8 +1,8 @@
-import type { CSSProperties } from "react";
-import { default as React } from "react";
-import { useUiState } from "src/state/UiState";
-import { BACKGROUND } from "src/styles";
-import type { UiState } from "src/typings/state/UiState";
+import type { CSSProperties } from 'react';
+import { default as React } from 'react';
+import { useUiState } from 'src/state/UiState';
+import { BACKGROUND } from 'src/styles';
+import type { UiState } from 'src/typings/state/UiState';
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // * Selectors *
@@ -19,7 +19,7 @@ type Props = {};
 export const Character = ({}: Props) => {
   const { currentOpenMenu } = useUiState(fromUi);
 
-  if (currentOpenMenu !== "character") return null;
+  if (currentOpenMenu !== 'character') return null;
 
   return (
     <div style={styles.character}>
@@ -34,13 +34,13 @@ export const Character = ({}: Props) => {
 const styles = {
   character: {
     ...BACKGROUND,
-    borderRadius: "1%",
-    display: "flex",
-    flexDirection: "column",
+    borderRadius: '1%',
+    display: 'flex',
+    flexDirection: 'column',
     height: 400,
-    justifyContent: "space-between",
+    justifyContent: 'space-between',
     padding: 20,
-    pointerEvents: "all",
+    pointerEvents: 'all',
     width: 420,
   } as CSSProperties,
   title: {

@@ -1,7 +1,7 @@
-import { camera } from "src/game/engine/camera";
-import { renderer } from "src/game/engine/renderer";
-import { tickGameLoop } from "src/game/loop/tickGameLoop";
-import type { Scene } from "three";
+import { camera } from 'src/game/engine/camera';
+import { renderer } from 'src/game/engine/renderer';
+import { tickGameLoop } from 'src/game/loop/tickGameLoop';
+import type { Scene } from 'three';
 
 export const createRenderLoop = (scene: Scene) => {
   const beginRenderLoop = (): void => {

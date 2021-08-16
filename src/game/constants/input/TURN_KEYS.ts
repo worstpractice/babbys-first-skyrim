@@ -1,4 +1,4 @@
-import type { TurnKey } from "src/game/typings/keys/TurnKey";
+import type { TurnKey } from 'src/game/typings/keys/TurnKey';
 
 type EarlyWarningSystem = {
   readonly [key in TurnKey]: true;

@@ -1,9 +1,9 @@
-import { camera } from "src/game/engine/camera";
-import { calculateFrameRateIndependentLerpCoefficient } from "src/game/third-person-camera/calculateFrameRateIndependentLerpCoefficient";
-import { calculateIdealFrom } from "src/game/third-person-camera/calculateIdealFrom";
-import { getCurrentCameraLookAt } from "src/game/third-person-camera/getCurrentCameraLookAt";
-import { vec3 } from "src/game/utils/vec3";
-import type { Vector3 } from "three";
+import { camera } from 'src/game/engine/camera';
+import { calculateFrameRateIndependentLerpCoefficient } from 'src/game/third-person-camera/calculateFrameRateIndependentLerpCoefficient';
+import { calculateIdealFrom } from 'src/game/third-person-camera/calculateIdealFrom';
+import { getCurrentCameraLookAt } from 'src/game/third-person-camera/getCurrentCameraLookAt';
+import { vec3 } from 'src/game/utils/vec3';
+import type { Vector3 } from 'three';
 
 export const tickCamera = (deltaInSeconds: number): void => {
   /** NOTE: places the camera a little bit behind the player and above their shoulder. */

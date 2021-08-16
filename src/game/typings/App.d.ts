@@ -1,4 +1,4 @@
-import type { AnimationMixer, PerspectiveCamera, Scene, WebGLRenderer } from "three";
+import type { AnimationMixer, PerspectiveCamera, Scene, WebGLRenderer } from 'three';
 
 export type App = {
   readonly camera: PerspectiveCamera;

@@ -1,9 +1,9 @@
-import type { CSSProperties, MouseEventHandler, ReactChild } from "react";
-import { default as React } from "react";
+import type { CSSProperties, MouseEventHandler, ReactChild } from 'react';
+import { default as React } from 'react';
 
 type Props = {
   readonly children: ReactChild | readonly ReactChild[];
-  readonly direction: "row" | "column";
+  readonly direction: 'row' | 'column';
   readonly resetClickState?: MouseEventHandler<HTMLDivElement>;
   readonly style?: CSSProperties;
 };
@@ -25,20 +25,20 @@ export const Flex = ({ children, direction, resetClickState, style }: Props) => 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const styles = {
   flex: {
-    display: "flex",
-    flexDirection: "row",
+    display: 'flex',
+    flexDirection: 'row',
     gap: 5,
-    justifyContent: "space-evenly",
+    justifyContent: 'space-evenly',
   } as CSSProperties,
 } as const;
 
 const directionStyles = {
   column: {
     ...styles.flex,
-    flexDirection: "column",
+    flexDirection: 'column',
   } as CSSProperties,
   row: {
     ...styles.flex,
-    flexDirection: "row",
+    flexDirection: 'row',
   } as CSSProperties,
 } as const;

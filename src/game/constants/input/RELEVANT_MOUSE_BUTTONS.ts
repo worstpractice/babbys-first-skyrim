@@ -1,4 +1,4 @@
-import type { RelevantMouseButton } from "src/game/typings/RelevantMouseButton";
+import type { RelevantMouseButton } from 'src/game/typings/RelevantMouseButton';
 
 type EarlyWarningSystem = {
   readonly [key in RelevantMouseButton]: true;

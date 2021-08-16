@@ -1,4 +1,4 @@
-import { default as React } from "react";
+import { default as React } from 'react';
 
 type Props = {};
 
@@ -7,7 +7,7 @@ export const Statue = ({}: Props) => {
     <div
       style={{
         height: 350,
-        pointerEvents: "all",
+        pointerEvents: 'all',
         width: 200,
       }}
     />

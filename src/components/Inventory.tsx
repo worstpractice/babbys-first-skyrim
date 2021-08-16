@@ -1,17 +1,17 @@
-import type { CSSProperties } from "react";
-import { default as React } from "react";
-import { InventorySlot } from "src/components/InventorySlot";
-import { Flex } from "src/components/layout/Flex";
-import { Statue } from "src/components/Statue";
-import { FIRST_ROW, LEFT_COLUMN, RIGHT_COLUMN, SECOUND_ROW, THIRD_ROW } from "src/constants/INVENTORY";
-import { useClickedState } from "src/state/ClickedState";
-import { useDraggedState } from "src/state/DraggedState";
-import { useUiState } from "src/state/UiState";
-import { BACKGROUND } from "src/styles";
-import type { SlotNumber } from "src/typings/phantom-types/number/SlotNumber";
-import type { ClickedState } from "src/typings/state/ClickedState";
-import type { DraggedState } from "src/typings/state/DraggedState";
-import type { UiState } from "src/typings/state/UiState";
+import type { CSSProperties } from 'react';
+import { default as React } from 'react';
+import { InventorySlot } from 'src/components/InventorySlot';
+import { Flex } from 'src/components/layout/Flex';
+import { Statue } from 'src/components/Statue';
+import { FIRST_ROW, LEFT_COLUMN, RIGHT_COLUMN, SECOUND_ROW, THIRD_ROW } from 'src/constants/INVENTORY';
+import { useClickedState } from 'src/state/ClickedState';
+import { useDraggedState } from 'src/state/DraggedState';
+import { useUiState } from 'src/state/UiState';
+import { BACKGROUND } from 'src/styles';
+import type { SlotNumber } from 'src/typings/phantom-types/number/SlotNumber';
+import type { ClickedState } from 'src/typings/state/ClickedState';
+import type { DraggedState } from 'src/typings/state/DraggedState';
+import type { UiState } from 'src/typings/state/UiState';
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // * Selectors *
@@ -43,7 +43,7 @@ export const Inventory = ({}: Props) => {
   const { setCurrentlyDraggedElement } = useDraggedState(fromDragged);
   const { currentOpenMenu } = useUiState(fromUi);
 
-  if (currentOpenMenu !== "inventory") return null;
+  if (currentOpenMenu !== 'inventory') return null;
 
   const resetClickState = () => {
     setCurrentlyClickedElement(null);
@@ -105,6 +105,6 @@ const styles = {
     paddingBottom: 25,
     paddingLeft: 25,
     paddingRight: 25,
-    pointerEvents: "all",
+    pointerEvents: 'all',
   } as CSSProperties,
 } as const;

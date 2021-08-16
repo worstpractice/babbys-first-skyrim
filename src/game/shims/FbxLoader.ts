@@ -1,1 +1,1 @@
-export { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
+export { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader';

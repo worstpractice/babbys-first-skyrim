@@ -1,1 +1,1 @@
-export type SlotNumber = number & { readonly type: "SlotNumber" };
+export type SlotNumber = number & { readonly type: 'SlotNumber' };

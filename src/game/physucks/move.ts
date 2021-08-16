@@ -1,13 +1,13 @@
-import { input } from "src/game/input/input";
-import { player } from "src/game/player/player";
-import { vec3 } from "src/game/utils/vec3";
+import { input } from 'src/game/input/input';
+import { player } from 'src/game/player/player';
+import { vec3 } from 'src/game/utils/vec3';
 
 export const move = (deltaInSeconds: number) => {
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // * Move Forward *
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  if (input.heldKeys.has("KeyW")) {
-    const acceleration = input.heldModifierKeys.has("ShiftLeft") ? player.physics.acceleration.z * 3 : player.physics.acceleration.z;
+  if (input.heldKeys.has('KeyW')) {
+    const acceleration = input.heldModifierKeys.has('ShiftLeft') ? player.physics.acceleration.z * 3 : player.physics.acceleration.z;
 
     player.physics.velocity.z += acceleration * deltaInSeconds;
   }
@@ -15,7 +15,7 @@ export const move = (deltaInSeconds: number) => {
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // * Move Backward *
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  if (input.heldKeys.has("KeyS")) {
+  if (input.heldKeys.has('KeyS')) {
     player.physics.velocity.z -= player.physics.acceleration.z * deltaInSeconds;
   }
 

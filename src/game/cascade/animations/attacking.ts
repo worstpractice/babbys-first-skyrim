@@ -1,13 +1,13 @@
-import { player } from "src/game/player/player";
+import { player } from 'src/game/player/player';
 
 export const startAttacking = () => {
-  const isUsing = player.activeEffects.has("using");
+  const isUsing = player.activeEffects.has('using');
 
   if (!isUsing) return;
 
-  player.activeAnimations.add("attacking");
+  player.activeAnimations.add('attacking');
 };
 
 export const stopAttacking = () => {
-  player.activeAnimations.delete("attacking");
+  player.activeAnimations.delete('attacking');
 };

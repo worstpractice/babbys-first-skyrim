@@ -1,5 +1,5 @@
-import { player } from "src/game/player/player";
-import type { Vector3 } from "three";
+import { player } from 'src/game/player/player';
+import type { Vector3 } from 'three';
 
 export const calculateIdealFrom = (offset: Vector3): Vector3 => {
   /** NOTE: copies the character's orientation (since the offset is in local space), orienting us in the right direction. */

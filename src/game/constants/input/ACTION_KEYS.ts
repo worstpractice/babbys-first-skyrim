@@ -1,4 +1,4 @@
-import type { ActionKey } from "src/game/typings/keys/ActionKey";
+import type { ActionKey } from 'src/game/typings/keys/ActionKey';
 
 type EarlyWarningSystem = {
   readonly [key in ActionKey]: true;

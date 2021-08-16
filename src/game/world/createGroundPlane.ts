@@ -1,7 +1,7 @@
-import { COLOR_GROUND } from "src/game/constants/COLOR_GROUND";
-import { FACING_UPRIGHT } from "src/game/constants/FACING_UPRIGHT";
-import { GROUND_PLANE_HEIGHT, GROUND_PLANE_WIDTH } from "src/game/constants/GROUND_PLANE";
-import { Mesh, MeshStandardMaterial, PlaneGeometry } from "three";
+import { COLOR_GROUND } from 'src/game/constants/COLOR_GROUND';
+import { FACING_UPRIGHT } from 'src/game/constants/FACING_UPRIGHT';
+import { GROUND_PLANE_HEIGHT, GROUND_PLANE_WIDTH } from 'src/game/constants/GROUND_PLANE';
+import { Mesh, MeshStandardMaterial, PlaneGeometry } from 'three';
 
 export const createGroundPlane = async (): Promise<Mesh<PlaneGeometry, MeshStandardMaterial>> => {
   const plane = new Mesh(
@@ -11,7 +11,7 @@ export const createGroundPlane = async (): Promise<Mesh<PlaneGeometry, MeshStand
     }),
   );
 
-  plane.name = "groundPlane";
+  plane.name = 'groundPlane';
 
   plane.castShadow = false;
   plane.receiveShadow = true;

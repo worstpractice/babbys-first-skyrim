@@ -1,4 +1,4 @@
-import type { ModifierKey } from "src/game/typings/keys/ModifierKey";
+import type { ModifierKey } from 'src/game/typings/keys/ModifierKey';
 
 type EarlyWarningSystem = {
   readonly [key in ModifierKey]: true;

@@ -1,13 +1,13 @@
-import { player } from "src/game/player/player";
+import { player } from 'src/game/player/player';
 
 export const startJumping = () => {
-  const hasNothingToPushOffAgainst = player.activeEffects.has("levitating");
+  const hasNothingToPushOffAgainst = player.activeEffects.has('levitating');
 
   if (hasNothingToPushOffAgainst) return;
 
-  player.activeAnimations.add("jumping");
+  player.activeAnimations.add('jumping');
 };
 
 export const stopJumping = () => {
-  player.activeAnimations.delete("jumping");
+  player.activeAnimations.delete('jumping');
 };

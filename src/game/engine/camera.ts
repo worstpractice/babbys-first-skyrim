@@ -1,4 +1,4 @@
-import { PerspectiveCamera } from "three";
+import { PerspectiveCamera } from 'three';
 
 const FOV = 90;
 const ASPECT = window.innerWidth / window.innerHeight;

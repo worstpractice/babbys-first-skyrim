@@ -1,15 +1,15 @@
-import type { CSSProperties } from "react";
-import { default as React, useRef } from "react";
-import { indexToItem } from "src/lookup-tables/indexToItem";
-import { itemToModel } from "src/lookup-tables/itemToModel";
-import { useClickedState } from "src/state/ClickedState";
-import { useDraggedState } from "src/state/DraggedState";
-import type { ItemName } from "src/typings/ItemName";
-import type { SlotNumber } from "src/typings/phantom-types/number/SlotNumber";
-import type { SlotEvent } from "src/typings/SlotEvent";
-import type { ClickedState } from "src/typings/state/ClickedState";
-import type { DraggedState } from "src/typings/state/DraggedState";
-import { toIconUrl } from "src/utils/urls/toIconUrl";
+import type { CSSProperties } from 'react';
+import { default as React, useRef } from 'react';
+import { indexToItem } from 'src/lookup-tables/indexToItem';
+import { itemToModel } from 'src/lookup-tables/itemToModel';
+import { useClickedState } from 'src/state/ClickedState';
+import { useDraggedState } from 'src/state/DraggedState';
+import type { ItemName } from 'src/typings/ItemName';
+import type { SlotNumber } from 'src/typings/phantom-types/number/SlotNumber';
+import type { SlotEvent } from 'src/typings/SlotEvent';
+import type { ClickedState } from 'src/typings/state/ClickedState';
+import type { DraggedState } from 'src/typings/state/DraggedState';
+import { toIconUrl } from 'src/utils/urls/toIconUrl';
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // * Selectors *
@@ -35,7 +35,7 @@ type Props = {
 const handleItem = ({ index, item }: SlotEvent) => {
   const isBeingEquipped = index < 8;
 
-  const weaponModel = itemToModel["sword"];
+  const weaponModel = itemToModel['sword'];
 
   if (!weaponModel) {
     console.warn(`No weapon model for sword!`);
@@ -44,7 +44,7 @@ const handleItem = ({ index, item }: SlotEvent) => {
 
   weaponModel.visible = isBeingEquipped;
 
-  const verb = isBeingEquipped ? "Equipped" : "Moved";
+  const verb = isBeingEquipped ? 'Equipped' : 'Moved';
 
   console.log(`${verb} ${item} into slot #${index}`);
 };
@@ -53,7 +53,7 @@ export const InventorySlot = ({ onItem = handleItem, index }: Props) => {
   const { currentlyClickedElement, setCurrentlyClickedElement } = useClickedState(fromClicked);
   const { currentlyDraggedElement, setCurrentlyDraggedElement } = useDraggedState(fromDragged);
   const slotRef = useRef<HTMLDivElement | null>(null);
-  const item = indexToItem[index] ?? "";
+  const item = indexToItem[index] ?? '';
 
   ///////////////////////////////////////////////////////////////////////////
 
@@ -84,8 +84,8 @@ export const InventorySlot = ({ onItem = handleItem, index }: Props) => {
     const myBackgroundImage = me.style.backgroundImage;
     const theirBackgroundImage = them.style.backgroundImage;
 
-    const myItem = indexToItem[myIndex] ?? "";
-    const theirItem = indexToItem[theirIndex] ?? "";
+    const myItem = indexToItem[myIndex] ?? '';
+    const theirItem = indexToItem[theirIndex] ?? '';
 
     // Swap background images
     me.style.backgroundImage = theirBackgroundImage;
@@ -132,13 +132,13 @@ export const InventorySlot = ({ onItem = handleItem, index }: Props) => {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const styles = {
   slot: {
-    backgroundColor: "rgb(0, 0, 0, 1)",
-    border: "rgb(0, 0, 0, 1)",
-    borderRadius: "5%",
-    borderStyle: "solid",
+    backgroundColor: 'rgb(0, 0, 0, 1)',
+    border: 'rgb(0, 0, 0, 1)',
+    borderRadius: '5%',
+    borderStyle: 'solid',
     height: 30,
     padding: 10,
-    pointerEvents: "all",
+    pointerEvents: 'all',
     width: 30,
   } as CSSProperties,
 } as const;
@@ -146,7 +146,7 @@ const styles = {
 const slotStyles = {
   occupied: {
     ...styles.slot,
-    cursor: "pointer",
+    cursor: 'pointer',
   } as CSSProperties,
   vacant: {
     ...styles.slot,

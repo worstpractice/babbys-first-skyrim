@@ -1,5 +1,5 @@
-import type { ItemName } from "src/typings/ItemName";
+import type { ItemName } from 'src/typings/ItemName';
 
-export const toIconUrl = (itemName: ItemName = "") => {
-  return itemName ? `url(/assets/icons/${itemName}.svg)` : "";
+export const toIconUrl = (itemName: ItemName = '') => {
+  return itemName ? `url(/assets/icons/${itemName}.svg)` : '';
 };

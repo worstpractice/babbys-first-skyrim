@@ -1,6 +1,6 @@
-import create from "zustand";
-import { combine } from "zustand/middleware";
-import type { DraggedState } from "src/typings/state/DraggedState";
+import create from 'zustand';
+import { combine } from 'zustand/middleware';
+import type { DraggedState } from 'src/typings/state/DraggedState';
 
 export type Data = {
   readonly currentlyDraggedElement: HTMLDivElement | null;

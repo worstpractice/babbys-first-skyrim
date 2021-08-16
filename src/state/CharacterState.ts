@@ -1,7 +1,7 @@
-import create from "zustand";
-import { combine } from "zustand/middleware";
-import type { ItemName } from "src/typings/ItemName";
-import type { CharacterState } from "src/typings/state/CharacterState";
+import create from 'zustand';
+import { combine } from 'zustand/middleware';
+import type { ItemName } from 'src/typings/ItemName';
+import type { CharacterState } from 'src/typings/state/CharacterState';
 
 export type Data = {
   readonly mainHand: ItemName;
@@ -15,7 +15,7 @@ export const useCharacterState = create<CharacterState>(
   combine<Data, Actions>(
     {
       ///////////////////////////////////////////
-      mainHand: "",
+      mainHand: '',
       ///////////////////////////////////////////
     } as const,
     (set) => {

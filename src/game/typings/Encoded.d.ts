@@ -1,4 +1,4 @@
-import type { TextureEncoding } from "three";
+import type { TextureEncoding } from 'three';
 
 export type Encoded = {
   readonly material: {

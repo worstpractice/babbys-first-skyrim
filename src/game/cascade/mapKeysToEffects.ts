@@ -1,28 +1,28 @@
-import { startJumping, stopJumping } from "src/game/cascade/animations/jumping";
-import { startMoving, stopMoving } from "src/game/cascade/effects/moving";
-import { startTurning, stopTurning } from "src/game/cascade/effects/turning";
-import { startUsing, stopUsing } from "src/game/cascade/effects/using";
-import { input } from "src/game/input/input";
-import { player } from "src/game/player/player";
-import type { AnimationMixerEvent } from "src/game/typings/AnimationMixerEvent";
-import type { AnimationMixerListener } from "src/game/typings/AnimationMixerListener";
+import { startJumping, stopJumping } from 'src/game/cascade/animations/jumping';
+import { startMoving, stopMoving } from 'src/game/cascade/effects/moving';
+import { startTurning, stopTurning } from 'src/game/cascade/effects/turning';
+import { startUsing, stopUsing } from 'src/game/cascade/effects/using';
+import { input } from 'src/game/input/input';
+import { player } from 'src/game/player/player';
+import type { AnimationMixerEvent } from 'src/game/typings/AnimationMixerEvent';
+import type { AnimationMixerListener } from 'src/game/typings/AnimationMixerListener';
 
 const stopJumpingAndCleanUp = ({ action }: AnimationMixerEvent) => {
   const clip = action.getClip();
 
-  if (clip.name !== "jumpingClip") return;
+  if (clip.name !== 'jumpingClip') return;
 
   stopJumping();
 
-  player.mixer.removeEventListener("finished", stopJumping);
+  player.mixer.removeEventListener('finished', stopJumping);
 };
 
 export const mapKeysToEffects = (): void => {
   //////////////////////////////////////////////////////////////////////
   // * Moving *
   //////////////////////////////////////////////////////////////////////
-  input.heldMovementKeys.onAny("add", () => {
-    const isTreadingWater = input.heldMovementKeys.has("KeyS") && input.heldMovementKeys.has("KeyW");
+  input.heldMovementKeys.on('add', () => {
+    const isTreadingWater = input.heldMovementKeys.has('KeyS') && input.heldMovementKeys.has('KeyW');
 
     if (isTreadingWater) {
       stopMoving();
@@ -31,30 +31,30 @@ export const mapKeysToEffects = (): void => {
     }
   });
 
-  input.heldMovementKeys.onAny("delete", () => {
-    const isTreadingWater = input.heldMovementKeys.has("KeyS") && input.heldMovementKeys.has("KeyW");
+  input.heldMovementKeys.on('delete', () => {
+    const isTreadingWater = input.heldMovementKeys.has('KeyS') && input.heldMovementKeys.has('KeyW');
 
     if (!isTreadingWater) {
       startMoving();
     }
   });
 
-  input.heldMovementKeys.onEmpty(stopMoving);
+  input.heldMovementKeys.on('empty', stopMoving);
 
   //////////////////////////////////////////////////////////////////////
   // * Turning *
   //////////////////////////////////////////////////////////////////////
-  input.heldActionKeys.onAny("add", ({ value }) => {
-    const isTurning = value === "KeyD" || value === "KeyA";
+  input.heldActionKeys.on('add', ({ value }) => {
+    const isTurning = value === 'KeyD' || value === 'KeyA';
 
     if (!isTurning) return;
 
-    const isTreadingWater = input.heldActionKeys.has("KeyA") && input.heldActionKeys.has("KeyD");
+    const isTreadingWater = input.heldActionKeys.has('KeyA') && input.heldActionKeys.has('KeyD');
 
     if (isTreadingWater) {
       stopTurning();
-      input.heldActionKeys.onceAny("delete", ({ value }) => {
-        const isTurning = value === "KeyD" || value === "KeyA";
+      input.heldActionKeys.once('delete', ({ value }) => {
+        const isTurning = value === 'KeyD' || value === 'KeyA';
 
         if (!isTurning) return;
 
@@ -68,8 +68,8 @@ export const mapKeysToEffects = (): void => {
   //////////////////////////////////////////////////////////////////////
   // * Jumping *
   //////////////////////////////////////////////////////////////////////
-  input.heldActionKeys.on("add", "Space", () => {
-    (player.mixer.addEventListener as AnimationMixerListener)("finished", stopJumpingAndCleanUp);
+  input.heldActionKeys.on('add', 'Space', () => {
+    (player.mixer.addEventListener as AnimationMixerListener)('finished', stopJumpingAndCleanUp);
 
     startJumping();
   });
@@ -77,9 +77,9 @@ export const mapKeysToEffects = (): void => {
   //////////////////////////////////////////////////////////////////////
   // * Attacking *
   //////////////////////////////////////////////////////////////////////
-  input.heldMouseButtons.on("add", "LMB", () => {
+  input.heldMouseButtons.on('add', 'LMB', () => {
     startUsing();
 
-    input.heldMouseButtons.once("delete", "LMB", stopUsing);
+    input.heldMouseButtons.once('delete', 'LMB', stopUsing);
   });
 };

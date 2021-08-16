@@ -1,27 +1,27 @@
-import create from "zustand";
-import { combine } from "zustand/middleware";
-import type { MenuName } from "src/typings/MenuName";
-import type { UiState } from "src/typings/state/UiState";
+import create from 'zustand';
+import { combine } from 'zustand/middleware';
+import type { MenuName } from 'src/typings/MenuName';
+import type { UiState } from 'src/typings/state/UiState';
 
 export type Data = {
   readonly currentOpenMenu: MenuName;
 };
 
 export type Actions = {
-  readonly toggleCurrentOpenMenu: (to: Exclude<MenuName, "">) => void;
+  readonly toggleCurrentOpenMenu: (to: Exclude<MenuName, ''>) => void;
 };
 
 export const useUiState = create<UiState>(
   combine<Data, Actions>(
     {
       ///////////////////////////////////////////
-      currentOpenMenu: "",
+      currentOpenMenu: '',
       ///////////////////////////////////////////
     } as const,
     (set) => {
       return {
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        toggleCurrentOpenMenu: (to: Exclude<MenuName, "">) => {
+        toggleCurrentOpenMenu: (to: Exclude<MenuName, ''>) => {
           set((state): Data => {
             const { currentOpenMenu } = state;
 
@@ -31,7 +31,7 @@ export const useUiState = create<UiState>(
             }
 
             /** If a given menu is showing, clicking its menu button again closes it. */
-            const newOpenMenu = currentOpenMenu ? "" : to;
+            const newOpenMenu = currentOpenMenu ? '' : to;
 
             return { currentOpenMenu: newOpenMenu } as const;
           });

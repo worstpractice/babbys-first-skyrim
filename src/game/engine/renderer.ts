@@ -1,12 +1,12 @@
-import { PCFSoftShadowMap, sRGBEncoding, WebGLRenderer } from "three";
+import { PCFSoftShadowMap, sRGBEncoding, WebGLRenderer } from 'three';
 
-const canvas = document.getElementById("canvas") as HTMLCanvasElement;
+const canvas = document.getElementById('canvas') as HTMLCanvasElement;
 
 export const renderer = new WebGLRenderer({
   antialias: true,
   canvas,
-  powerPreference: "high-performance",
-  precision: "highp",
+  powerPreference: 'high-performance',
+  precision: 'highp',
 });
 
 /** See: https://discoverthreejs.com/tips-and-tricks/#accurate-colors */

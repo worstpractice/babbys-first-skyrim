@@ -3,7 +3,7 @@ export const disableSaveShortcut = (event: KeyboardEvent): void => {
 
   if (!ctrlKey) return;
 
-  if (code !== "KeyS") return;
+  if (code !== 'KeyS') return;
 
   event.preventDefault();
   event.stopImmediatePropagation();
