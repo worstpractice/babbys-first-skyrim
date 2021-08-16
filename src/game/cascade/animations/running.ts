@@ -1,6 +1,6 @@
 import { player } from 'src/game/player/player';
 
-export const startRunning = () => {
+export const startRunning = (): void => {
   const isMoving = player.activeEffects.has('moving');
 
   if (!isMoving) return;
@@ -8,6 +8,6 @@ export const startRunning = () => {
   player.activeAnimations.add('running');
 };
 
-export const stopRunning = () => {
+export const stopRunning = (): void => {
   player.activeAnimations.delete('running');
 };

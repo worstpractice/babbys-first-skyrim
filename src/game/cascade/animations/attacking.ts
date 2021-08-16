@@ -1,6 +1,6 @@
 import { player } from 'src/game/player/player';
 
-export const startAttacking = () => {
+export const startAttacking = (): void => {
   const isUsing = player.activeEffects.has('using');
 
   if (!isUsing) return;
@@ -8,6 +8,6 @@ export const startAttacking = () => {
   player.activeAnimations.add('attacking');
 };
 
-export const stopAttacking = () => {
+export const stopAttacking = (): void => {
   player.activeAnimations.delete('attacking');
 };

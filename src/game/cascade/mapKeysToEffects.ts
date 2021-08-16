@@ -7,7 +7,7 @@ import { player } from 'src/game/player/player';
 import type { AnimationMixerEvent } from 'src/game/typings/AnimationMixerEvent';
 import type { AnimationMixerListener } from 'src/game/typings/AnimationMixerListener';
 
-const stopJumpingAndCleanUp = ({ action }: AnimationMixerEvent) => {
+const stopJumpingAndCleanUp = ({ action }: AnimationMixerEvent): void => {
   const clip = action.getClip();
 
   if (clip.name !== 'jumpingClip') return;
@@ -21,8 +21,8 @@ export const mapKeysToEffects = (): void => {
   //////////////////////////////////////////////////////////////////////
   // * Moving *
   //////////////////////////////////////////////////////////////////////
-  input.heldMovementKeys.on('add', () => {
-    const isTreadingWater = input.heldMovementKeys.has('KeyS') && input.heldMovementKeys.has('KeyW');
+  input.heldMovementKeys.on('add', (): void => {
+    const isTreadingWater = input.heldMovementKeys.hasAllOf('KeyS', 'KeyW');
 
     if (isTreadingWater) {
       stopMoving();
@@ -31,8 +31,8 @@ export const mapKeysToEffects = (): void => {
     }
   });
 
-  input.heldMovementKeys.on('delete', () => {
-    const isTreadingWater = input.heldMovementKeys.has('KeyS') && input.heldMovementKeys.has('KeyW');
+  input.heldMovementKeys.on('delete', (): void => {
+    const isTreadingWater = input.heldMovementKeys.hasAllOf('KeyS', 'KeyW');
 
     if (!isTreadingWater) {
       startMoving();
@@ -44,16 +44,16 @@ export const mapKeysToEffects = (): void => {
   //////////////////////////////////////////////////////////////////////
   // * Turning *
   //////////////////////////////////////////////////////////////////////
-  input.heldActionKeys.on('add', ({ value }) => {
+  input.heldActionKeys.on('add', ({ value }): void => {
     const isTurning = value === 'KeyD' || value === 'KeyA';
 
     if (!isTurning) return;
 
-    const isTreadingWater = input.heldActionKeys.has('KeyA') && input.heldActionKeys.has('KeyD');
+    const isTreadingWater = input.heldActionKeys.hasAllOf('KeyA', 'KeyD');
 
     if (isTreadingWater) {
       stopTurning();
-      input.heldActionKeys.once('delete', ({ value }) => {
+      input.heldActionKeys.once('delete', ({ value }): void => {
         const isTurning = value === 'KeyD' || value === 'KeyA';
 
         if (!isTurning) return;
@@ -68,7 +68,7 @@ export const mapKeysToEffects = (): void => {
   //////////////////////////////////////////////////////////////////////
   // * Jumping *
   //////////////////////////////////////////////////////////////////////
-  input.heldActionKeys.on('add', 'Space', () => {
+  input.heldActionKeys.on('add', 'Space', (): void => {
     (player.mixer.addEventListener as AnimationMixerListener)('finished', stopJumpingAndCleanUp);
 
     startJumping();
@@ -77,7 +77,7 @@ export const mapKeysToEffects = (): void => {
   //////////////////////////////////////////////////////////////////////
   // * Attacking *
   //////////////////////////////////////////////////////////////////////
-  input.heldMouseButtons.on('add', 'LMB', () => {
+  input.heldMouseButtons.on('add', 'LMB', (): void => {
     startUsing();
 
     input.heldMouseButtons.once('delete', 'LMB', stopUsing);

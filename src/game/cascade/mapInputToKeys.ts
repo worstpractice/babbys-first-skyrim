@@ -2,7 +2,7 @@ import { input } from 'src/game/input/input';
 import type { TestSetPair } from 'src/game/typings/TestSetPair';
 
 export const mapInputToKeys = <T extends string>(testSetPairs: readonly TestSetPair<T>[]): void => {
-  input.heldKeys.on('add', ({ value }) => {
+  input.heldKeys.on('add', ({ value }): void => {
     for (const [test, set] of testSetPairs) {
       if (!test(value)) continue;
 
@@ -10,7 +10,7 @@ export const mapInputToKeys = <T extends string>(testSetPairs: readonly TestSetP
     }
   });
 
-  input.heldKeys.on('delete', ({ value }) => {
+  input.heldKeys.on('delete', ({ value }): void => {
     for (const [test, obset] of testSetPairs) {
       if (!test(value)) continue;
 

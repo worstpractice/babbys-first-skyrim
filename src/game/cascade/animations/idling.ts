@@ -1,6 +1,6 @@
 import { player } from 'src/game/player/player';
 
-export const startIdling = () => {
+export const startIdling = (): void => {
   const isDoingSomething = Boolean(player.activeEffects.size);
 
   if (isDoingSomething) return;
@@ -8,6 +8,6 @@ export const startIdling = () => {
   player.activeAnimations.add('idling');
 };
 
-export const stopIdling = () => {
+export const stopIdling = (): void => {
   player.activeAnimations.delete('idling');
 };

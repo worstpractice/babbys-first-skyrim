@@ -20,7 +20,7 @@ const quickenToRun = (): void => {
   startRunning();
 };
 
-export const mapEffectsToAnimationNames = () => {
+export const mapEffectsToAnimationNames = (): void => {
   //////////////////////////////////////////////////////////////////////
   // * From Nothing To Idling *
   //////////////////////////////////////////////////////////////////////
@@ -29,7 +29,7 @@ export const mapEffectsToAnimationNames = () => {
   //////////////////////////////////////////////////////////////////////
   // * From Idling To Moving *
   //////////////////////////////////////////////////////////////////////
-  player.activeEffects.on('add', 'moving', () => {
+  player.activeEffects.on('add', 'moving', (): void => {
     const isRunning = input.heldModifierKeys.has('ShiftLeft');
 
     if (isRunning) {
@@ -44,7 +44,7 @@ export const mapEffectsToAnimationNames = () => {
   //////////////////////////////////////////////////////////////////////
   // * From Walking To Running (And Back Again) *
   //////////////////////////////////////////////////////////////////////
-  input.heldModifierKeys.on('add', 'ShiftLeft', () => {
+  input.heldModifierKeys.on('add', 'ShiftLeft', (): void => {
     startRunning();
 
     input.heldModifierKeys.once('delete', 'ShiftLeft', slowToWalk);
@@ -53,7 +53,7 @@ export const mapEffectsToAnimationNames = () => {
   //////////////////////////////////////////////////////////////////////
   // * From Moving To Nothing  *
   //////////////////////////////////////////////////////////////////////
-  player.activeEffects.on('delete', 'moving', () => {
+  player.activeEffects.on('delete', 'moving', (): void => {
     stopRunning();
     stopWalking();
   });
@@ -61,7 +61,7 @@ export const mapEffectsToAnimationNames = () => {
   //////////////////////////////////////////////////////////////////////ddddd
   // * Start Using  *
   //////////////////////////////////////////////////////////////////////
-  player.activeEffects.on('add', 'using', () => {
+  player.activeEffects.on('add', 'using', (): void => {
     /** NOTE: We consult the currently equipped item about what pair of start/stop functions to actually call here. */
     const currentItem = indexToItem[0 as SlotNumber] ?? '';
 
@@ -71,7 +71,7 @@ export const mapEffectsToAnimationNames = () => {
 
     start();
 
-    const stopAndCleanUp = ({ action }: AnimationMixerEvent) => {
+    const stopAndCleanUp = ({ action }: AnimationMixerEvent): void => {
       const clip = action.getClip();
 
       if (clip.name !== `${animation}Clip`) return;

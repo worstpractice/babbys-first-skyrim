@@ -1,6 +1,6 @@
 import { player } from 'src/game/player/player';
 
-export const startJumping = () => {
+export const startJumping = (): void => {
   const hasNothingToPushOffAgainst = player.activeEffects.has('levitating');
 
   if (hasNothingToPushOffAgainst) return;
@@ -8,6 +8,6 @@ export const startJumping = () => {
   player.activeAnimations.add('jumping');
 };
 
-export const stopJumping = () => {
+export const stopJumping = (): void => {
   player.activeAnimations.delete('jumping');
 };
