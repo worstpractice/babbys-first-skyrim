@@ -1,15 +1,20 @@
-import { mixers } from 'src/game/engine/mixers';
 import { player } from 'src/game/player/player';
 import { FBXLoader } from 'src/game/shims/FbxLoader';
 import type { Mutable } from 'src/game/typings/Mutable';
 import { enableShadows } from 'src/game/utils/mapping/enableShadows';
 import { enableSrgbEncoding } from 'src/game/utils/mapping/enableSrgbEncoding';
-import type { Group, LoadingManager, Scene } from 'three';
+import type { LoadingManager, Scene } from 'three';
 import { AnimationMixer } from 'three';
 
 const CHARACTERS_PATH = './assets/models/castle-guard/' as const;
 
-export const loadPlayerModel = async (loadingManager: LoadingManager, scene: Scene): Promise<Group> => {
+type Props = {
+  readonly animationMixers: AnimationMixer[];
+  readonly loadingManager: LoadingManager;
+  readonly scene: Scene;
+};
+
+export const loadPlayerModel = async ({ animationMixers, loadingManager, scene }: Props) => {
   const modelLoader = new FBXLoader(loadingManager);
 
   modelLoader.setPath(CHARACTERS_PATH);
@@ -25,7 +30,7 @@ export const loadPlayerModel = async (loadingManager: LoadingManager, scene: Sce
   (player as Mutable<typeof player>).model = playerModel;
   (player as Mutable<typeof player>).mixer = new AnimationMixer(playerModel);
 
-  mixers.push(player.mixer);
+  animationMixers.push(player.mixer);
 
   scene.add(playerModel);
 

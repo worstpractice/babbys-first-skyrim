@@ -1,9 +1,17 @@
 import { createLoadingManager } from 'src/game/engine/createLoadingManager';
+import type { Input } from 'src/game/typings/Input';
 import type { Mutable } from 'src/game/typings/Mutable';
-import type { CubeTexture, LoadingManager } from 'three';
+import type { AnimationMixer, CubeTexture, PerspectiveCamera, WebGLRenderer } from 'three';
 import { CubeTextureLoader, Scene, sRGBEncoding } from 'three';
 
-export const createScene = async (): Promise<{ readonly loadingManager: LoadingManager; readonly scene: Scene }> => {
+type Props = {
+  readonly animationMixers: readonly AnimationMixer[];
+  readonly camera: PerspectiveCamera;
+  readonly input: Input;
+  readonly renderer: WebGLRenderer;
+};
+
+export const createScene = async (props: Props) => {
   const scene = new Scene();
 
   const skyboxTexturePaths = [
@@ -15,7 +23,7 @@ export const createScene = async (): Promise<{ readonly loadingManager: LoadingM
     './assets/textures/skybox/negz.jpg',
   ] as const;
 
-  const loadingManager = await createLoadingManager(scene);
+  const loadingManager = await createLoadingManager({ ...props, scene });
 
   const loader = new CubeTextureLoader(loadingManager);
 

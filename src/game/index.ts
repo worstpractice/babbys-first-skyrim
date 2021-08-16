@@ -11,7 +11,7 @@ const loadApp = async (): Promise<void> => {
 window.addEventListener(
   'DOMContentLoaded',
   () => {
-    loadApp().catch(console.error);
+    void loadApp().catch(console.error);
   },
   ONCE_PASSIVE,
 );

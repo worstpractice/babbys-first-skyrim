@@ -1,7 +1,7 @@
-import { input } from 'src/game/input/input';
 import { player } from 'src/game/player/player';
+import type { Input } from 'src/game/typings/Input';
 
-export const startTurning = (): void => {
+export const startTurning = (input: Input): void => {
   const isPlayerTurning = input.heldKeys.hasAnyOf('KeyA', 'KeyD');
 
   if (!isPlayerTurning) return;

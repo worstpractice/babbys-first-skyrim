@@ -1,7 +1,7 @@
-import { input } from 'src/game/input/input';
 import { player } from 'src/game/player/player';
+import type { Input } from 'src/game/typings/Input';
 
-export const startMoving = (): void => {
+export const startMoving = (input: Input): void => {
   const isPlayerMoving = Boolean(input.heldMovementKeys.size);
 
   if (!isPlayerMoving) return;

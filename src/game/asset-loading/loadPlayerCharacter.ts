@@ -2,13 +2,19 @@ import { populateAnimationsTable } from 'src/game/animations/populateAnimationsT
 import { loadPlayerAssets } from 'src/game/asset-loading/loadPlayerAssets';
 import { startIdling } from 'src/game/cascade/animations/idling';
 import type { NameClipDuo } from 'src/game/typings/NameClipDuo';
-import type { LoadingManager, Scene } from 'three';
+import type { AnimationMixer, LoadingManager, Scene } from 'three';
 
-export const loadPlayerCharacter = async (loadingManager: LoadingManager, scene: Scene): Promise<void> => {
-  const nameClipDuos: readonly NameClipDuo[] = await loadPlayerAssets(loadingManager, scene);
+type Props = {
+  readonly animationMixers: AnimationMixer[];
+  readonly loadingManager: LoadingManager;
+  readonly scene: Scene;
+};
+
+export const loadPlayerCharacter = async (props: Props): Promise<void> => {
+  const nameClipDuos: readonly NameClipDuo[] = await loadPlayerAssets(props);
 
   for (const [name, clip] of nameClipDuos) {
-    populateAnimationsTable(name, clip);
+    await populateAnimationsTable(name, clip);
   }
 
   startIdling();

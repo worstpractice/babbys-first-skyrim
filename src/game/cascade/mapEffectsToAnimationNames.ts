@@ -1,10 +1,10 @@
 import { startIdling } from 'src/game/cascade/animations/idling';
 import { startRunning, stopRunning } from 'src/game/cascade/animations/running';
 import { startWalking, stopWalking } from 'src/game/cascade/animations/walking';
-import { input } from 'src/game/input/input';
 import { player } from 'src/game/player/player';
 import type { AnimationMixerEvent } from 'src/game/typings/AnimationMixerEvent';
 import type { AnimationMixerListener } from 'src/game/typings/AnimationMixerListener';
+import type { Input } from 'src/game/typings/Input';
 import { indexToItem } from 'src/lookup-tables/indexToItem';
 import { itemToAnimation } from 'src/lookup-tables/itemToAnimation';
 import { itemToAnimationDuo } from 'src/lookup-tables/itemToAnimationDuo';
@@ -20,7 +20,7 @@ const quickenToRun = (): void => {
   startRunning();
 };
 
-export const mapEffectsToAnimationNames = (): void => {
+export const mapEffectsToAnimationNames = (input: Input): void => {
   //////////////////////////////////////////////////////////////////////
   // * From Nothing To Idling *
   //////////////////////////////////////////////////////////////////////

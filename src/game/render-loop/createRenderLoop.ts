@@ -1,9 +1,16 @@
-import { camera } from 'src/game/engine/camera';
-import { renderer } from 'src/game/engine/renderer';
-import { tickGameLoop } from 'src/game/loop/tickGameLoop';
-import type { Scene } from 'three';
+import { tickRenderLoop } from 'src/game/tick/tickRenderLoop';
+import type { Input } from 'src/game/typings/Input';
+import type { AnimationMixer, PerspectiveCamera, Scene, WebGLRenderer } from 'three';
 
-export const createRenderLoop = (scene: Scene) => {
+type Props = {
+  readonly animationMixers: readonly AnimationMixer[];
+  readonly camera: PerspectiveCamera;
+  readonly input: Input;
+  readonly renderer: WebGLRenderer;
+  readonly scene: Scene;
+};
+
+export const createRenderLoop = async ({ animationMixers, camera, input, renderer, scene }: Props) => {
   const beginRenderLoop = (): void => {
     let previousRafTime: DOMHighResTimeStamp = 0;
 
@@ -16,7 +23,7 @@ export const createRenderLoop = (scene: Scene) => {
       // THEN: we destructively update `previousRaf` to the latest value.
       previousRafTime = elapsedTime;
 
-      tickGameLoop(deltaTime);
+      tickRenderLoop(deltaTime, animationMixers, camera, input);
 
       renderer.render(scene, camera);
     };

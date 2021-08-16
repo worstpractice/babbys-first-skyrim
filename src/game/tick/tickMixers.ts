@@ -1,7 +1,7 @@
-import { mixers } from 'src/game/engine/mixers';
+import type { AnimationMixer } from 'three';
 
-export const tickMixers = (deltaInSeconds: number): void => {
-  for (const mixer of mixers) {
+export const tickMixers = (deltaInSeconds: number, animationMixers: readonly AnimationMixer[]): void => {
+  for (const mixer of animationMixers) {
     mixer.update(deltaInSeconds);
   }
 };

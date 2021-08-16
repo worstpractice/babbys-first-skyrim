@@ -2,10 +2,11 @@ import { startJumping, stopJumping } from 'src/game/cascade/animations/jumping';
 import { startMoving, stopMoving } from 'src/game/cascade/effects/moving';
 import { startTurning, stopTurning } from 'src/game/cascade/effects/turning';
 import { startUsing, stopUsing } from 'src/game/cascade/effects/using';
-import { input } from 'src/game/input/input';
+
 import { player } from 'src/game/player/player';
 import type { AnimationMixerEvent } from 'src/game/typings/AnimationMixerEvent';
 import type { AnimationMixerListener } from 'src/game/typings/AnimationMixerListener';
+import type { Input } from 'src/game/typings/Input';
 
 const stopJumpingAndCleanUp = ({ action }: AnimationMixerEvent): void => {
   const clip = action.getClip();
@@ -17,7 +18,7 @@ const stopJumpingAndCleanUp = ({ action }: AnimationMixerEvent): void => {
   player.mixer.removeEventListener('finished', stopJumping);
 };
 
-export const mapKeysToEffects = (): void => {
+export const mapKeysToEffects = (input: Input): void => {
   //////////////////////////////////////////////////////////////////////
   // * Moving *
   //////////////////////////////////////////////////////////////////////
@@ -27,7 +28,7 @@ export const mapKeysToEffects = (): void => {
     if (isTreadingWater) {
       stopMoving();
     } else {
-      startMoving();
+      startMoving(input);
     }
   });
 
@@ -35,7 +36,7 @@ export const mapKeysToEffects = (): void => {
     const isTreadingWater = input.heldMovementKeys.hasAllOf('KeyS', 'KeyW');
 
     if (!isTreadingWater) {
-      startMoving();
+      startMoving(input);
     }
   });
 
@@ -58,10 +59,10 @@ export const mapKeysToEffects = (): void => {
 
         if (!isTurning) return;
 
-        startTurning();
+        startTurning(input);
       });
     } else {
-      startTurning();
+      startTurning(input);
     }
   });
 

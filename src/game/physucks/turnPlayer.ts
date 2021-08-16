@@ -1,12 +1,12 @@
-import { input } from 'src/game/input/input';
 import { player } from 'src/game/player/player';
+import type { Input } from 'src/game/typings/Input';
 import { vec3 } from 'src/game/utils/vec3';
 import { Quaternion } from 'three';
 
 const TO_THE_LEFT = Math.PI;
 const TO_THE_RIGHT = -Math.PI;
 
-export const turn = (deltaInSeconds: number) => {
+export const turnPlayer = (deltaInSeconds: number, input: Input): void => {
   if (!player.activeEffects.has('turning')) return;
 
   const turnQuaternion = new Quaternion();

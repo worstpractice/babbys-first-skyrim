@@ -22,17 +22,16 @@ const fromClicked = ({ currentlyClickedElement, setCurrentlyClickedElement }: Cl
 };
 
 const fromDragged = ({ currentlyDraggedElement, setCurrentlyDraggedElement }: DraggedState) => {
-  return { currentlyDraggedElement, setCurrentlyDraggedElement } as const;
+  return {
+    currentlyDraggedElement,
+    setCurrentlyDraggedElement,
+  } as const;
 };
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-type Props = {
-  readonly item?: ItemName;
-  readonly onItem?: (event: SlotEvent) => void;
-  readonly index: SlotNumber;
-};
-
-const handleItem = ({ index, item }: SlotEvent) => {
+// * Wonky Utils ¯\_(ツ)_/¯ *
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const handleItem = ({ index, item }: SlotEvent): void => {
   const isBeingEquipped = index < 8;
 
   const weaponModel = itemToModel['sword'];
@@ -49,6 +48,14 @@ const handleItem = ({ index, item }: SlotEvent) => {
   console.log(`${verb} ${item} into slot #${index}`);
 };
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+type Props = {
+  readonly item?: ItemName;
+  readonly onItem?: (event: SlotEvent) => void;
+  readonly index: SlotNumber;
+};
+
 export const InventorySlot = ({ onItem = handleItem, index }: Props) => {
   const { currentlyClickedElement, setCurrentlyClickedElement } = useClickedState(fromClicked);
   const { currentlyDraggedElement, setCurrentlyDraggedElement } = useDraggedState(fromDragged);
@@ -57,7 +64,7 @@ export const InventorySlot = ({ onItem = handleItem, index }: Props) => {
 
   ///////////////////////////////////////////////////////////////////////////
 
-  const handleMouseDown = () => {
+  const handleMouseDown = (): void => {
     const { current } = slotRef;
 
     if (!current) return;
@@ -68,7 +75,7 @@ export const InventorySlot = ({ onItem = handleItem, index }: Props) => {
 
   ///////////////////////////////////////////////////////////////////////////
 
-  const handleMouseUp = () => {
+  const handleMouseUp = (): void => {
     const { current } = slotRef;
 
     if (!current) return;
@@ -105,7 +112,7 @@ export const InventorySlot = ({ onItem = handleItem, index }: Props) => {
 
   ///////////////////////////////////////////////////////////////////////////
 
-  const handleMouseLeave = () => {
+  const handleMouseLeave = (): void => {
     const { current } = slotRef;
 
     if (!current) return;
@@ -124,7 +131,17 @@ export const InventorySlot = ({ onItem = handleItem, index }: Props) => {
       } as const)
     : slotStyles.vacant;
 
-  return <div id={`${index}`} onMouseDown={handleMouseDown} onMouseLeave={handleMouseLeave} onMouseUp={handleMouseUp} ref={slotRef} style={style}></div>;
+  return (
+    <div
+      //
+      id={`${index}`}
+      onMouseDown={handleMouseDown}
+      onMouseLeave={handleMouseLeave}
+      onMouseUp={handleMouseUp}
+      ref={slotRef}
+      style={style}
+    />
+  );
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

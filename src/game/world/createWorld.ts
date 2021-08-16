@@ -11,8 +11,8 @@ const thingsToAddToScene = [
 ] as const;
 
 export const createWorld = async (scene: Scene): Promise<void> => {
-  for (const each of thingsToAddToScene) {
-    const thing = await each();
+  for (const createFn of thingsToAddToScene) {
+    const thing = await createFn();
 
     scene.add(thing);
   }
