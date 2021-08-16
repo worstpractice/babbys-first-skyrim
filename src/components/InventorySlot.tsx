@@ -1,7 +1,7 @@
 import type { CSSProperties } from 'react';
 import { default as React, useRef } from 'react';
-import { indexToItem } from 'src/lookup-tables/indexToItem';
-import { itemToModel } from 'src/lookup-tables/itemToModel';
+import { slotNumberToItemName } from 'src/lookup-tables/slotNumberToItemName';
+import { itemNameToModel } from 'src/lookup-tables/itemNameToModel';
 import { useClickedState } from 'src/state/ClickedState';
 import { useDraggedState } from 'src/state/DraggedState';
 import type { ItemName } from 'src/typings/ItemName';
@@ -34,7 +34,7 @@ const fromDragged = ({ currentlyDraggedElement, setCurrentlyDraggedElement }: Dr
 const handleItem = ({ index, item }: SlotEvent): void => {
   const isBeingEquipped = index < 8;
 
-  const weaponModel = itemToModel['sword'];
+  const weaponModel = itemNameToModel['sword'];
 
   if (!weaponModel) {
     console.warn(`No weapon model for sword!`);
@@ -60,7 +60,7 @@ export const InventorySlot = ({ onItem = handleItem, index }: Props) => {
   const { currentlyClickedElement, setCurrentlyClickedElement } = useClickedState(fromClicked);
   const { currentlyDraggedElement, setCurrentlyDraggedElement } = useDraggedState(fromDragged);
   const slotRef = useRef<HTMLDivElement | null>(null);
-  const item = indexToItem[index] ?? '';
+  const item = slotNumberToItemName[index] ?? '';
 
   ///////////////////////////////////////////////////////////////////////////
 
@@ -91,16 +91,16 @@ export const InventorySlot = ({ onItem = handleItem, index }: Props) => {
     const myBackgroundImage = me.style.backgroundImage;
     const theirBackgroundImage = them.style.backgroundImage;
 
-    const myItem = indexToItem[myIndex] ?? '';
-    const theirItem = indexToItem[theirIndex] ?? '';
+    const myItem = slotNumberToItemName[myIndex] ?? '';
+    const theirItem = slotNumberToItemName[theirIndex] ?? '';
 
     // Swap background images
     me.style.backgroundImage = theirBackgroundImage;
     them.style.backgroundImage = myBackgroundImage;
 
     // Swap game items
-    indexToItem[theirIndex] = myItem;
-    indexToItem[myIndex] = theirItem;
+    slotNumberToItemName[theirIndex] = myItem;
+    slotNumberToItemName[myIndex] = theirItem;
 
     setCurrentlyClickedElement(null);
     setCurrentlyDraggedElement(null);

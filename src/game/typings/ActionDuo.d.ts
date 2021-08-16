@@ -1,4 +1,4 @@
-export type StartStopDuo = {
+export type ActionDuo = {
   readonly start: () => void;
   readonly stop: () => void;
 };

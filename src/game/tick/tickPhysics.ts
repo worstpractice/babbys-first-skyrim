@@ -2,17 +2,18 @@ import { applyFriction } from 'src/game/physucks/applyFriction';
 import { movePlayer } from 'src/game/physucks/movePlayer';
 import { turnPlayer } from 'src/game/physucks/turnPlayer';
 import type { Input } from 'src/game/typings/Input';
+import type { Player } from 'src/game/typings/Player';
 
-export const tickPhysics = (deltaInSeconds: number, input: Input): void => {
+export const tickPhysics = (deltaInSeconds: number, input: Input, player: Player): void => {
   ////////////////////////////////////////////////////////////////////////////////////////////////
   // * Friction *
   ////////////////////////////////////////////////////////////////////////////////////////////////
-  applyFriction(deltaInSeconds);
+  applyFriction(deltaInSeconds, player);
 
   ////////////////////////////////////////////////////////////////////////////////////////////////
   // * Player Impulses *
   ////////////////////////////////////////////////////////////////////////////////////////////////
-  movePlayer(deltaInSeconds, input);
+  movePlayer(deltaInSeconds, input, player);
 
-  turnPlayer(deltaInSeconds, input);
+  turnPlayer(deltaInSeconds, input, player);
 };

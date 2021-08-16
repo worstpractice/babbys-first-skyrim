@@ -1,6 +1,6 @@
-import { player } from 'src/game/player/player';
+import type { Player } from 'src/game/typings/Player';
 
-export const mapAnimationNamesToAnimations = (): void => {
+export const mapAnimationNamesToAnimations = (player: Player): void => {
   player.activeAnimations.on('add', ({ value }): void => {
     console.log(`add ${value}`);
     const { action } = player.animations[value];

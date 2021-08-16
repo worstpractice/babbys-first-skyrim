@@ -6,7 +6,7 @@ const NEAR = 1;
 
 const FAR = 10_000;
 
-export const createCamera = async () => {
+export const createCamera = () => {
   const ASPECT = window.innerWidth / window.innerHeight;
 
   const camera = new PerspectiveCamera(FOV, ASPECT, NEAR, FAR);

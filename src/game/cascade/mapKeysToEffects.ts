@@ -1,24 +1,33 @@
-import { startJumping, stopJumping } from 'src/game/cascade/animations/jumping';
-import { startMoving, stopMoving } from 'src/game/cascade/effects/moving';
-import { startTurning, stopTurning } from 'src/game/cascade/effects/turning';
-import { startUsing, stopUsing } from 'src/game/cascade/effects/using';
-
-import { player } from 'src/game/player/player';
-import type { AnimationMixerEvent } from 'src/game/typings/AnimationMixerEvent';
+import type { Actions } from 'src/game/typings/Actions';
 import type { AnimationMixerListener } from 'src/game/typings/AnimationMixerListener';
+import type { Effects } from 'src/game/typings/Effects';
 import type { Input } from 'src/game/typings/Input';
+import type { Player } from 'src/game/typings/Player';
 
-const stopJumpingAndCleanUp = ({ action }: AnimationMixerEvent): void => {
-  const clip = action.getClip();
-
-  if (clip.name !== 'jumpingClip') return;
-
-  stopJumping();
-
-  player.mixer.removeEventListener('finished', stopJumping);
+type Props = {
+  readonly actions: Actions;
+  readonly effects: Effects;
+  readonly input: Input;
+  readonly player: Player;
 };
 
-export const mapKeysToEffects = (input: Input): void => {
+export const mapKeysToEffects = ({ actions, effects, input, player }: Props): void => {
+  const {
+    //
+    startJumping,
+    stopJumpingAndCleanUp,
+  } = actions;
+
+  const {
+    //
+    startMoving,
+    startTurning,
+    startUsing,
+    stopMoving,
+    stopTurning,
+    stopUsing,
+  } = effects;
+
   //////////////////////////////////////////////////////////////////////
   // * Moving *
   //////////////////////////////////////////////////////////////////////
@@ -28,7 +37,7 @@ export const mapKeysToEffects = (input: Input): void => {
     if (isTreadingWater) {
       stopMoving();
     } else {
-      startMoving(input);
+      startMoving();
     }
   });
 
@@ -36,7 +45,7 @@ export const mapKeysToEffects = (input: Input): void => {
     const isTreadingWater = input.heldMovementKeys.hasAllOf('KeyS', 'KeyW');
 
     if (!isTreadingWater) {
-      startMoving(input);
+      startMoving();
     }
   });
 
@@ -59,10 +68,10 @@ export const mapKeysToEffects = (input: Input): void => {
 
         if (!isTurning) return;
 
-        startTurning(input);
+        startTurning();
       });
     } else {
-      startTurning(input);
+      startTurning();
     }
   });
 

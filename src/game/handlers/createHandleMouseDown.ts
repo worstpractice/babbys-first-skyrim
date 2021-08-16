@@ -3,7 +3,7 @@ import type { RelevantMouseButton } from 'src/game/typings/RelevantMouseButton';
 import { isRelevantMouseButton } from 'src/game/utils/type-predicates/isRelevantMouseButton';
 import type { WebGLRenderer } from 'three';
 
-export const createHandleMouseDown = async (input: Input, renderer: WebGLRenderer) => {
+export const createHandleMouseDown = (input: Input, renderer: WebGLRenderer) => {
   const handleMouseDown = ({ button, target }: MouseEvent): void => {
     if (target !== renderer.domElement) return;
 

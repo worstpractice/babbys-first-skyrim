@@ -3,7 +3,7 @@ import { FBXLoader } from 'src/game/shims/FbxLoader';
 import { enableShadows } from 'src/game/utils/mapping/enableShadows';
 import { enableSrgbEncoding } from 'src/game/utils/mapping/enableSrgbEncoding';
 import { vec3 } from 'src/game/utils/vec3';
-import { itemToModel } from 'src/lookup-tables/itemToModel';
+import { itemNameToModel } from 'src/lookup-tables/itemNameToModel';
 import type { Group, LoadingManager } from 'three';
 
 const WEAPONS_PATH = `./assets/models/weapons/` as const;
@@ -28,7 +28,7 @@ export const loadWeaponModel = async (loadingManager: LoadingManager, playerMode
   weaponModel.rotateY(-1);
   weaponModel.position.add(vec3(-10, 13.37, -0.5));
 
-  itemToModel[ITEM_NAME] = weaponModel;
+  itemNameToModel[ITEM_NAME] = weaponModel;
 
   const [root] = playerModel.children;
 

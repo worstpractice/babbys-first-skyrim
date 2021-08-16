@@ -10,9 +10,9 @@ const thingsToAddToScene = [
   createDirectionalLight,
 ] as const;
 
-export const createWorld = async (scene: Scene): Promise<void> => {
+export const populateWorld = (scene: Scene): void => {
   for (const createFn of thingsToAddToScene) {
-    const thing = await createFn();
+    const thing = createFn();
 
     scene.add(thing);
   }

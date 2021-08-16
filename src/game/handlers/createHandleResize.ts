@@ -1,6 +1,6 @@
 import type { PerspectiveCamera, WebGLRenderer } from 'three';
 
-export const createHandleResize = async (camera: PerspectiveCamera, renderer: WebGLRenderer): Promise<(event: UIEvent) => void> => {
+export const createHandleResize = (camera: PerspectiveCamera, renderer: WebGLRenderer) => {
   const handleResize = (event: UIEvent): void => {
     /** See: https://codepen.io/machal/pen/rrXNWO */
     const height = window.innerHeight;

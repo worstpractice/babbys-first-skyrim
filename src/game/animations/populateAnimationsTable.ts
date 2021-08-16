@@ -1,10 +1,10 @@
-import { player } from 'src/game/player/player';
 import type { AnimationName } from 'src/game/typings/AnimationName';
 import type { Mutable } from 'src/game/typings/Mutable';
+import type { Player } from 'src/game/typings/Player';
 import type { AnimationClip } from 'three';
 import { LoopOnce } from 'three';
 
-export const populateAnimationsTable = async (animationName: AnimationName, clip: AnimationClip): Promise<void> => {
+export const populateAnimationsTable = (animationName: AnimationName, clip: AnimationClip, player: Player): void => {
   clip.name = `${animationName}Clip`;
 
   const action = player.mixer.clipAction(clip);

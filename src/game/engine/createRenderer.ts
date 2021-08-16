@@ -1,6 +1,6 @@
 import { PCFSoftShadowMap, sRGBEncoding, WebGLRenderer } from 'three';
 
-export const createRenderer = async () => {
+export const createRenderer = () => {
   const canvas = document.getElementById('canvas') as HTMLCanvasElement;
 
   const renderer = new WebGLRenderer({

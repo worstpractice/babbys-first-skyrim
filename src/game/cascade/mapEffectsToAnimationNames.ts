@@ -1,26 +1,47 @@
-import { startIdling } from 'src/game/cascade/animations/idling';
-import { startRunning, stopRunning } from 'src/game/cascade/animations/running';
-import { startWalking, stopWalking } from 'src/game/cascade/animations/walking';
-import { player } from 'src/game/player/player';
+import type { ActionDuo } from 'src/game/typings/ActionDuo';
+import type { Actions } from 'src/game/typings/Actions';
 import type { AnimationMixerEvent } from 'src/game/typings/AnimationMixerEvent';
 import type { AnimationMixerListener } from 'src/game/typings/AnimationMixerListener';
 import type { Input } from 'src/game/typings/Input';
-import { indexToItem } from 'src/lookup-tables/indexToItem';
-import { itemToAnimation } from 'src/lookup-tables/itemToAnimation';
-import { itemToAnimationDuo } from 'src/lookup-tables/itemToAnimationDuo';
+import type { Player } from 'src/game/typings/Player';
+import { itemNameToAnimation } from 'src/lookup-tables/itemNameToAnimation';
+import { slotNumberToItemName } from 'src/lookup-tables/slotNumberToItemName';
+import type { ItemName } from 'src/typings/ItemName';
 import type { SlotNumber } from 'src/typings/phantom-types/number/SlotNumber';
 
-const slowToWalk = (): void => {
-  stopRunning();
-  startWalking();
+type Props = {
+  readonly actions: Actions;
+  readonly input: Input;
+  readonly player: Player;
 };
 
-const quickenToRun = (): void => {
-  stopWalking();
-  startRunning();
-};
+export const mapEffectsToAnimationNames = ({ actions, input, player }: Props): void => {
+  const {
+    //
+    quickenToRun,
+    slowToWalk,
+    startAttacking,
+    startIdling,
+    stopAttacking,
+    startRunning,
+    startWalking,
+    stopIdling,
+    stopRunning,
+    stopWalking,
+  } = actions;
 
-export const mapEffectsToAnimationNames = (input: Input): void => {
+  const itemNameToActionDuo: { readonly [key in ItemName]: ActionDuo } = {
+    /** Empty hands mean you idle on LMB. */
+    '': {
+      start: startIdling,
+      stop: stopIdling,
+    },
+    sword: {
+      start: startAttacking,
+      stop: stopAttacking,
+    },
+  } as const;
+
   //////////////////////////////////////////////////////////////////////
   // * From Nothing To Idling *
   //////////////////////////////////////////////////////////////////////
@@ -63,11 +84,11 @@ export const mapEffectsToAnimationNames = (input: Input): void => {
   //////////////////////////////////////////////////////////////////////
   player.activeEffects.on('add', 'using', (): void => {
     /** NOTE: We consult the currently equipped item about what pair of start/stop functions to actually call here. */
-    const currentItem = indexToItem[0 as SlotNumber] ?? '';
+    const currentItem = slotNumberToItemName[0 as SlotNumber] ?? '';
 
-    const { start, stop } = itemToAnimationDuo[currentItem];
+    const { start, stop } = itemNameToActionDuo[currentItem];
 
-    const animation = itemToAnimation[currentItem];
+    const animation = itemNameToAnimation[currentItem];
 
     start();
 

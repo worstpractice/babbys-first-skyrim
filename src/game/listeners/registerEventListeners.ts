@@ -13,12 +13,12 @@ type Props = {
   readonly renderer: WebGLRenderer;
 };
 
-export const registerEventListeners = async ({ camera, input, renderer }: Props): Promise<void> => {
-  const handleKeyDown = await createHandleKeydown(input);
-  const handleKeyUp = await createHandleKeyUp(input);
-  const handleMouseDown = await createHandleMouseDown(input, renderer);
-  const handleMouseUp = await createHandleMouseUp(input, renderer);
-  const handleResize = await createHandleResize(camera, renderer);
+export const registerEventListeners = ({ camera, input, renderer }: Props): void => {
+  const handleKeyDown = createHandleKeydown(input);
+  const handleKeyUp = createHandleKeyUp(input);
+  const handleMouseDown = createHandleMouseDown(input, renderer);
+  const handleMouseUp = createHandleMouseUp(input, renderer);
+  const handleResize = createHandleResize(camera, renderer);
 
   window.addEventListener('keydown', handleKeyDown, PASSIVE);
   window.addEventListener('keyup', handleKeyUp, PASSIVE);

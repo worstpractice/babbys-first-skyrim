@@ -1,8 +1,8 @@
-import { player } from 'src/game/player/player';
 import type { Input } from 'src/game/typings/Input';
+import type { Player } from 'src/game/typings/Player';
 import { vec3 } from 'src/game/utils/vec3';
 
-export const movePlayer = (deltaInSeconds: number, input: Input) => {
+export const movePlayer = (deltaInSeconds: number, input: Input, player: Player) => {
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // * Move Forward *
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

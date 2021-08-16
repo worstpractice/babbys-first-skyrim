@@ -2,7 +2,7 @@ import { COLOR_SKY } from 'src/game/constants/COLOR_SKY';
 import { GROUND_PLANE_HEIGHT, GROUND_PLANE_WIDTH } from 'src/game/constants/GROUND_PLANE';
 import { DirectionalLight } from 'three';
 
-export const createDirectionalLight = async (): Promise<DirectionalLight> => {
+export const createDirectionalLight = (): DirectionalLight => {
   const light = new DirectionalLight(COLOR_SKY, 1);
 
   light.name = 'directionalLight';
