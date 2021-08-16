@@ -16,7 +16,7 @@ specifiers:
   eslint-plugin-react-hooks: 4.2.0
   eslint-plugin-unicorn: 35.0.0
   normalize.css: 8.0.1
-  obset: 2.2.0
+  obset: 2.2.1
   prettier: 2.3.2
   react: 17.0.2
   react-dom: 17.0.2
@@ -27,7 +27,7 @@ specifiers:
 
 dependencies:
   normalize.css: 8.0.1
-  obset: 2.2.0
+  obset: 2.2.1
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
   three: 0.131.3
@@ -3071,8 +3071,8 @@ packages:
       es-abstract: 1.18.3
     dev: true
 
-  /obset/2.2.0:
-    resolution: {integrity: sha512-VlHpaRWXn6tCxwK0R/AIaXp96GIjD0dN6fsMZ2Mhhi232FMsH+DjxWbqvImq3Ttvtj6g+tRVHchd4zVNacOnPA==}
+  /obset/2.2.1:
+    resolution: {integrity: sha512-VpyvjG7q2wyvD2z3zgg8hSLMtAuxWlM6HLsHZpscGKy1lbCKD9vybWwW0aJ6a4hxsjEOQ84msaQhb2zckSRrEA==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     dev: false
 
