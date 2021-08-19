@@ -32,7 +32,7 @@ export const mapKeysToEffects = ({ actions, effects, input, player }: Props): vo
   // * Moving *
   //////////////////////////////////////////////////////////////////////
   input.heldMovementKeys.on('add', (): void => {
-    const isTreadingWater = input.heldMovementKeys.hasAllOf('KeyS', 'KeyW');
+    const isTreadingWater = input.heldMovementKeys.hasEvery('KeyS', 'KeyW');
 
     if (isTreadingWater) {
       stopMoving();
@@ -42,7 +42,7 @@ export const mapKeysToEffects = ({ actions, effects, input, player }: Props): vo
   });
 
   input.heldMovementKeys.on('delete', (): void => {
-    const isTreadingWater = input.heldMovementKeys.hasAllOf('KeyS', 'KeyW');
+    const isTreadingWater = input.heldMovementKeys.hasEvery('KeyS', 'KeyW');
 
     if (!isTreadingWater) {
       startMoving();
@@ -59,7 +59,7 @@ export const mapKeysToEffects = ({ actions, effects, input, player }: Props): vo
 
     if (!isTurning) return;
 
-    const isTreadingWater = input.heldActionKeys.hasAllOf('KeyA', 'KeyD');
+    const isTreadingWater = input.heldActionKeys.hasEvery('KeyA', 'KeyD');
 
     if (isTreadingWater) {
       stopTurning();

@@ -33,7 +33,7 @@ export const createEffects = (input: Input, player: Player): Effects => {
   // * Turning *
   /////////////////////////////////////////////////////////////////////////////
   const startTurning = (): void => {
-    const isPlayerTurning = input.heldKeys.hasAnyOf('KeyA', 'KeyD');
+    const isPlayerTurning = input.heldKeys.hasSome('KeyA', 'KeyD');
 
     if (!isPlayerTurning) return;
 
