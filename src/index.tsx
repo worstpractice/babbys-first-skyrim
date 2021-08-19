@@ -1,9 +1,9 @@
-import 'normalize.css';
+import 'modern-normalize';
 import { default as React, StrictMode } from 'react';
 import { render } from 'react-dom';
-import 'src/game';
 import { CAPTURE } from 'src/constants/event-listener-options/CAPTURE';
 import { CAPTURE_PASSIVE } from 'src/constants/event-listener-options/CAPTURE_PASSIVE';
+import 'src/game';
 import { closeMenusOnAttack } from 'src/handlers/closeMenusOnAttack';
 import { disableSaveShortcut } from 'src/handlers/disableSaveShortcut';
 import { handleHotkeys } from 'src/handlers/handleHotkeys';
