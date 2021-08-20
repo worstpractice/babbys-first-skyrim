@@ -6,9 +6,9 @@ export const Statue = ({}: Props) => {
   return (
     <div
       style={{
-        height: 350,
+        height: 440,
         pointerEvents: 'all',
-        width: 200,
+        width: 250,
       }}
     />
   );

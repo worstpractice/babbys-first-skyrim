@@ -102,9 +102,10 @@ export const Inventory = ({}: Props) => {
 const styles = {
   inventory: {
     ...BACKGROUND,
-    paddingBottom: 25,
-    paddingLeft: 25,
-    paddingRight: 25,
+    borderRadius: '1%',
+    paddingBottom: 32,
+    paddingLeft: 32,
+    paddingRight: 32,
     pointerEvents: 'all',
   } as CSSProperties,
 } as const;

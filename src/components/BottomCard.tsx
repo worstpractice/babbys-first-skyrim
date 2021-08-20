@@ -24,9 +24,9 @@ const styles = {
     ...BACKGROUND,
     borderRadius: '5%',
     cursor: 'pointer',
-    height: 50,
+    height: 75,
     padding: 10,
     pointerEvents: 'all',
-    width: 50,
+    width: 75,
   } as CSSProperties,
 } as const;

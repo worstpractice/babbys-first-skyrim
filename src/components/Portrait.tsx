@@ -15,8 +15,8 @@ const styles = {
   portrait: {
     ...BACKGROUND,
     borderRadius: '50%',
-    height: 225,
+    height: 280,
     pointerEvents: 'all',
-    width: 225,
+    width: 280,
   } as CSSProperties,
 } as const;

@@ -153,10 +153,10 @@ const styles = {
     border: 'rgb(0, 0, 0, 1)',
     borderRadius: '5%',
     borderStyle: 'solid',
-    height: 30,
-    padding: 10,
+    height: 60,
+    padding: 12.5,
     pointerEvents: 'all',
-    width: 30,
+    width: 60,
   } as CSSProperties,
 } as const;
 

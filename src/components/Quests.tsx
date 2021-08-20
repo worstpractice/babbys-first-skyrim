@@ -37,11 +37,11 @@ const styles = {
     borderRadius: '1%',
     display: 'flex',
     flexDirection: 'column',
-    height: 400,
+    height: 500,
     justifyContent: 'space-between',
     padding: 20,
     pointerEvents: 'all',
-    width: 420,
+    width: 525,
   } as CSSProperties,
   title: {
     marginTop: 0,

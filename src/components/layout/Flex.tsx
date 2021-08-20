@@ -27,7 +27,7 @@ const styles = {
   flex: {
     display: 'flex',
     flexDirection: 'row',
-    gap: 5,
+    gap: 6.25,
     justifyContent: 'space-evenly',
   } as CSSProperties,
 } as const;
