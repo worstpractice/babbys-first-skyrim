@@ -4,7 +4,7 @@
     "obset": "2.3.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "three": "0.131.3",
+    "three": "github:mrdoob/three.js",
     "zustand": "3.5.9"
   },
   "devDependencies": {
@@ -31,9 +31,9 @@
     "fmt": "prettier -u --config .prettierrc -w src/**/*.{d.ts,ts,tsx,json}",
     "lint": "eslint ./src --ext .d.ts,.ts,.tsx",
     "lint:fix": "eslint ./src --ext .d.ts,.ts,.tsx --fix",
-    "nuke": "\"rd /q /s .\\node_modules\\.cache\\snowpack\" | cmd",
+    "nuke": "node ./nuke.mjs",
     "start": "pnpm nuke && snowpack dev",
-    "tidy": "pnpm run lint:fix && pnpm run fmt"
+    "tidy": "pnpm lint:fix && pnpm fmt"
   },
   "type": "module"
 }
