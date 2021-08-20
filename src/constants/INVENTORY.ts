@@ -6,9 +6,9 @@ const ROW_LENGTH = {
 
 export const FIRST_ROW: readonly ItemName[] = Array.from<ItemName>(ROW_LENGTH).fill('');
 
-export const SECOUND_ROW: readonly ItemName[] = FIRST_ROW;
+export const SECOND_ROW: readonly ItemName[] = FIRST_ROW;
 
-export const THIRD_ROW: readonly ItemName[] = SECOUND_ROW;
+export const THIRD_ROW: readonly ItemName[] = SECOND_ROW;
 
 const COLUMN_LENGTH = {
   length: 4,

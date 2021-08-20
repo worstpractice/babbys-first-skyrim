@@ -3,7 +3,7 @@ import { default as React } from 'react';
 import { InventorySlot } from 'src/components/InventorySlot';
 import { Flex } from 'src/components/layout/Flex';
 import { Statue } from 'src/components/Statue';
-import { FIRST_ROW, LEFT_COLUMN, RIGHT_COLUMN, SECOUND_ROW, THIRD_ROW } from 'src/constants/INVENTORY';
+import { FIRST_ROW, LEFT_COLUMN, RIGHT_COLUMN, SECOND_ROW, THIRD_ROW } from 'src/constants/INVENTORY';
 import { useClickedState } from 'src/state/ClickedState';
 import { useDraggedState } from 'src/state/DraggedState';
 import { useUiState } from 'src/state/UiState';
@@ -45,7 +45,7 @@ export const Inventory = ({}: Props) => {
 
   if (currentOpenMenu !== 'inventory') return null;
 
-  const resetClickState = () => {
+  const resetClickState = (): void => {
     setCurrentlyClickedElement(null);
     setCurrentlyDraggedElement(null);
   };
@@ -79,7 +79,7 @@ export const Inventory = ({}: Props) => {
         })}
       </Flex>
       <Flex direction="row">
-        {SECOUND_ROW.map(() => {
+        {SECOND_ROW.map(() => {
           const index = slotNumber++ as SlotNumber;
 
           return <InventorySlot index={index} key={index} />;

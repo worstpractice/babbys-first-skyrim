@@ -1,4 +1,4 @@
 export type ActionDuo = {
-  readonly start: () => void;
-  readonly stop: () => void;
+  readonly start: (this: void) => void;
+  readonly stop: (this: void) => void;
 };

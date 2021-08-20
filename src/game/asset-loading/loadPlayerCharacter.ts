@@ -13,14 +13,11 @@ type Props = {
 };
 
 export const loadPlayerCharacter = async (props: Props): Promise<void> => {
-  const { player, actions } = props;
-  const { startIdling } = actions;
+  const { player } = props;
 
   const nameClipDuos = await loadPlayerAssets(props);
 
   for (const [name, clip] of nameClipDuos) {
     populateAnimationsTable(name, clip, player);
   }
-
-  startIdling();
 };

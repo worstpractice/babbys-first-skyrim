@@ -36,9 +36,11 @@ export const main = async (): Promise<App> => {
   // * Essential Side Effects 🤦‍♂️ *
   ///////////////////////////////////////////////////////////
 
-  void loadPlayerCharacter({ actions, animationMixers, loadingManager, player, scene });
+  await loadPlayerCharacter({ actions, animationMixers, loadingManager, player, scene });
 
   populateWorld(scene);
+
+  registerEventListeners({ camera, input, renderer });
 
   mapInputToKeys(input);
 
@@ -48,7 +50,7 @@ export const main = async (): Promise<App> => {
 
   mapAnimationNamesToAnimations(player);
 
-  registerEventListeners({ camera, input, renderer });
+  actions.startIdling();
 
   ///////////////////////////////////////////////////////////
 

@@ -1,14 +1,14 @@
-import create from 'zustand';
-import { combine } from 'zustand/middleware';
 import type { ItemName } from 'src/typings/ItemName';
 import type { CharacterState } from 'src/typings/state/CharacterState';
+import create from 'zustand';
+import { combine } from 'zustand/middleware';
 
 export type Data = {
   readonly mainHand: ItemName;
 };
 
 export type Actions = {
-  readonly equipInMainHand: (item: ItemName) => void;
+  readonly equipInMainHand: (this: void, item: ItemName) => void;
 };
 
 export const useCharacterState = create<CharacterState>(

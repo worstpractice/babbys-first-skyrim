@@ -1,10 +1,10 @@
 export type Effects = {
-  readonly startLevitating: () => void;
-  readonly startMoving: () => void;
-  readonly startTurning: () => void;
-  readonly startUsing: () => void;
-  readonly stopLevitating: () => void;
-  readonly stopMoving: () => void;
-  readonly stopTurning: () => void;
-  readonly stopUsing: () => void;
+  readonly startLevitating: (this: void) => void;
+  readonly startMoving: (this: void) => void;
+  readonly startTurning: (this: void) => void;
+  readonly startUsing: (this: void) => void;
+  readonly stopLevitating: (this: void) => void;
+  readonly stopMoving: (this: void) => void;
+  readonly stopTurning: (this: void) => void;
+  readonly stopUsing: (this: void) => void;
 };

@@ -1,6 +1,6 @@
 import { ObSet } from 'obset';
 import type { AnimationName } from 'src/game/typings/AnimationName';
-import type { Animations } from 'src/game/typings/Animations';
+import type { ActionClips } from 'src/game/typings/ActionClips';
 import type { Effect } from 'src/game/typings/Effect';
 import type { Player } from 'src/game/typings/Player';
 import { vec3 } from 'src/game/utils/vec3';
@@ -12,7 +12,7 @@ export const createPlayer = () => {
   ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   /** NOTE: gets initialized at animation load time. */
-  const animations: Animations = {
+  const animations: ActionClips = {
     attacking: {
       action: undefined as any as AnimationAction, // Every action has one clip
       clip: undefined as any as AnimationClip, // Every clip has one action

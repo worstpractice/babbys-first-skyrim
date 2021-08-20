@@ -21,8 +21,8 @@ export const loadPlayerAnimations = async (loadingManager: LoadingManager): Prom
 
   animationLoader.setPath(ANIMATIONS_PATH);
 
-  const asyncAnimationLoaders: readonly (() => Promise<NameClipDuo>)[] = ANIMATIONS.map(([path, name]) => {
-    return async (): Promise<NameClipDuo> => {
+  const asyncAnimationLoaders: readonly ((this: void) => Promise<NameClipDuo>)[] = ANIMATIONS.map(([path, name]) => {
+    const handleLoad = async (): Promise<NameClipDuo> => {
       const animation = await animationLoader.loadAsync(path);
 
       animation.name = name;
@@ -31,6 +31,8 @@ export const loadPlayerAnimations = async (loadingManager: LoadingManager): Prom
 
       return [name, animations] as const;
     };
+
+    return handleLoad;
   });
 
   const promises: readonly Promise<NameClipDuo>[] = asyncAnimationLoaders.map(toPromises);
