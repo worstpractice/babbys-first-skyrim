@@ -32,7 +32,7 @@ export const loadWeaponModel = async (loadingManager: LoadingManager, playerMode
 
   const [root] = playerModel.children;
 
-  root?.traverse((child) => {
+  root?.traverse((child): void => {
     if (child.name !== 'RightHandIndex1') return;
 
     child.attach(weaponModel);

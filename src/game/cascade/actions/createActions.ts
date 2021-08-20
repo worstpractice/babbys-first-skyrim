@@ -2,78 +2,78 @@ import type { Actions } from 'src/game/typings/Actions';
 import type { AnimationMixerEvent } from 'src/game/typings/AnimationMixerEvent';
 import type { Player } from 'src/game/typings/Player';
 
-export const createActions = (player: Player): Actions => {
+export const createActions = ({ activeAnimations, activeEffects, mixer }: Player): Actions => {
   /////////////////////////////////////////////////////////////////////////////
   // * Attacking *
   /////////////////////////////////////////////////////////////////////////////
   const startAttacking = (): void => {
-    const isUsing = player.activeEffects.has('using');
+    const isUsing = activeEffects.has('using');
 
     if (!isUsing) return;
 
-    player.activeAnimations.add('attacking');
+    activeAnimations.add('attacking');
   };
 
   const stopAttacking = (): void => {
-    player.activeAnimations.delete('attacking');
+    activeAnimations.delete('attacking');
   };
 
   /////////////////////////////////////////////////////////////////////////////
   // * Idling *
   /////////////////////////////////////////////////////////////////////////////
   const startIdling = (): void => {
-    if (player.activeEffects.size) return;
+    if (activeEffects.size) return;
 
-    player.activeAnimations.add('idling');
+    activeAnimations.add('idling');
   };
 
   const stopIdling = (): void => {
-    player.activeAnimations.delete('idling');
+    activeAnimations.delete('idling');
   };
 
   /////////////////////////////////////////////////////////////////////////////
   // * Jumping *
   /////////////////////////////////////////////////////////////////////////////
   const startJumping = (): void => {
-    const hasNothingToPushOffAgainst = player.activeEffects.has('levitating');
+    const hasNothingToPushOffAgainst = activeEffects.has('levitating');
 
     if (hasNothingToPushOffAgainst) return;
 
-    player.activeAnimations.add('jumping');
+    activeAnimations.add('jumping');
   };
 
   const stopJumping = (): void => {
-    player.activeAnimations.delete('jumping');
+    activeAnimations.delete('jumping');
   };
 
   /////////////////////////////////////////////////////////////////////////////
   // * Running *
   /////////////////////////////////////////////////////////////////////////////
   const startRunning = (): void => {
-    const isMoving = player.activeEffects.has('moving');
+    const isMoving = activeEffects.has('moving');
 
     if (!isMoving) return;
 
-    player.activeAnimations.add('running');
+    activeAnimations.add('running');
   };
 
   const stopRunning = (): void => {
-    player.activeAnimations.delete('running');
+    activeAnimations.delete('running');
   };
 
   /////////////////////////////////////////////////////////////////////////////
   // * Walking *
   /////////////////////////////////////////////////////////////////////////////
   const startWalking = (): void => {
-    const isMoving = player.activeEffects.has('moving');
+    const isMoving = activeEffects.has('moving');
 
     if (!isMoving) return;
 
-    player.activeAnimations.add('walking');
+    activeAnimations.add('walking');
   };
 
   const stopWalking = (): void => {
-    player.activeAnimations.delete('walking');
+    activeAnimations.delete('walking');
   };
 
   /////////////////////////////////////////////////////////////////////////////
@@ -96,7 +96,7 @@ export const createActions = (player: Player): Actions => {
 
     stopJumping();
 
-    player.mixer.removeEventListener('finished', stopJumping);
+    mixer.removeEventListener('finished', stopJumping);
   };
 
   /////////////////////////////////////////////////////////////////////////////

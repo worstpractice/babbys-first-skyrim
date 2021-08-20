@@ -1,19 +1,13 @@
-import { createLoadingManager } from 'src/game/engine/createLoadingManager';
-import type { Input } from 'src/game/typings/Input';
 import type { Mutable } from 'src/game/typings/Mutable';
-import type { Player } from 'src/game/typings/Player';
-import type { AnimationMixer, CubeTexture, PerspectiveCamera, WebGLRenderer } from 'three';
+import type { CubeTexture, LoadingManager, Object3D } from 'three';
 import { CubeTextureLoader, Scene, sRGBEncoding } from 'three';
 
 type Props = {
-  readonly animationMixers: readonly AnimationMixer[];
-  readonly camera: PerspectiveCamera;
-  readonly input: Input;
-  readonly player: Player;
-  readonly renderer: WebGLRenderer;
+  readonly loadingManager: LoadingManager;
+  readonly setup: readonly ((this: void) => Object3D)[];
 };
 
-export const createScene = (props: Props) => {
+export const createScene = ({ loadingManager, setup }: Props) => {
   const scene = new Scene();
 
   const skyboxTexturePaths = [
@@ -25,8 +19,6 @@ export const createScene = (props: Props) => {
     './assets/textures/skybox/negz.jpg',
   ] as const;
 
-  const loadingManager = createLoadingManager({ ...props, scene });
-
   const loader = new CubeTextureLoader(loadingManager);
 
   const skybox: CubeTexture = loader.load(skyboxTexturePaths as Mutable<typeof skyboxTexturePaths>);
@@ -35,8 +27,11 @@ export const createScene = (props: Props) => {
 
   scene.background = skybox;
 
-  return {
-    loadingManager,
-    scene,
-  } as const;
+  for (const createFn of setup) {
+    const thing = createFn();
+
+    scene.add(thing);
+  }
+
+  return scene;
 };
