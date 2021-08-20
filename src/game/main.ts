@@ -40,8 +40,6 @@ export const main = async (): Promise<App> => {
 
   populateWorld(scene);
 
-  registerEventListeners({ camera, input, renderer });
-
   mapInputToKeys(input);
 
   mapKeysToEffects({ actions, effects, input, player });
@@ -49,6 +47,8 @@ export const main = async (): Promise<App> => {
   mapEffectsToAnimationNames({ actions, input, player });
 
   mapAnimationNamesToAnimations(player);
+
+  registerEventListeners({ camera, input, renderer });
 
   actions.startIdling();
 
