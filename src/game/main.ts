@@ -12,10 +12,10 @@ import { createScene } from 'src/game/engine/createScene';
 import { createInput } from 'src/game/input/createInput';
 import { registerEventListeners } from 'src/game/listeners/registerEventListeners';
 import { createPlayer } from 'src/game/player/createPlayer';
+import { createAmbientLight } from 'src/game/scene/createAmbientLight';
+import { createDirectionalLight } from 'src/game/scene/createDirectionalLight';
+import { createGroundPlane } from 'src/game/scene/createGroundPlane';
 import type { App } from 'src/game/typings/App';
-import { createAmbientLight } from 'src/game/world/createAmbientLight';
-import { createDirectionalLight } from 'src/game/world/createDirectionalLight';
-import { createGroundPlane } from 'src/game/world/createGroundPlane';
 import type { AnimationMixer } from 'three';
 
 const SCENE_SETUP = [
