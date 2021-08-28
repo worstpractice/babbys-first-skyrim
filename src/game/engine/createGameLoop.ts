@@ -8,7 +8,7 @@ import type { Player } from 'src/game/typings/Player';
 import type { AnimationMixer, PerspectiveCamera, Scene, WebGLRenderer } from 'three';
 
 type Props = {
-  readonly animationMixers: readonly AnimationMixer[];
+  readonly mixers: readonly AnimationMixer[];
   readonly camera: PerspectiveCamera;
   readonly input: Input;
   readonly player: Player;
@@ -17,7 +17,7 @@ type Props = {
   readonly world: World;
 };
 
-export const createGameLoop = ({ animationMixers, camera, input, player, renderer, scene, world }: Props) => {
+export const createGameLoop = ({ mixers, camera, input, player, renderer, scene, world }: Props) => {
   const beginGameLoop = (): void => {
     let previousRafTime: DOMHighResTimeStamp = 0;
 
@@ -35,7 +35,7 @@ export const createGameLoop = ({ animationMixers, camera, input, player, rendere
       const deltaInSeconds = deltaTime * 0.001;
 
       tickPhysics(deltaInSeconds, getCurrentCameraDirection, input, player, world);
-      tickMixers(deltaInSeconds, animationMixers);
+      tickMixers(deltaInSeconds, mixers);
       tickCamera(deltaInSeconds, camera, player);
 
       renderer.render(scene, camera);

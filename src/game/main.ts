@@ -23,7 +23,7 @@ import type { App } from 'src/game/typings/App';
 import type { AnimationMixer } from 'three';
 
 export const main = async (): Promise<App> => {
-  const animationMixers: AnimationMixer[] = [];
+  const mixers: AnimationMixer[] = [];
 
   const { physicsMaterial, world } = createWorld();
 
@@ -37,7 +37,7 @@ export const main = async (): Promise<App> => {
 
   const scene = createScene({ loadingManager });
 
-  const player = await createPlayer({ animationMixers, loadingManager });
+  const player = await createPlayer({ loadingManager, mixers });
 
   const actions = createActions(player);
 
@@ -50,7 +50,7 @@ export const main = async (): Promise<App> => {
   // * Essential Side Effects 🤦‍♂️ *
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  loadingManager.onLoad = createGameLoop({ animationMixers, camera, input, player, renderer, scene, world });
+  loadingManager.onLoad = createGameLoop({ camera, input, mixers, player, renderer, scene, world });
 
   populate({
     constructors: {
@@ -90,8 +90,8 @@ export const main = async (): Promise<App> => {
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   return {
-    animationMixers,
     camera,
+    mixers,
     renderer,
     scene,
   } as const;

@@ -1,6 +1,6 @@
 import type { World } from 'cannon-es';
-import { movePlayer } from 'src/game/physics/movePlayer';
-import { turnPlayer } from 'src/game/physics/turnPlayer';
+import { movePlayer } from 'src/game/locomotion/movePlayer';
+import { turnPlayer } from 'src/game/locomotion/turnPlayer';
 import { THINGS } from 'src/game/tables/THINGS';
 import type { BasicQuat } from 'src/game/typings/compatibility/BasicQuat';
 import type { BasicVec3 } from 'src/game/typings/compatibility/BasicVec3';

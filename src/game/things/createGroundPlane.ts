@@ -1,7 +1,8 @@
 import { Body, Plane } from 'cannon-es';
 import { COLOR_GROUND } from 'src/game/constants/COLOR_GROUND';
 import { FACING_UPRIGHT } from 'src/game/constants/FACING_UPRIGHT';
-import { GROUND_PLANE_HEIGHT, GROUND_PLANE_WIDTH } from 'src/game/constants/GROUND_PLANE';
+import { GROUND_PLANE_HEIGHT } from 'src/game/constants/GROUND_PLANE_HEIGHT';
+import { GROUND_PLANE_WIDTH } from 'src/game/constants/GROUND_PLANE_WIDTH';
 import type { Thing } from 'src/game/typings/Thing';
 import { Mesh, MeshStandardMaterial, PlaneGeometry } from 'three';
 

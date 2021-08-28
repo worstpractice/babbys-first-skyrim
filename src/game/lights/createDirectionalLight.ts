@@ -1,5 +1,6 @@
 import { COLOR_SKY } from 'src/game/constants/COLOR_SKY';
-import { GROUND_PLANE_HEIGHT, GROUND_PLANE_WIDTH } from 'src/game/constants/GROUND_PLANE';
+import { GROUND_PLANE_HEIGHT } from 'src/game/constants/GROUND_PLANE_HEIGHT';
+import { GROUND_PLANE_WIDTH } from 'src/game/constants/GROUND_PLANE_WIDTH';
 import { DirectionalLight } from 'three';
 
 export const createDirectionalLight = (): DirectionalLight => {

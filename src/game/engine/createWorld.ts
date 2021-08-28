@@ -1,8 +1,5 @@
-import { ContactMaterial, GSSolver, Material, NaiveBroadphase, SplitSolver, Vec3, World } from 'cannon-es';
-
-const GRAVITY_OF_EARTH = new Vec3(0, -9.81, 0); // m/s²
-
-const YOLO_GRAVITY = new Vec3(0, -20, 0); // m/s²
+import { ContactMaterial, GSSolver, Material, NaiveBroadphase, SplitSolver, World } from 'cannon-es';
+import { GRAVITY_OF_YOLO } from 'src/game/constants/GRAVITY_OF_YOLO';
 
 export const createWorld = () => {
   const subSolver = new GSSolver();
@@ -13,7 +10,7 @@ export const createWorld = () => {
 
   const world = new World({
     broadphase: new NaiveBroadphase(),
-    gravity: YOLO_GRAVITY,
+    gravity: GRAVITY_OF_YOLO,
     solver,
   });
 
@@ -26,7 +23,7 @@ export const createWorld = () => {
   // Create a slippery material (friction coefficient = 0.0)
   const physicsMaterial = new Material('physics');
   const contactMaterial = new ContactMaterial(physicsMaterial, physicsMaterial, {
-    friction: 0.0,
+    friction: 0.3,
     restitution: 0.3,
   });
 

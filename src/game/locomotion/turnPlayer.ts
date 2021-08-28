@@ -1,8 +1,7 @@
+import { TO_THE_LEFT } from 'src/game/constants/TO_THE_LEFT';
+import { TO_THE_RIGHT } from 'src/game/constants/TO_THE_RIGHT';
 import type { Input } from 'src/game/typings/Input';
 import type { Player } from 'src/game/typings/Player';
-
-const TO_THE_LEFT = Math.PI;
-const TO_THE_RIGHT = -Math.PI;
 
 export const turnPlayer = (deltaInSeconds: number, input: Input, player: Player): void => {
   if (!player.activeEffects.has('turning')) return;
