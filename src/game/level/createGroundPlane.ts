@@ -33,7 +33,7 @@ export const createGroundPlane = (): Thing => {
   });
 
   body.position.set(0, 0, 0);
-  body.quaternion.setFromEuler(FACING_UPRIGHT, 0, 0); // make it face up
+  body.quaternion.setFromEuler(FACING_UPRIGHT, 0, 0);
 
   /////////////////////////////////////////////////////////////////////////////
 

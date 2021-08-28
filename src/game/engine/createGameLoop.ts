@@ -1,23 +1,26 @@
 import type { World } from 'cannon-es';
 import { createGetCurrentCameraDirection } from 'src/game/camera/createGetCurrentCameraDirection';
 import { tickCamera } from 'src/game/tick/tickCamera';
+import { tickLocomotion } from 'src/game/tick/tickLocomotion';
 import { tickMixers } from 'src/game/tick/tickMixers';
 import { tickPhysics } from 'src/game/tick/tickPhysics';
 import type { Input } from 'src/game/typings/Input';
 import type { Player } from 'src/game/typings/Player';
+import type { Level } from 'src/typings/Level';
 import type { AnimationMixer, PerspectiveCamera, Scene, WebGLRenderer } from 'three';
 
 type Props = {
-  readonly mixers: readonly AnimationMixer[];
   readonly camera: PerspectiveCamera;
   readonly input: Input;
+  readonly level: Level;
+  readonly mixers: readonly AnimationMixer[];
   readonly player: Player;
   readonly renderer: WebGLRenderer;
   readonly scene: Scene;
   readonly world: World;
 };
 
-export const createGameLoop = ({ mixers, camera, input, player, renderer, scene, world }: Props) => {
+export const createGameLoop = ({ camera, input, level, mixers, player, renderer, scene, world }: Props) => {
   const beginGameLoop = (): void => {
     let previousRafTime: DOMHighResTimeStamp = 0;
 
@@ -34,7 +37,8 @@ export const createGameLoop = ({ mixers, camera, input, player, renderer, scene,
 
       const deltaInSeconds = deltaTime * 0.001;
 
-      tickPhysics(deltaInSeconds, getCurrentCameraDirection, input, player, world);
+      tickPhysics(deltaInSeconds, level, world);
+      tickLocomotion(deltaInSeconds, getCurrentCameraDirection, input, player);
       tickMixers(deltaInSeconds, mixers);
       tickCamera(deltaInSeconds, camera, player);
 

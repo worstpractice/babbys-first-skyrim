@@ -7,6 +7,7 @@ import type { ActionClips } from 'src/game/typings/ActionClips';
 import type { AnimationName } from 'src/game/typings/AnimationName';
 import type { Effect } from 'src/game/typings/Effect';
 import type { Player } from 'src/game/typings/Player';
+import { snitch } from 'src/utils/snitch';
 import type { LoadingManager } from 'three';
 import { AnimationMixer, LoopOnce } from 'three';
 
@@ -75,10 +76,17 @@ export const createPlayer = async ({ loadingManager, mixers }: Props): Promise<P
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // * Create Player *
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
   return {
     actionClips,
-    activeAnimations: new ObSet<AnimationName>(),
-    activeEffects: new ObSet<Effect>(),
+    activeAnimations: new ObSet<AnimationName>()
+      //
+      .on('add', snitch)
+      .on('delete', snitch),
+    activeEffects: new ObSet<Effect>()
+      //
+      .on('add', snitch)
+      .on('delete', snitch),
     body,
     mixer,
     model,

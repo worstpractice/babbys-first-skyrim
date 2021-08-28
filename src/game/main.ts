@@ -1,7 +1,7 @@
 import cannonDebugger from 'cannon-es-debugger';
 import { createActions } from 'src/game/cascade/actions/createActions';
 import { createEffects } from 'src/game/cascade/effects/createEffects';
-import { mapAnimationNamesToAnimations } from 'src/game/cascade/mapAnimationNamestoAnimations';
+import { mapAnimationNamesToAnimations } from 'src/game/cascade/mapAnimationNamesToAnimations';
 import { mapEffectsToAnimationNames } from 'src/game/cascade/mapEffectsToAnimationNames';
 import { mapInputToKeys } from 'src/game/cascade/mapInputToKeys';
 import { mapKeysToEffects } from 'src/game/cascade/mapKeysToEffects';
@@ -12,11 +12,11 @@ import { createRenderer } from 'src/game/engine/createRenderer';
 import { createScene } from 'src/game/engine/createScene';
 import { createWorld } from 'src/game/engine/createWorld';
 import { createInput } from 'src/game/input/createInput';
+import { createGroundPlane } from 'src/game/level/createGroundPlane';
+import { createLevel } from 'src/game/level/createLevel';
 import { createAmbientLight } from 'src/game/lights/createAmbientLight';
 import { createDirectionalLight } from 'src/game/lights/createDirectionalLight';
 import { registerEventListeners } from 'src/game/listeners/registerEventListeners';
-import { populate } from 'src/game/population/populate';
-import { createGroundPlane } from 'src/game/things/createGroundPlane';
 import { createPlayer } from 'src/game/things/createPlayer';
 import { createSphere } from 'src/game/things/createSphere';
 import type { App } from 'src/game/typings/App';
@@ -43,16 +43,7 @@ export const main = async (): Promise<App> => {
 
   const effects = createEffects(input, player);
 
-  player.activeEffects.on('add', 'turning', console.log);
-  player.activeEffects.on('delete', 'turning', console.log);
-
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  // * Essential Side Effects 🤦‍♂️ *
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-  loadingManager.onLoad = createGameLoop({ camera, input, mixers, player, renderer, scene, world });
-
-  populate({
+  const level = createLevel({
     constructors: {
       lights: [
         //
@@ -72,6 +63,12 @@ export const main = async (): Promise<App> => {
     scene,
     world,
   });
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // * Essential Side Effects 🤦‍♂️ *
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  loadingManager.onLoad = createGameLoop({ camera, input, level, mixers, player, renderer, scene, world });
 
   mapInputToKeys(input);
 

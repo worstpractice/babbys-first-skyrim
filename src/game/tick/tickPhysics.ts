@@ -1,32 +1,15 @@
 import type { World } from 'cannon-es';
-import { movePlayer } from 'src/game/locomotion/movePlayer';
-import { turnPlayer } from 'src/game/locomotion/turnPlayer';
-import { THINGS } from 'src/game/tables/THINGS';
+import { PHYSICS_TIME_STEP } from 'src/game/constants/PHYSICS_TIME_STEP';
 import type { BasicQuat } from 'src/game/typings/compatibility/BasicQuat';
 import type { BasicVec3 } from 'src/game/typings/compatibility/BasicVec3';
-import type { Input } from 'src/game/typings/Input';
-import type { Player } from 'src/game/typings/Player';
+import type { Level } from 'src/typings/Level';
 import type { Quaternion, Vector3 } from 'three';
 
-const PHYSICS_TIME_STEP = 1 / 144; // seconds
-
-export const tickPhysics = (deltaInSeconds: number, getCurrentCameraDirection: (this: void) => Vector3, input: Input, player: Player, world: World): void => {
-  for (const { body, model } of THINGS) {
+export const tickPhysics = (deltaInSeconds: number, { things }: Level, world: World): void => {
+  for (const { body, model } of things) {
     model.position.copy(body.position as BasicVec3 as Vector3);
     model.quaternion.copy(body.quaternion as BasicQuat as Quaternion);
   }
 
   world.step(PHYSICS_TIME_STEP, deltaInSeconds);
-
-  // ////////////////////////////////////////////////////////////////////////////////////////////////
-  // // * Friction *
-  // ////////////////////////////////////////////////////////////////////////////////////////////////
-  // applyFriction(deltaInSeconds, player);
-
-  ////////////////////////////////////////////////////////////////////////////////////////////////
-  // * Player Impulses *
-  ////////////////////////////////////////////////////////////////////////////////////////////////
-  movePlayer(deltaInSeconds, getCurrentCameraDirection, input, player);
-
-  turnPlayer(deltaInSeconds, input, player);
 };
