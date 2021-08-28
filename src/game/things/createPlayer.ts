@@ -1,3 +1,4 @@
+import { Body, Box, Vec3 } from 'cannon-es';
 import { ObSet } from 'obset';
 import { loadPlayerAnimations } from 'src/game/asset-loading/loadPlayerAnimations';
 import { loadPlayerModel } from 'src/game/asset-loading/loadPlayerModel';
@@ -6,28 +7,24 @@ import type { ActionClips } from 'src/game/typings/ActionClips';
 import type { AnimationName } from 'src/game/typings/AnimationName';
 import type { Effect } from 'src/game/typings/Effect';
 import type { Player } from 'src/game/typings/Player';
-import { vec3 } from 'src/game/utils/vec3';
-import type { LoadingManager, Scene } from 'three';
+import type { LoadingManager } from 'three';
 import { AnimationMixer, LoopOnce } from 'three';
 
 type Props = {
   readonly animationMixers: AnimationMixer[];
   readonly loadingManager: LoadingManager;
-  readonly scene: Scene;
 };
 
-export const createPlayer = async ({ animationMixers, loadingManager, scene }: Props): Promise<Player> => {
+export const createPlayer = async ({ animationMixers, loadingManager }: Props): Promise<Player> => {
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // * Load Player Model *
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
   // Loading player model must complete before loading weapon model may commence
-  const model = await loadPlayerModel({ loadingManager, scene }); // Every model has one mixer
+  const model = await loadPlayerModel({ loadingManager }); // Every model has one mixer
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // * Create Player Mixer *
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
   const mixer = new AnimationMixer(model); // Every mixer has one model
 
   animationMixers.push(mixer);
@@ -64,18 +61,26 @@ export const createPlayer = async ({ animationMixers, loadingManager, scene }: P
   const actionClips: ActionClips = Object.fromEntries(entries);
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // * Create Physics *
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  const body = new Body({
+    mass: 10, // kg
+    shape: new Box(new Vec3(5, 10, 5)),
+  });
+
+  const doNotLaunchIntoSpace = 35;
+
+  body.position.set(model.position.x, model.position.y + doNotLaunchIntoSpace, model.position.z);
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // * Create Player *
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   return {
     actionClips,
     activeAnimations: new ObSet<AnimationName>(),
     activeEffects: new ObSet<Effect>(),
+    body,
     mixer,
     model,
-    physics: {
-      acceleration: vec3(0, 0.25, 50.0),
-      decceleration: vec3(0, -0.0001, -5.0),
-      velocity: vec3(),
-    },
   } as const;
 };

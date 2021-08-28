@@ -79,7 +79,7 @@ export const mapEffectsToAnimationNames = ({ actions, input, player }: Props): v
     stopWalking();
   });
 
-  //////////////////////////////////////////////////////////////////////ddddd
+  //////////////////////////////////////////////////////////////////////
   // * Start Using  *
   //////////////////////////////////////////////////////////////////////
   player.activeEffects.on('add', 'using', (): void => {
@@ -105,6 +105,14 @@ export const mapEffectsToAnimationNames = ({ actions, input, player }: Props): v
     /** NOTE: make sure the relevant `stopFooing()` also calls `stopUsing()`. */
     (player.mixer.addEventListener as AnimationMixerListener)('finished', stopAndCleanUp);
   });
+
+  // //////////////////////////////////////////////////////////////////////
+  // // * Start Using  *
+  // //////////////////////////////////////////////////////////////////////
+  // player.activeEffects.on('add', 'turning', (): void => {
+  //   stopRunning();
+  //   stopWalking();
+  // });
 
   //////////////////////////////////////////////////////////////////////
 };

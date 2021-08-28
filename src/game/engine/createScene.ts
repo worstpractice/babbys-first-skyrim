@@ -1,13 +1,12 @@
 import type { Mutable } from 'src/game/typings/Mutable';
-import type { CubeTexture, LoadingManager, Object3D } from 'three';
+import type { CubeTexture, LoadingManager } from 'three';
 import { CubeTextureLoader, Scene, sRGBEncoding } from 'three';
 
 type Props = {
   readonly loadingManager: LoadingManager;
-  readonly setup: readonly ((this: void) => Object3D)[];
 };
 
-export const createScene = ({ loadingManager, setup }: Props) => {
+export const createScene = ({ loadingManager }: Props) => {
   const scene = new Scene();
 
   const skyboxTexturePaths = [
@@ -26,12 +25,6 @@ export const createScene = ({ loadingManager, setup }: Props) => {
   skybox.encoding = sRGBEncoding;
 
   scene.background = skybox;
-
-  for (const createFn of setup) {
-    const thing = createFn();
-
-    scene.add(thing);
-  }
 
   return scene;
 };

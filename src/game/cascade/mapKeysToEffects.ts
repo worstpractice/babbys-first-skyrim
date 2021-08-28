@@ -34,19 +34,13 @@ export const mapKeysToEffects = ({ actions, effects, input, player }: Props): vo
   input.heldMovementKeys.on('add', (): void => {
     const isTreadingWater = input.heldMovementKeys.hasEvery('KeyS', 'KeyW');
 
-    if (isTreadingWater) {
-      stopMoving();
-    } else {
-      startMoving();
-    }
+    isTreadingWater ? stopMoving() : startMoving();
   });
 
   input.heldMovementKeys.on('delete', (): void => {
     const isTreadingWater = input.heldMovementKeys.hasEvery('KeyS', 'KeyW');
 
-    if (!isTreadingWater) {
-      startMoving();
-    }
+    if (!isTreadingWater) startMoving();
   });
 
   input.heldMovementKeys.on('empty', stopMoving);
@@ -54,26 +48,16 @@ export const mapKeysToEffects = ({ actions, effects, input, player }: Props): vo
   //////////////////////////////////////////////////////////////////////
   // * Turning *
   //////////////////////////////////////////////////////////////////////
-  input.heldActionKeys.on('add', ({ value }): void => {
-    const isTurning = value === 'KeyD' || value === 'KeyA';
+  const turn = (): void => {
+    const isTurning = input.heldActionKeys.xor('KeyA', 'KeyD');
 
-    if (!isTurning) return;
+    isTurning ? startTurning() : stopTurning();
+  };
 
-    const isTreadingWater = input.heldActionKeys.hasEvery('KeyA', 'KeyD');
-
-    if (isTreadingWater) {
-      stopTurning();
-      input.heldActionKeys.once('delete', ({ value }): void => {
-        const isTurning = value === 'KeyD' || value === 'KeyA';
-
-        if (!isTurning) return;
-
-        startTurning();
-      });
-    } else {
-      startTurning();
-    }
-  });
+  input.heldActionKeys.on('add', 'KeyA', turn);
+  input.heldActionKeys.on('add', 'KeyD', turn);
+  input.heldActionKeys.on('delete', 'KeyD', turn);
+  input.heldActionKeys.on('delete', 'KeyA', turn);
 
   //////////////////////////////////////////////////////////////////////
   // * Jumping *

@@ -1,11 +1,13 @@
 {
   "dependencies": {
+    "cannon-es": "^0.18.0",
+    "cannon-es-debugger": "^0.1.4",
     "modern-normalize": "1.1.0",
-    "obset": "2.3.3",
+    "obset": "2.4.3",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "three": "github:mrdoob/three.js#1b5c97ae",
-    "zustand": "3.5.9"
+    "zustand": "3.5.10"
   },
   "devDependencies": {
     "@babel/runtime": "7.15.3",
@@ -16,15 +18,15 @@
     "@types/react-dom": "17.0.9",
     "@types/snowpack-env": "2.3.4",
     "@types/three": "0.131.0",
-    "@typescript-eslint/eslint-plugin": "4.29.2",
-    "@typescript-eslint/parser": "4.29.2",
+    "@typescript-eslint/eslint-plugin": "4.29.3",
+    "@typescript-eslint/parser": "4.29.3",
     "eslint": "7.32.0",
     "eslint-plugin-react": "7.24.0",
     "eslint-plugin-react-hooks": "4.2.0",
     "eslint-plugin-unicorn": "35.0.0",
     "prettier": "2.3.2",
-    "snowpack": "3.8.6",
-    "typescript": "4.5.0-dev.20210822"
+    "snowpack": "3.8.8",
+    "typescript": "4.5.0-dev.20210826"
   },
   "scripts": {
     "build": "snowpack build",
