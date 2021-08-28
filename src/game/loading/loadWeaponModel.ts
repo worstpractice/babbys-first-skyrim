@@ -9,33 +9,33 @@ import type { Group, LoadingManager } from 'three';
 import { Vector3 } from 'three';
 
 export const loadWeaponModel = async (loadingManager: LoadingManager, playerModel: Group): Promise<void> => {
-  const weaponLoader = new FBXLoader(loadingManager);
+  const loader = new FBXLoader(loadingManager);
 
-  weaponLoader.setPath(WEAPONS_PATH);
+  loader.setPath(WEAPONS_PATH);
 
-  const weaponModel = await weaponLoader.loadAsync(`${ITEM_NAME}.fbx`);
+  const model = await loader.loadAsync(`${ITEM_NAME}.fbx`);
 
-  weaponModel.name = ITEM_NAME;
-  weaponModel.scale.setScalar(0.021);
-  weaponModel.traverse(enableShadows);
-  weaponModel.traverse(enableSrgbEncoding);
+  model.name = ITEM_NAME;
+  model.scale.setScalar(0.021);
+  model.traverse(enableShadows);
+  model.traverse(enableSrgbEncoding);
 
   // Align to player
-  weaponModel.rotateY(Math.PI);
-  weaponModel.rotateX(FACING_UPRIGHT);
-  weaponModel.rotateY(-1);
-  weaponModel.position.add(new Vector3(-10, 13.37, -0.5));
+  model.rotateY(Math.PI);
+  model.rotateX(FACING_UPRIGHT);
+  model.rotateY(-1);
+  model.position.add(new Vector3(-10, 13.37, -0.5));
 
-  itemNameToModel[ITEM_NAME] = weaponModel;
+  itemNameToModel[ITEM_NAME] = model;
 
   const [root] = playerModel.children;
 
   root?.traverse((child): void => {
     if (child.name !== 'RightHandIndex1') return;
 
-    child.attach(weaponModel);
+    child.attach(model);
   });
 
   // Hide for now, unhide via inventory equip
-  weaponModel.visible = false;
+  model.visible = false;
 };

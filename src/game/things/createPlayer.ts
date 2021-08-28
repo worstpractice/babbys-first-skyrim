@@ -69,9 +69,9 @@ export const createPlayer = async ({ loadingManager, mixers }: Props): Promise<P
     shape: new Box(new Vec3(5, 10, 5)),
   });
 
-  const doNotLaunchIntoSpace = 35;
+  console.log(model);
 
-  body.position.set(model.position.x, model.position.y + doNotLaunchIntoSpace, model.position.z);
+  body.position.set(model.position.x, model.position.y, model.position.z);
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // * Create Player *
