@@ -1,6 +1,6 @@
-import { calculateCurrentLookAt } from 'src/game/third-person-camera/calculateCurrentLookAt';
-import { calculateFrameRateIndependentLerpCoefficient } from 'src/game/third-person-camera/calculateFrameRateIndependentLerpCoefficient';
-import { calculateIdealFrom } from 'src/game/third-person-camera/calculateIdealFrom';
+import { calculateCurrentLookAt } from 'src/game/camera/calculateCurrentLookAt';
+import { calculateFrameRateIndependentLerpCoefficient } from 'src/game/camera/calculateFrameRateIndependentLerpCoefficient';
+import { calculateIdealFrom } from 'src/game/camera/calculateIdealFrom';
 import type { Player } from 'src/game/typings/Player';
 import { vec3 } from 'src/game/utils/vec3';
 import type { PerspectiveCamera, Vector3 } from 'three';

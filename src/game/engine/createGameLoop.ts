@@ -1,5 +1,5 @@
 import type { World } from 'cannon-es';
-import { createGetCurrentCameraDirection } from 'src/game/third-person-camera/createGetCurrentCameraDirection';
+import { createGetCurrentCameraDirection } from 'src/game/camera/createGetCurrentCameraDirection';
 import { tickCamera } from 'src/game/tick/tickCamera';
 import { tickMixers } from 'src/game/tick/tickMixers';
 import { tickPhysics } from 'src/game/tick/tickPhysics';

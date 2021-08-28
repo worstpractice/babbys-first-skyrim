@@ -1,8 +1,8 @@
 import { Body, Box, Vec3 } from 'cannon-es';
 import { ObSet } from 'obset';
-import { loadPlayerAnimations } from 'src/game/asset-loading/loadPlayerAnimations';
-import { loadPlayerModel } from 'src/game/asset-loading/loadPlayerModel';
-import { loadWeaponModel } from 'src/game/asset-loading/loadWeaponModel';
+import { loadPlayerAnimations } from 'src/game/loading/loadPlayerAnimations';
+import { loadPlayerModel } from 'src/game/loading/loadPlayerModel';
+import { loadWeaponModel } from 'src/game/loading/loadWeaponModel';
 import type { ActionClips } from 'src/game/typings/ActionClips';
 import type { AnimationName } from 'src/game/typings/AnimationName';
 import type { Effect } from 'src/game/typings/Effect';
