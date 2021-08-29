@@ -11,14 +11,14 @@ specifiers:
   '@types/three': 0.131.0
   '@typescript-eslint/eslint-plugin': 4.29.3
   '@typescript-eslint/parser': 4.29.3
-  cannon-es: ^0.18.0
-  cannon-es-debugger: ^0.1.4
+  cannon-es: 0.18.0
+  cannon-es-debugger: 0.1.4
   eslint: 7.32.0
-  eslint-plugin-react: 7.24.0
+  eslint-plugin-react: 7.25.0
   eslint-plugin-react-hooks: 4.2.0
   eslint-plugin-unicorn: 35.0.0
   modern-normalize: 1.1.0
-  obset: 2.4.3
+  obset: 3.5.3
   prettier: 2.3.2
   react: 17.0.2
   react-dom: 17.0.2
@@ -31,7 +31,7 @@ dependencies:
   cannon-es: 0.18.0
   cannon-es-debugger: 0.1.4_acc2e8dc834250254711f7a8d90dd6f6
   modern-normalize: 1.1.0
-  obset: 2.4.3
+  obset: 3.5.3
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
   three: github.com/mrdoob/three.js/1b5c97ae
@@ -49,7 +49,7 @@ devDependencies:
   '@typescript-eslint/eslint-plugin': 4.29.3_6d37f7b592500fe826406f6edc280ae8
   '@typescript-eslint/parser': 4.29.3_8b2559f0397fae336f41eb6d2a3d4120
   eslint: 7.32.0
-  eslint-plugin-react: 7.24.0_eslint@7.32.0
+  eslint-plugin-react: 7.25.0_eslint@7.32.0
   eslint-plugin-react-hooks: 4.2.0_eslint@7.32.0
   eslint-plugin-unicorn: 35.0.0_eslint@7.32.0
   prettier: 2.3.2
@@ -1670,8 +1670,8 @@ packages:
       eslint: 7.32.0
     dev: true
 
-  /eslint-plugin-react/7.24.0_eslint@7.32.0:
-    resolution: {integrity: sha512-KJJIx2SYx7PBx3ONe/mEeMz4YE0Lcr7feJTCMyyKb/341NcjuAgim3Acgan89GfPv7nxXK2+0slu0CWXYM4x+Q==}
+  /eslint-plugin-react/7.25.0_eslint@7.32.0:
+    resolution: {integrity: sha512-bZL+HeB+Qaimb4ryOc+OYYOX0XnOr6FX30ZXkzL8iSJA3tATTtZ1YgYyjK3jGvVDcZMejfUaeS/5wKDfTgyfVw==}
     engines: {node: '>=4'}
     peerDependencies:
       eslint: ^3 || ^4 || ^5 || ^6 || ^7
@@ -1680,6 +1680,7 @@ packages:
       array.prototype.flatmap: 1.2.4
       doctrine: 2.1.0
       eslint: 7.32.0
+      estraverse: 5.2.0
       has: 1.0.3
       jsx-ast-utils: 3.2.0
       minimatch: 3.0.4
@@ -3132,8 +3133,8 @@ packages:
       swappop: 1.0.2
     dev: false
 
-  /obset/2.4.3:
-    resolution: {integrity: sha512-a3UfykQsjzrkVN+QybMwqfLD9pZMziEA6q0dW2A7Ey/D73FEOeKo0fJ+hgjQ4JONV2J7jKVMVDQuKZmV6YGpSA==}
+  /obset/3.5.3:
+    resolution: {integrity: sha512-yuyXhFLHICjr45vAWpu4jHyHH4uS/LEs8jZ1GWJXDp1tqAss7VqGzlaIcqjGcQCtYAkhYl68ACb32WWjPAXZWQ==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     dependencies:
       swappop: 1.0.4
