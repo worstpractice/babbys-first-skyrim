@@ -11,7 +11,7 @@ import { createLoadingManager } from 'src/game/engine/createLoadingManager';
 import { createRenderer } from 'src/game/engine/createRenderer';
 import { createScene } from 'src/game/engine/createScene';
 import { createWorld } from 'src/game/engine/createWorld';
-import { createGroundPlane } from 'src/game/ground/createGroundPlane';
+import { createRuggedTerrain } from 'src/game/ground/createRuggedTerrain';
 import { createInput } from 'src/game/input/createInput';
 import { createLevel } from 'src/game/level/createLevel';
 import { createAmbientLight } from 'src/game/lights/createAmbientLight';
@@ -25,7 +25,7 @@ import type { AnimationMixer } from 'three';
 export const main = async (): Promise<App> => {
   const mixers: AnimationMixer[] = [];
 
-  const { physicsMaterial, world } = createWorld();
+  const world = createWorld();
 
   const camera = createCamera();
 
@@ -52,10 +52,10 @@ export const main = async (): Promise<App> => {
       ],
       things: [
         //
+        createRuggedTerrain,
         () => {
           return player;
         },
-        createGroundPlane,
         createSphere,
         createSphere,
         createSphere,
@@ -68,7 +68,6 @@ export const main = async (): Promise<App> => {
         createSphere,
       ],
     },
-    physicsMaterial,
     scene,
     world,
   });

@@ -1,17 +1,16 @@
 import { Body, Plane, Quaternion, Vec3 } from 'cannon-es';
 import { COLOR_GROUND } from 'src/game/constants/COLOR_GROUND';
 import { FACING_UPRIGHT } from 'src/game/constants/FACING_UPRIGHT';
-import { GROUND_PLANE_HEIGHT } from 'src/game/constants/GROUND_PLANE_HEIGHT';
-import { GROUND_PLANE_WIDTH } from 'src/game/constants/GROUND_PLANE_WIDTH';
+import { GROUND_PLANE_SIDE } from 'src/game/constants/GROUND_PLANE_SIDE';
 import type { Thing } from 'src/game/typings/Thing';
 import { Mesh, MeshStandardMaterial, PlaneGeometry } from 'three';
 
-export const createGroundPlane = (): Thing => {
+export const createInfinitePlane = (): Thing => {
   /////////////////////////////////////////////////////////////////////////////
   // * 3D *
   /////////////////////////////////////////////////////////////////////////////
   const mesh = new Mesh(
-    new PlaneGeometry(GROUND_PLANE_WIDTH, GROUND_PLANE_HEIGHT),
+    new PlaneGeometry(GROUND_PLANE_SIDE, GROUND_PLANE_SIDE),
     new MeshStandardMaterial({
       color: COLOR_GROUND,
     }),

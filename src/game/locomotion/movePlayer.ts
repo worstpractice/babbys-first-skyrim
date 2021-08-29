@@ -11,6 +11,7 @@ export const movePlayer = (deltaInSeconds: number, getCurrentCameraDirection: (t
 
   const { x, z } = getCurrentCameraDirection();
 
+  player.body.quaternion.w = 1;
   player.body.velocity.x = x * velocity;
   player.body.velocity.z = z * velocity;
 };

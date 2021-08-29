@@ -3,7 +3,7 @@
     "cannon-es": "0.18.0",
     "cannon-es-debugger": "0.1.4",
     "modern-normalize": "1.1.0",
-    "obset": "3.5.3",
+    "obset": "3.6.3",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "three": "github:mrdoob/three.js#8fd508b2",

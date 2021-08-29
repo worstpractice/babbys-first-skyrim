@@ -18,7 +18,7 @@ specifiers:
   eslint-plugin-react-hooks: 4.2.0
   eslint-plugin-unicorn: 35.0.0
   modern-normalize: 1.1.0
-  obset: 3.5.3
+  obset: 3.6.3
   prettier: 2.3.2
   react: 17.0.2
   react-dom: 17.0.2
@@ -31,7 +31,7 @@ dependencies:
   cannon-es: 0.18.0
   cannon-es-debugger: 0.1.4_acc2e8dc834250254711f7a8d90dd6f6
   modern-normalize: 1.1.0
-  obset: 3.5.3
+  obset: 3.6.3
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
   three: github.com/mrdoob/three.js/8fd508b2
@@ -3148,8 +3148,8 @@ packages:
       swappop: 1.0.2
     dev: false
 
-  /obset/3.5.3:
-    resolution: {integrity: sha512-yuyXhFLHICjr45vAWpu4jHyHH4uS/LEs8jZ1GWJXDp1tqAss7VqGzlaIcqjGcQCtYAkhYl68ACb32WWjPAXZWQ==}
+  /obset/3.6.3:
+    resolution: {integrity: sha512-mUifsJV81OxIUR9r5eh1DQmeC4bmx6aJl+qOKZWoD8uqJ5gvVBF5/gNQn4gNIL5e1VdQdnGknYqJCUWsHUX1mA==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     dependencies:
       swappop: 1.0.4

@@ -1,6 +1,5 @@
 import { COLOR_SKY } from 'src/game/constants/COLOR_SKY';
-import { GROUND_PLANE_HEIGHT } from 'src/game/constants/GROUND_PLANE_HEIGHT';
-import { GROUND_PLANE_WIDTH } from 'src/game/constants/GROUND_PLANE_WIDTH';
+import { GROUND_PLANE_SIDE } from 'src/game/constants/GROUND_PLANE_SIDE';
 import { DirectionalLight } from 'three';
 
 export const createDirectionalLight = (): DirectionalLight => {
@@ -19,10 +18,10 @@ export const createDirectionalLight = (): DirectionalLight => {
   light.shadow.mapSize.width = 16_384;
   light.shadow.mapSize.height = 16_384;
 
-  light.shadow.camera.left = GROUND_PLANE_HEIGHT;
-  light.shadow.camera.right = -GROUND_PLANE_HEIGHT;
-  light.shadow.camera.top = GROUND_PLANE_WIDTH;
-  light.shadow.camera.bottom = -GROUND_PLANE_WIDTH;
+  light.shadow.camera.left = GROUND_PLANE_SIDE;
+  light.shadow.camera.right = -GROUND_PLANE_SIDE;
+  light.shadow.camera.top = GROUND_PLANE_SIDE;
+  light.shadow.camera.bottom = -GROUND_PLANE_SIDE;
 
   return light;
 };

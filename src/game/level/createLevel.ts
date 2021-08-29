@@ -1,4 +1,4 @@
-import type { Material, World } from 'cannon-es';
+import type { World } from 'cannon-es';
 import { ObSet } from 'obset';
 import type { Thing } from 'src/game/typings/Thing';
 import type { Level } from 'src/typings/Level';
@@ -9,12 +9,11 @@ type Props = {
     readonly things: readonly ((this: void) => Thing)[];
     readonly lights: readonly ((this: void) => AmbientLight | DirectionalLight)[];
   };
-  readonly physicsMaterial: Material;
   readonly scene: Scene;
   readonly world: World;
 };
 
-export const createLevel = ({ constructors, physicsMaterial, scene, world }: Props): Level => {
+export const createLevel = ({ constructors, scene, world }: Props): Level => {
   const things = new ObSet<Thing>();
 
   /////////////////////////////////////////////////////////////////////////////
@@ -35,8 +34,6 @@ export const createLevel = ({ constructors, physicsMaterial, scene, world }: Pro
     things.add(thing);
 
     const { body, model } = thing;
-
-    body.material = physicsMaterial;
 
     scene.add(model);
     world.addBody(body);

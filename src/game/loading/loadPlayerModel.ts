@@ -21,7 +21,5 @@ export const loadPlayerModel = async ({ loadingManager }: Props): Promise<Group>
   model.traverse(enableShadows);
   model.traverse(enableSrgbEncoding);
 
-  console.log(model);
-
   return model;
 };
