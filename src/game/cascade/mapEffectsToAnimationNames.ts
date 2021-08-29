@@ -106,13 +106,5 @@ export const mapEffectsToAnimationNames = ({ actions, input, player }: Props): v
     (player.mixer.addEventListener as AnimationMixerListener)('finished', stopAndCleanUp);
   });
 
-  // //////////////////////////////////////////////////////////////////////
-  // // * Start Using  *
-  // //////////////////////////////////////////////////////////////////////
-  // player.activeEffects.on('add', 'turning', (): void => {
-  //   stopRunning();
-  //   stopWalking();
-  // });
-
   //////////////////////////////////////////////////////////////////////
 };
