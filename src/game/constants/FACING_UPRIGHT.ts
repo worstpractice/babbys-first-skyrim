@@ -1,1 +1,1 @@
-export const FACING_UPRIGHT = -Math.PI / 2;
+export const FACING_UPRIGHT = -Math.PI * 0.5;

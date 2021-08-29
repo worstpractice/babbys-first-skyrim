@@ -20,10 +20,9 @@ export const createWorld = () => {
   // Stabilization time in number of timesteps
   world.defaultContactMaterial.contactEquationRelaxation = 4;
 
-  // Create a slippery material (friction coefficient = 0.0)
   const physicsMaterial = new Material('physics');
   const contactMaterial = new ContactMaterial(physicsMaterial, physicsMaterial, {
-    friction: 0.3,
+    friction: 0.1, // Create a slippery material (friction coefficient = 0.0)
     restitution: 0.3,
   });
 

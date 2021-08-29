@@ -11,8 +11,8 @@ import { createLoadingManager } from 'src/game/engine/createLoadingManager';
 import { createRenderer } from 'src/game/engine/createRenderer';
 import { createScene } from 'src/game/engine/createScene';
 import { createWorld } from 'src/game/engine/createWorld';
+import { createGroundPlane } from 'src/game/ground/createGroundPlane';
 import { createInput } from 'src/game/input/createInput';
-import { createGroundPlane } from 'src/game/level/createGroundPlane';
 import { createLevel } from 'src/game/level/createLevel';
 import { createAmbientLight } from 'src/game/lights/createAmbientLight';
 import { createDirectionalLight } from 'src/game/lights/createDirectionalLight';
@@ -56,6 +56,15 @@ export const main = async (): Promise<App> => {
           return player;
         },
         createGroundPlane,
+        createSphere,
+        createSphere,
+        createSphere,
+        createSphere,
+        createSphere,
+        createSphere,
+        createSphere,
+        createSphere,
+        createSphere,
         createSphere,
       ],
     },

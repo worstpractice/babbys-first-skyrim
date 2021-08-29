@@ -65,13 +65,11 @@ export const createPlayer = async ({ loadingManager, mixers }: Props): Promise<P
   // * Create Physics *
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   const body = new Body({
-    mass: 10, // kg
-    shape: new Box(new Vec3(5, 10, 5)),
+    mass: 80, // kg
+    position: new Vec3(0, 20, 0),
+    shape: new Box(new Vec3(6, 12, 6)),
+    type: Body.DYNAMIC,
   });
-
-  console.log(model);
-
-  body.position.set(model.position.x, model.position.y, model.position.z);
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // * Create Player *
