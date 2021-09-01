@@ -16,19 +16,19 @@ export const mapInputToKeys = (input: Input): void => {
     [isRelevantMouseButton, input.heldMouseButtons],
   ] as const;
 
-  input.heldKeys.on('add', ({ value }): void => {
+  input.heldKeys.on('add', (key): void => {
     for (const [test, set] of testSetPairs) {
-      if (!test(value)) continue;
+      if (!test(key)) continue;
 
-      set.add(value);
+      set.add(key);
     }
   });
 
-  input.heldKeys.on('delete', ({ value }): void => {
+  input.heldKeys.on('delete', (key): void => {
     for (const [test, obset] of testSetPairs) {
-      if (!test(value)) continue;
+      if (!test(key)) continue;
 
-      obset.delete(value);
+      obset.delete(key);
     }
   });
 };

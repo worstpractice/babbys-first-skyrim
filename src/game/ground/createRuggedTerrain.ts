@@ -1,34 +1,31 @@
-import { Body, Heightfield, Material, Quaternion, Vec3 } from 'cannon-es';
+import type { Material } from 'cannon-es';
+import { Body, Heightfield, Quaternion, Vec3 } from 'cannon-es';
 import { COLOR_GROUND } from 'src/game/constants/COLOR_GROUND';
 import { FACING_UPRIGHT } from 'src/game/constants/FACING_UPRIGHT';
 import { GROUND_PLANE_SIDE } from 'src/game/constants/GROUND_PLANE_SIDE';
 import type { Thing } from 'src/game/typings/Thing';
-import { Mesh, MeshStandardMaterial, PlaneGeometry } from 'three';
+import { Mesh, MeshLambertMaterial, MeshStandardMaterial, PlaneGeometry } from 'three';
 
-const SIZE_X = 64;
-
-const SIZE_Y = 64;
-
-const calculateCos = (index: number, SIZE: number): number => {
-  return Math.cos((index / SIZE) * Math.PI * 5);
+const calculateCos = (index: number, size: number): number => {
+  return Math.cos((index / size) * Math.PI * 5);
 };
 
-const RUGGEDNESS = 3;
+const RUGGEDNESS = 2;
 
-const calculateHeight = (i: number, j: number) => {
-  return calculateCos(i, SIZE_X) * calculateCos(j, SIZE_Y) * RUGGEDNESS + 2;
+const calculateHeight = (i: number, j: number, x: number, y: number) => {
+  return calculateCos(i, x) * calculateCos(j, y) * RUGGEDNESS + 2;
 };
 
-const createHeightMatrix = (): number[][] => {
+const createHeightMatrix = (x: number, y: number): number[][] => {
   const matrix: number[][] = [];
 
-  for (let i = 0; i < SIZE_X; i++) {
+  for (let i = 0; i < x; i++) {
     const heights: number[] = [];
 
-    for (let j = 0; j < SIZE_Y; j++) {
-      const isOuterEdge = !i || !j || i === SIZE_X - 1 || j === SIZE_Y - 1;
+    for (let j = 0; j < y; j++) {
+      const isOuterEdge = !i || !j || i === x - 1 || j === y - 1;
 
-      const height = isOuterEdge ? 3 : calculateHeight(i, j);
+      const height = isOuterEdge ? 3 : calculateHeight(i, j, x, y);
 
       heights.push(height);
     }
@@ -39,13 +36,13 @@ const createHeightMatrix = (): number[][] => {
   return matrix;
 };
 
-export const createRuggedTerrain = (): Thing => {
+export const createRuggedTerrain = (groundMaterial: Material): Thing => {
   /////////////////////////////////////////////////////////////////////////////
   // * 3D *
   /////////////////////////////////////////////////////////////////////////////
   const model = new Mesh(
-    new PlaneGeometry(GROUND_PLANE_SIDE, GROUND_PLANE_SIDE),
-    new MeshStandardMaterial({
+    new PlaneGeometry(GROUND_PLANE_SIDE, GROUND_PLANE_SIDE, 100, 100),
+    new MeshLambertMaterial({
       color: COLOR_GROUND,
     }),
   );
@@ -53,29 +50,38 @@ export const createRuggedTerrain = (): Thing => {
   model.name = 'ruggedTerrain';
   model.castShadow = false;
   model.receiveShadow = true;
-  model.visible = false; // for now
+  // model.visible = false; // for now
 
   /////////////////////////////////////////////////////////////////////////////
   // * Physics *
   /////////////////////////////////////////////////////////////////////////////
-  const matrix = createHeightMatrix();
+  const x = 64;
+  const y = 64;
+
+  const matrix = createHeightMatrix(x, y);
+
+  const elementSize = 100 / x;
+
+  const shape = new Heightfield(matrix, {
+    elementSize,
+  });
 
   const body = new Body({
     fixedRotation: true,
     mass: 0,
-    material: new Material('ground'),
+    material: groundMaterial,
     position: new Vec3(
       //
-      -GROUND_PLANE_SIDE,
-      0,
-      GROUND_PLANE_SIDE,
+      -((x - 1) * elementSize) / 2,
+      -4,
+      ((y - 1) * elementSize) / 2,
     ),
     quaternion: new Quaternion().setFromEuler(FACING_UPRIGHT, 0, 0),
-    shape: new Heightfield(matrix, {
-      elementSize: 10,
-    }),
+    shape,
     type: Body.STATIC,
   });
+
+  model.geometry.copy(shape.body.)
 
   /////////////////////////////////////////////////////////////////////////////
 

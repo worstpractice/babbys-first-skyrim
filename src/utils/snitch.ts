@@ -1,6 +1,6 @@
-import type { SetEvent } from 'obset';
+import type { SetOperation } from 'obset';
 
-export const snitch = <T>({ operation, value }: SetEvent<T>) => {
+export const snitch = <T>(value: T, operation: SetOperation) => {
   const emoji = operation === 'add' ? '➕' : '➖';
 
   console.log(`${emoji} ${operation} ${value}`);

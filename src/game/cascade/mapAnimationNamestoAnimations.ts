@@ -1,14 +1,14 @@
 import type { Player } from 'src/game/typings/Player';
 
 export const mapAnimationNamesToAnimations = ({ activeAnimations, actionClips }: Player): void => {
-  activeAnimations.on('add', ({ value }): void => {
-    const { action } = actionClips[value];
+  activeAnimations.on('add', (animationName): void => {
+    const { action } = actionClips[animationName];
 
     action.play();
   });
 
-  activeAnimations.on('delete', ({ value }): void => {
-    const { action } = actionClips[value];
+  activeAnimations.on('delete', (animationName): void => {
+    const { action } = actionClips[animationName];
 
     action.stop();
   });

@@ -38,9 +38,9 @@ export const createGameLoop = ({ camera, input, level, mixers, player, renderer,
       const deltaInSeconds = deltaTime * 0.001;
 
       tickPhysics(deltaInSeconds, level, world);
-      tickLocomotion(deltaInSeconds, getCurrentCameraDirection, input, player);
+      // tickLocomotion(deltaInSeconds, getCurrentCameraDirection, input, player);
       tickMixers(deltaInSeconds, mixers);
-      tickCamera(deltaInSeconds, camera, player);
+      // tickCamera(deltaInSeconds, camera, player);
 
       renderer.render(scene, camera);
     };

@@ -8,7 +8,7 @@ export const createCamera = () => {
 
   const camera = new PerspectiveCamera(CAMERA_FOV, ASPECT, CAMERA_NEAR, CAMERA_FAR);
 
-  camera.position.set(75, 20, 0);
+  camera.position.set(0, 33, 90);
 
   return camera;
 };

@@ -1,3 +1,4 @@
+import { Material } from 'cannon-es';
 import cannonDebugger from 'cannon-es-debugger';
 import { createActions } from 'src/game/cascade/actions/createActions';
 import { createEffects } from 'src/game/cascade/effects/createEffects';
@@ -19,6 +20,7 @@ import { createDirectionalLight } from 'src/game/lights/createDirectionalLight';
 import { registerEventListeners } from 'src/game/listeners/registerEventListeners';
 import { createPlayer } from 'src/game/things/createPlayer';
 import { createSphere } from 'src/game/things/createSphere';
+import { createTank } from 'src/game/things/createTank';
 import type { App } from 'src/game/typings/App';
 import type { AnimationMixer } from 'three';
 
@@ -43,6 +45,8 @@ export const main = async (): Promise<App> => {
 
   const effects = createEffects(input, player);
 
+  const groundMaterial = new Material('ground');
+
   const level = createLevel({
     constructors: {
       lights: [
@@ -52,7 +56,9 @@ export const main = async (): Promise<App> => {
       ],
       things: [
         //
-        createRuggedTerrain,
+        () => {
+          return createRuggedTerrain(groundMaterial);
+        },
         () => {
           return player;
         },
@@ -71,6 +77,8 @@ export const main = async (): Promise<App> => {
     scene,
     world,
   });
+
+  const tank = createTank({ groundMaterial, world });
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // * Essential Side Effects 🤦‍♂️ *

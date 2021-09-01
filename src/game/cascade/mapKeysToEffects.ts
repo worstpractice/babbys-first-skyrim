@@ -56,8 +56,9 @@ export const mapKeysToEffects = ({ actions, effects, input, player }: Props): vo
 
   input.heldActionKeys.on('add', 'KeyA', turn);
   input.heldActionKeys.on('add', 'KeyD', turn);
-  input.heldActionKeys.on('delete', 'KeyD', turn);
+
   input.heldActionKeys.on('delete', 'KeyA', turn);
+  input.heldActionKeys.on('delete', 'KeyD', turn);
 
   //////////////////////////////////////////////////////////////////////
   // * Jumping *
