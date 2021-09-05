@@ -3,38 +3,10 @@ import { Body, Heightfield, Quaternion, Vec3 } from 'cannon-es';
 import { COLOR_GROUND } from 'src/game/constants/COLOR_GROUND';
 import { FACING_UPRIGHT } from 'src/game/constants/FACING_UPRIGHT';
 import { GROUND_PLANE_SIDE } from 'src/game/constants/GROUND_PLANE_SIDE';
+import { calculateHeightMatrix } from 'src/game/height-matrix/calculateHeightMatrix';
+import type { Mutable } from "src/game/typings/Mutable";
 import type { Thing } from 'src/game/typings/Thing';
-import { Mesh, MeshLambertMaterial, MeshStandardMaterial, PlaneGeometry } from 'three';
-
-const calculateCos = (index: number, size: number): number => {
-  return Math.cos((index / size) * Math.PI * 5);
-};
-
-const RUGGEDNESS = 2;
-
-const calculateHeight = (i: number, j: number, x: number, y: number) => {
-  return calculateCos(i, x) * calculateCos(j, y) * RUGGEDNESS + 2;
-};
-
-const createHeightMatrix = (x: number, y: number): number[][] => {
-  const matrix: number[][] = [];
-
-  for (let i = 0; i < x; i++) {
-    const heights: number[] = [];
-
-    for (let j = 0; j < y; j++) {
-      const isOuterEdge = !i || !j || i === x - 1 || j === y - 1;
-
-      const height = isOuterEdge ? 3 : calculateHeight(i, j, x, y);
-
-      heights.push(height);
-    }
-
-    matrix.push(heights);
-  }
-
-  return matrix;
-};
+import { Mesh, MeshLambertMaterial, PlaneGeometry } from 'three';
 
 export const createRuggedTerrain = (groundMaterial: Material): Thing => {
   /////////////////////////////////////////////////////////////////////////////
@@ -58,11 +30,11 @@ export const createRuggedTerrain = (groundMaterial: Material): Thing => {
   const x = 64;
   const y = 64;
 
-  const matrix = createHeightMatrix(x, y);
+  const matrix = calculateHeightMatrix(x, y);
 
   const elementSize = 100 / x;
 
-  const shape = new Heightfield(matrix, {
+  const shape = new Heightfield(matrix as Mutable<typeof matrix>, {
     elementSize,
   });
 
@@ -80,8 +52,6 @@ export const createRuggedTerrain = (groundMaterial: Material): Thing => {
     shape,
     type: Body.STATIC,
   });
-
-  model.geometry.copy(shape.body.)
 
   /////////////////////////////////////////////////////////////////////////////
 

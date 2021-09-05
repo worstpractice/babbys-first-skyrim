@@ -43,7 +43,7 @@ export const main = async (): Promise<App> => {
 
   const actions = createActions(player);
 
-  const effects = createEffects(input, player);
+  const effects = createEffects(player);
 
   const groundMaterial = new Material('ground');
 

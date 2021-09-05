@@ -1,8 +1,7 @@
 import type { Effects } from 'src/game/typings/Effects';
-import type { Input } from 'src/game/typings/Input';
 import type { Player } from 'src/game/typings/Player';
 
-export const createEffects = ({ heldMovementKeys }: Input, { activeEffects }: Player): Effects => {
+export const createEffects = ({ activeEffects }: Player): Effects => {
   /////////////////////////////////////////////////////////////////////////////
   // * Levitating *
   /////////////////////////////////////////////////////////////////////////////
@@ -18,10 +17,6 @@ export const createEffects = ({ heldMovementKeys }: Input, { activeEffects }: Pl
   // * Moving *
   /////////////////////////////////////////////////////////////////////////////
   const startMoving = (): void => {
-    // const isPlayerMoving = Boolean(heldMovementKeys.size);
-
-    // if (!isPlayerMoving) return;
-
     activeEffects.add('moving');
   };
 
@@ -43,11 +38,11 @@ export const createEffects = ({ heldMovementKeys }: Input, { activeEffects }: Pl
   /////////////////////////////////////////////////////////////////////////////
   // * Using *
   /////////////////////////////////////////////////////////////////////////////
-  const startUsing = () => {
+  const startUsing = (): void => {
     activeEffects.add('using');
   };
 
-  const stopUsing = () => {
+  const stopUsing = (): void => {
     activeEffects.delete('using');
   };
 
