@@ -4,7 +4,7 @@ import { COLOR_GROUND } from 'src/game/constants/COLOR_GROUND';
 import { FACING_UPRIGHT } from 'src/game/constants/FACING_UPRIGHT';
 import { GROUND_PLANE_SIDE } from 'src/game/constants/GROUND_PLANE_SIDE';
 import { calculateHeightMatrix } from 'src/game/height-matrix/calculateHeightMatrix';
-import type { Mutable } from "src/game/typings/Mutable";
+import type { Mutable } from 'src/game/typings/Mutable';
 import type { Thing } from 'src/game/typings/Thing';
 import { Mesh, MeshLambertMaterial, PlaneGeometry } from 'three';
 
