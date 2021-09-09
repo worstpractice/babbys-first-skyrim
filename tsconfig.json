@@ -2,7 +2,7 @@
   "compilerOptions": {
     "allowJs": false,
     "allowSyntheticDefaultImports": true,
-    "allowUnusedLabels": true,
+    "allowUnusedLabels": false,
     "assumeChangesOnlyAffectDirectDependencies": false,
     "baseUrl": ".",
     "disableSizeLimit": true,
@@ -35,7 +35,7 @@
     },
     "resolveJsonModule": true,
     "skipDefaultLibCheck": false,
-    "skipLibCheck": false,
+    "skipLibCheck": true,
     "strict": true,
     "strictBindCallApply": true,
     "strictFunctionTypes": true,
