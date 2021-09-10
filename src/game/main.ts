@@ -1,4 +1,3 @@
-import { Material } from 'cannon-es';
 import cannonDebugger from 'cannon-es-debugger';
 import { createActions } from 'src/game/cascade/actions/createActions';
 import { createEffects } from 'src/game/cascade/effects/createEffects';
@@ -12,7 +11,7 @@ import { createLoadingManager } from 'src/game/engine/createLoadingManager';
 import { createRenderer } from 'src/game/engine/createRenderer';
 import { createScene } from 'src/game/engine/createScene';
 import { createWorld } from 'src/game/engine/createWorld';
-import { createRuggedTerrain } from 'src/game/ground/createRuggedTerrain';
+import { createInfinitePlane } from 'src/game/ground/createInfinitePlane';
 import { createInput } from 'src/game/input/createInput';
 import { createLevel } from 'src/game/level/createLevel';
 import { createAmbientLight } from 'src/game/lights/createAmbientLight';
@@ -20,13 +19,10 @@ import { createDirectionalLight } from 'src/game/lights/createDirectionalLight';
 import { registerEventListeners } from 'src/game/listeners/registerEventListeners';
 import { createPlayer } from 'src/game/things/createPlayer';
 import { createSphere } from 'src/game/things/createSphere';
-import { createTank } from 'src/game/things/createTank';
 import type { App } from 'src/game/typings/App';
 import type { AnimationMixer } from 'three';
 
 export const main = async (): Promise<App> => {
-  const mixers: AnimationMixer[] = [];
-
   const world = createWorld();
 
   const camera = createCamera();
@@ -39,13 +35,13 @@ export const main = async (): Promise<App> => {
 
   const scene = createScene({ loadingManager });
 
+  const mixers: AnimationMixer[] = [];
+
   const player = await createPlayer({ loadingManager, mixers });
 
   const actions = createActions(player);
 
   const effects = createEffects(player);
-
-  const groundMaterial = new Material('ground');
 
   const level = createLevel({
     constructors: {
@@ -57,7 +53,7 @@ export const main = async (): Promise<App> => {
       things: [
         //
         () => {
-          return createRuggedTerrain(groundMaterial);
+          return createInfinitePlane();
         },
         () => {
           return player;
@@ -77,8 +73,6 @@ export const main = async (): Promise<App> => {
     scene,
     world,
   });
-
-  const tank = createTank({ groundMaterial, world });
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // * Essential Side Effects 🤦‍♂️ *

@@ -3,7 +3,7 @@ import type { ObSet } from 'obset';
 import type { ActionClips } from 'src/game/typings/ActionClips';
 import type { AnimationName } from 'src/game/typings/AnimationName';
 import type { Effect } from 'src/game/typings/Effect';
-import type { AnimationMixer, Group } from 'three';
+import type { AnimationMixer, Object3D } from 'three';
 
 export type Player = {
   readonly actionClips: ActionClips;
@@ -11,5 +11,5 @@ export type Player = {
   readonly activeAnimations: ObSet<AnimationName>;
   readonly body: Body;
   readonly mixer: AnimationMixer;
-  readonly model: Group;
+  readonly model: Object3D;
 };

@@ -23,38 +23,38 @@ specifiers:
   react: 17.0.2
   react-dom: 17.0.2
   snowpack: 3.8.8
-  three: github:mrdoob/three.js#d957011f
-  typescript: 4.5.0-dev.20210909
+  three: github:mrdoob/three.js#53e3d53d
+  typescript: 4.5.0-dev.20210910
   zustand: 3.5.10
 
 dependencies:
   cannon-es: 0.18.0
-  cannon-es-debugger: 0.1.4_971a14dbdecf4bf9a6733e44838ead74
+  cannon-es-debugger: 0.1.4_0c2c3f2263183dce5f02c0f5064cf56b
   modern-normalize: 1.1.0
   obset: 4.0.0
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
-  three: github.com/mrdoob/three.js/d957011f
+  three: github.com/mrdoob/three.js/53e3d53d
   zustand: 3.5.10_react@17.0.2
 
 devDependencies:
   '@babel/runtime': 7.15.4
   '@snowpack/plugin-react-refresh': 2.5.0_react-dom@17.0.2+react@17.0.2
-  '@snowpack/plugin-typescript': 1.2.1_typescript@4.5.0-dev.20210909
+  '@snowpack/plugin-typescript': 1.2.1_typescript@4.5.0-dev.20210910
   '@types/dat.gui': 0.7.7
   '@types/react': 17.0.20
   '@types/react-dom': 17.0.9
   '@types/snowpack-env': 2.3.4
   '@types/three': 0.131.0
-  '@typescript-eslint/eslint-plugin': 4.31.0_e670acb00f85979dc5ae932e762cd3c3
-  '@typescript-eslint/parser': 4.31.0_ee81d77807dd73f4bb3eafc71f23fd6c
+  '@typescript-eslint/eslint-plugin': 4.31.0_12d10ec4dd95774af55fc57117c84f0c
+  '@typescript-eslint/parser': 4.31.0_25e71a2f72445a6c2f378275485f6344
   eslint: 7.32.0
   eslint-plugin-react: 7.25.1_eslint@7.32.0
   eslint-plugin-react-hooks: 4.2.0_eslint@7.32.0
   eslint-plugin-unicorn: 35.0.0_eslint@7.32.0
   prettier: 2.4.0
   snowpack: 3.8.8
-  typescript: 4.5.0-dev.20210909
+  typescript: 4.5.0-dev.20210910
 
 packages:
 
@@ -588,14 +588,14 @@ packages:
       - supports-color
     dev: true
 
-  /@snowpack/plugin-typescript/1.2.1_typescript@4.5.0-dev.20210909:
+  /@snowpack/plugin-typescript/1.2.1_typescript@4.5.0-dev.20210910:
     resolution: {integrity: sha512-wU+JNaMVkqGsqTaUY7TnEMhGt/3URTgA9dpMCtZX6wn/ceA7Gwlmue/sOLynf0OTNLygHPvjiQECQYkEi3LTtg==}
     peerDependencies:
       typescript: '*'
     dependencies:
       execa: 5.1.1
       npm-run-path: 4.0.1
-      typescript: 4.5.0-dev.20210909
+      typescript: 4.5.0-dev.20210910
     dev: true
 
   /@szmarczak/http-timer/4.0.6:
@@ -699,7 +699,7 @@ packages:
     resolution: {integrity: sha512-4VCtsDi6mIId96GcGKG91e2Y6VwU2T0u/YB7vCFJh1kXik93arxn7l9tVZHo1LXOtgCJJDdC+e1fwf2Vu/4ySw==}
     dev: true
 
-  /@typescript-eslint/eslint-plugin/4.31.0_e670acb00f85979dc5ae932e762cd3c3:
+  /@typescript-eslint/eslint-plugin/4.31.0_12d10ec4dd95774af55fc57117c84f0c:
     resolution: {integrity: sha512-iPKZTZNavAlOhfF4gymiSuUkgLne/nh5Oz2/mdiUmuZVD42m9PapnCnzjxuDsnpnbH3wT5s2D8bw6S39TC6GNw==}
     engines: {node: ^10.12.0 || >=12.0.0}
     peerDependencies:
@@ -710,21 +710,21 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@typescript-eslint/experimental-utils': 4.31.0_ee81d77807dd73f4bb3eafc71f23fd6c
-      '@typescript-eslint/parser': 4.31.0_ee81d77807dd73f4bb3eafc71f23fd6c
+      '@typescript-eslint/experimental-utils': 4.31.0_25e71a2f72445a6c2f378275485f6344
+      '@typescript-eslint/parser': 4.31.0_25e71a2f72445a6c2f378275485f6344
       '@typescript-eslint/scope-manager': 4.31.0
       debug: 4.3.2
       eslint: 7.32.0
       functional-red-black-tree: 1.0.1
       regexpp: 3.2.0
       semver: 7.3.5
-      tsutils: 3.21.0_typescript@4.5.0-dev.20210909
-      typescript: 4.5.0-dev.20210909
+      tsutils: 3.21.0_typescript@4.5.0-dev.20210910
+      typescript: 4.5.0-dev.20210910
     transitivePeerDependencies:
       - supports-color
     dev: true
 
-  /@typescript-eslint/experimental-utils/4.31.0_ee81d77807dd73f4bb3eafc71f23fd6c:
+  /@typescript-eslint/experimental-utils/4.31.0_25e71a2f72445a6c2f378275485f6344:
     resolution: {integrity: sha512-Hld+EQiKLMppgKKkdUsLeVIeEOrwKc2G983NmznY/r5/ZtZCDvIOXnXtwqJIgYz/ymsy7n7RGvMyrzf1WaSQrw==}
     engines: {node: ^10.12.0 || >=12.0.0}
     peerDependencies:
@@ -733,7 +733,7 @@ packages:
       '@types/json-schema': 7.0.9
       '@typescript-eslint/scope-manager': 4.31.0
       '@typescript-eslint/types': 4.31.0
-      '@typescript-eslint/typescript-estree': 4.31.0_typescript@4.5.0-dev.20210909
+      '@typescript-eslint/typescript-estree': 4.31.0_typescript@4.5.0-dev.20210910
       eslint: 7.32.0
       eslint-scope: 5.1.1
       eslint-utils: 3.0.0_eslint@7.32.0
@@ -742,7 +742,7 @@ packages:
       - typescript
     dev: true
 
-  /@typescript-eslint/parser/4.31.0_ee81d77807dd73f4bb3eafc71f23fd6c:
+  /@typescript-eslint/parser/4.31.0_25e71a2f72445a6c2f378275485f6344:
     resolution: {integrity: sha512-oWbzvPh5amMuTmKaf1wp0ySxPt2ZXHnFQBN2Szu1O//7LmOvgaKTCIDNLK2NvzpmVd5A2M/1j/rujBqO37hj3w==}
     engines: {node: ^10.12.0 || >=12.0.0}
     peerDependencies:
@@ -754,10 +754,10 @@ packages:
     dependencies:
       '@typescript-eslint/scope-manager': 4.31.0
       '@typescript-eslint/types': 4.31.0
-      '@typescript-eslint/typescript-estree': 4.31.0_typescript@4.5.0-dev.20210909
+      '@typescript-eslint/typescript-estree': 4.31.0_typescript@4.5.0-dev.20210910
       debug: 4.3.2
       eslint: 7.32.0
-      typescript: 4.5.0-dev.20210909
+      typescript: 4.5.0-dev.20210910
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -775,7 +775,7 @@ packages:
     engines: {node: ^8.10.0 || ^10.13.0 || >=11.10.1}
     dev: true
 
-  /@typescript-eslint/typescript-estree/4.31.0_typescript@4.5.0-dev.20210909:
+  /@typescript-eslint/typescript-estree/4.31.0_typescript@4.5.0-dev.20210910:
     resolution: {integrity: sha512-QHl2014t3ptg+xpmOSSPn5hm4mY8D4s97ftzyk9BZ8RxYQ3j73XcwuijnJ9cMa6DO4aLXeo8XS3z1omT9LA/Eg==}
     engines: {node: ^10.12.0 || >=12.0.0}
     peerDependencies:
@@ -790,8 +790,8 @@ packages:
       globby: 11.0.4
       is-glob: 4.0.1
       semver: 7.3.5
-      tsutils: 3.21.0_typescript@4.5.0-dev.20210909
-      typescript: 4.5.0-dev.20210909
+      tsutils: 3.21.0_typescript@4.5.0-dev.20210910
+      typescript: 4.5.0-dev.20210910
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -1143,7 +1143,7 @@ packages:
     resolution: {integrity: sha512-GxeHOvR0LFMYPmFGA+NiTOt9uwYDxB3h154tW2yBYwfz2EMX3i1IBgr6gmJGfU0K8KQsqPa5XqLD8zVdP5lUzA==}
     dev: true
 
-  /cannon-es-debugger/0.1.4_971a14dbdecf4bf9a6733e44838ead74:
+  /cannon-es-debugger/0.1.4_0c2c3f2263183dce5f02c0f5064cf56b:
     resolution: {integrity: sha512-RefSPWX6gDMQsx3UWoQpkGW3R03Wwn8p1JteexQUYxDC5DnOS3U3iKhns2vVpFp6Q3AKiSSmRf7NIXnGN8L0RA==}
     peerDependencies:
       cannon-es: 0.x.x
@@ -1154,8 +1154,8 @@ packages:
         optional: true
     dependencies:
       cannon-es: 0.18.0
-      three: github.com/mrdoob/three.js/d957011f
-      typescript: 4.5.0-dev.20210909
+      three: github.com/mrdoob/three.js/53e3d53d
+      typescript: 4.5.0-dev.20210910
     dev: false
 
   /cannon-es/0.18.0:
@@ -4184,14 +4184,14 @@ packages:
     resolution: {integrity: sha512-77EbyPPpMz+FRFRuAFlWMtmgUWGe9UOG2Z25NqCwiIjRhOf5iKGuzSe5P2w1laq+FkRy4p+PCuVkJSGkzTEKVw==}
     dev: true
 
-  /tsutils/3.21.0_typescript@4.5.0-dev.20210909:
+  /tsutils/3.21.0_typescript@4.5.0-dev.20210910:
     resolution: {integrity: sha512-mHKK3iUXL+3UF6xL5k0PEhKRUBKPBCv/+RkEOpjRWxxx27KKRBmmA60A9pgOUvMi8GKhRMPEmjBRPzs2W7O1OA==}
     engines: {node: '>= 6'}
     peerDependencies:
       typescript: '>=2.8.0 || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.6.0-beta || >= 3.7.0-dev || >= 3.7.0-beta'
     dependencies:
       tslib: 1.14.1
-      typescript: 4.5.0-dev.20210909
+      typescript: 4.5.0-dev.20210910
     dev: true
 
   /tunnel-agent/0.6.0:
@@ -4232,8 +4232,8 @@ packages:
       is-typedarray: 1.0.0
     dev: true
 
-  /typescript/4.5.0-dev.20210909:
-    resolution: {integrity: sha512-Ho6P7zF4Z69BLYanohqbWkc6XyuR/j853XNwPFxPN+NSvF20chzSb4EuYZW4X0UaFBrJJ5JYV3wIYzCzdnz6dg==}
+  /typescript/4.5.0-dev.20210910:
+    resolution: {integrity: sha512-flWZIqtSwr08r/SMmXfed+2Beou4LWbKemMNoVIhXgWuU6wI+G9A+EWtV/f6XVhkRfJE5RERa4JHpIy8h47fgg==}
     engines: {node: '>=4.2.0'}
     hasBin: true
     dev: true
@@ -4419,8 +4419,8 @@ packages:
       react: 17.0.2
     dev: false
 
-  github.com/mrdoob/three.js/d957011f:
-    resolution: {tarball: https://codeload.github.com/mrdoob/three.js/tar.gz/d957011f}
+  github.com/mrdoob/three.js/53e3d53d:
+    resolution: {tarball: https://codeload.github.com/mrdoob/three.js/tar.gz/53e3d53d}
     name: three
     version: 0.132.2
     dev: false

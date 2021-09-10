@@ -1,4 +1,7 @@
 import type { World } from 'cannon-es';
+import { createGetCurrentCameraDirection } from 'src/game/camera/createGetCurrentCameraDirection';
+import { tickCamera } from 'src/game/tick/tickCamera';
+import { tickLocomotion } from 'src/game/tick/tickLocomotion';
 import { tickMixers } from 'src/game/tick/tickMixers';
 import { tickPhysics } from 'src/game/tick/tickPhysics';
 import type { Input } from 'src/game/typings/Input';
@@ -21,7 +24,7 @@ export const createGameLoop = ({ camera, input, level, mixers, player, renderer,
   const beginGameLoop = (): void => {
     let previousRafTime: DOMHighResTimeStamp = 0;
 
-    //const getCurrentCameraDirection = createGetCurrentCameraDirection({ camera, player });
+    const getCurrentCameraDirection = createGetCurrentCameraDirection({ camera, player });
 
     const gameLoop = (elapsedTime: DOMHighResTimeStamp): void => {
       requestAnimationFrame(gameLoop);
@@ -35,9 +38,9 @@ export const createGameLoop = ({ camera, input, level, mixers, player, renderer,
       const deltaInSeconds = deltaTime * 0.001;
 
       tickPhysics(deltaInSeconds, level, world);
-      // tickLocomotion(deltaInSeconds, getCurrentCameraDirection, input, player);
+      tickLocomotion(deltaInSeconds, getCurrentCameraDirection, input, player);
       tickMixers(deltaInSeconds, mixers);
-      // tickCamera(deltaInSeconds, camera, player);
+      tickCamera(deltaInSeconds, camera, player);
 
       renderer.render(scene, camera);
     };

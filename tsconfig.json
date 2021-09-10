@@ -34,7 +34,6 @@
       ]
     },
     "resolveJsonModule": true,
-    "skipDefaultLibCheck": false,
     "skipLibCheck": true,
     "strict": true,
     "strictBindCallApply": true,

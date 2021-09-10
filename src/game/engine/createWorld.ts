@@ -15,18 +15,16 @@ export const createWorld = () => {
   });
 
   // Contact stiffness - use to make softer/harder contacts
-  // world.defaultContactMaterial.contactEquationStiffness = 1e9;
+  world.defaultContactMaterial.contactEquationStiffness = 1e9;
 
   // Stabilization time in number of timesteps
-  // world.defaultContactMaterial.contactEquationRelaxation = 4;
-
-  world.gravity.set(0, -10, 0);
-
-  // Sweep and prune broadphase
-  world.broadphase = new SAPBroadphase(world);
+  world.defaultContactMaterial.contactEquationRelaxation = 4;
 
   // Disable friction by default
   world.defaultContactMaterial.friction = 0;
+
+  // Sweep and prune broadphase
+  world.broadphase = new SAPBroadphase(world);
 
   return world;
 };

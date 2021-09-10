@@ -6,7 +6,7 @@
     "obset": "4.0.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "three": "github:mrdoob/three.js#d957011f",
+    "three": "github:mrdoob/three.js#53e3d53d",
     "zustand": "3.5.10"
   },
   "devDependencies": {
@@ -26,7 +26,7 @@
     "eslint-plugin-unicorn": "35.0.0",
     "prettier": "2.4.0",
     "snowpack": "3.8.8",
-    "typescript": "4.5.0-dev.20210909"
+    "typescript": "4.5.0-dev.20210910"
   },
   "scripts": {
     "build": "snowpack build",
