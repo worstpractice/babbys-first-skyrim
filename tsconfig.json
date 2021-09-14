@@ -33,6 +33,7 @@
         "./*"
       ]
     },
+    "pretty": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
@@ -52,8 +53,5 @@
   ],
   "include": [
     "src"
-  ],
-  "typeAcquisition": {
-    "enable": true
-  }
+  ]
 }

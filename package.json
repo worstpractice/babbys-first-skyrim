@@ -6,7 +6,7 @@
     "obset": "4.0.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "three": "github:mrdoob/three.js#53e3d53d",
+    "three": "github:mrdoob/three.js#cbe555e0",
     "zustand": "3.5.10"
   },
   "devDependencies": {
@@ -17,16 +17,16 @@
     "@types/react": "17.0.20",
     "@types/react-dom": "17.0.9",
     "@types/snowpack-env": "2.3.4",
-    "@types/three": "0.131.0",
-    "@typescript-eslint/eslint-plugin": "4.31.0",
-    "@typescript-eslint/parser": "4.31.0",
+    "@types/three": "0.131.1",
+    "@typescript-eslint/eslint-plugin": "4.31.1",
+    "@typescript-eslint/parser": "4.31.1",
     "eslint": "7.32.0",
     "eslint-plugin-react": "7.25.1",
     "eslint-plugin-react-hooks": "4.2.0",
-    "eslint-plugin-unicorn": "35.0.0",
+    "eslint-plugin-unicorn": "36.0.0",
     "prettier": "2.4.0",
     "snowpack": "3.8.8",
-    "typescript": "4.5.0-dev.20210910"
+    "typescript": "4.5.0-dev.20210914"
   },
   "scripts": {
     "build": "snowpack build",

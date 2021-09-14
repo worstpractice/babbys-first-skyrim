@@ -1,7 +1,5 @@
-"use strict";
-
 /** @type {import("snowpack").SnowpackUserConfig} */
-module.exports = {
+export default {
   alias: {
     'src': './src',
   },
