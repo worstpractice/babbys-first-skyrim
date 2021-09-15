@@ -48,8 +48,9 @@
     "useUnknownInCatchVariables": true
   },
   "exclude": [
-    "**/node_modules",
-    "**/.*/"
+    "assets",
+    "node_modules",
+    "public"
   ],
   "include": [
     "src"
