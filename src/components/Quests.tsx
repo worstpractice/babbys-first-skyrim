@@ -14,7 +14,9 @@ const fromUi = ({ currentOpenMenu }: UiState) => {
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-type Props = {};
+type Props = {
+  readonly [key in PropertyKey]: never;
+};
 
 export const Quests = ({}: Props) => {
   const { currentOpenMenu } = useUiState(fromUi);

@@ -18,7 +18,9 @@ const fromUi = ({ toggleCurrentOpenMenu }: UiState) => {
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-type Props = {};
+type Props = {
+  readonly [key in PropertyKey]: never;
+};
 
 export const Ui = ({}: Props) => {
   const { toggleCurrentOpenMenu } = useUiState(fromUi);

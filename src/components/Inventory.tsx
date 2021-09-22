@@ -36,7 +36,9 @@ const fromUi = ({ currentOpenMenu }: UiState) => {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-type Props = {};
+type Props = {
+  readonly [key in PropertyKey]: never;
+};
 
 export const Inventory = ({}: Props) => {
   const { setCurrentlyClickedElement } = useClickedState(fromClicked);

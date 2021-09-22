@@ -35,7 +35,7 @@
     },
     "pretty": true,
     "resolveJsonModule": true,
-    "skipLibCheck": true,
+    "skipLibCheck": false,
     "strict": true,
     "strictBindCallApply": true,
     "strictFunctionTypes": true,
@@ -48,9 +48,8 @@
     "useUnknownInCatchVariables": true
   },
   "exclude": [
-    "assets",
-    "node_modules",
-    "public"
+    "**/node_modules",
+    "**/.*/"
   ],
   "include": [
     "src"

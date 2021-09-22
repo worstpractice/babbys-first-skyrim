@@ -3,9 +3,9 @@ import type { RelevantMouseButton } from 'src/game/typings/RelevantMouseButton';
 import { isRelevantMouseButton } from 'src/game/utils/type-predicates/isRelevantMouseButton';
 import type { WebGLRenderer } from 'three';
 
-export const createHandleMouseUp = (input: Input, renderer: WebGLRenderer) => {
+export const createHandleMouseUp = ({ heldMouseButtons }: Input, { domElement }: WebGLRenderer) => {
   const handleMouseUp = ({ button, target }: MouseEvent): void => {
-    if (target !== renderer.domElement) return;
+    if (target !== domElement) return;
 
     let humanReadableButton: RelevantMouseButton;
 
@@ -32,7 +32,7 @@ export const createHandleMouseUp = (input: Input, renderer: WebGLRenderer) => {
 
     if (!isRelevantMouseButton(humanReadableButton)) return;
 
-    input.heldMouseButtons.delete(humanReadableButton);
+    heldMouseButtons.delete(humanReadableButton);
   };
 
   return handleMouseUp;

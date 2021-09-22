@@ -1,6 +1,8 @@
 import { default as React } from 'react';
 
-type Props = {};
+type Props = {
+  readonly [key in PropertyKey]: never;
+};
 
 export const Statue = ({}: Props) => {
   return (
