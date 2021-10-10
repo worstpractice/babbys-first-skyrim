@@ -2,6 +2,7 @@ import type { CSSProperties, MouseEventHandler } from 'react';
 import { default as React } from 'react';
 import { BACKGROUND } from 'src/styles';
 import type { MenuName } from 'src/typings/MenuName';
+import { as } from 'src/utils/as';
 
 type Props = {
   iconName: MenuName;
@@ -20,7 +21,7 @@ export const BottomCard = ({ iconName, onClick }: Props) => {
 // * Styles *
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const styles = {
-  card: {
+  card: as<CSSProperties>({
     ...BACKGROUND,
     borderRadius: '5%',
     cursor: 'pointer',
@@ -28,5 +29,5 @@ const styles = {
     padding: 10,
     pointerEvents: 'all',
     width: 75,
-  } as CSSProperties,
+  }),
 } as const;

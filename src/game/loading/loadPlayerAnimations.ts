@@ -9,9 +9,7 @@ import { toPromises } from 'src/utils/mapping/toPromises';
 import type { LoadingManager } from 'three';
 
 export const loadPlayerAnimations = async (loadingManager: LoadingManager): Promise<readonly NameClipDuo[]> => {
-  // prettier-ignore
-  const loader = new FBXLoader(loadingManager)
-    .setPath(ANIMATIONS_PATH);
+  const loader = new FBXLoader(loadingManager).setPath(ANIMATIONS_PATH);
 
   const toLoadingHandler = ([path, name]: readonly [FbxFileName, AnimationName]): LoadingHandler => {
     const handleLoading: LoadingHandler = async () => {

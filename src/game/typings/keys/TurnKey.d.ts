@@ -1,5 +1,5 @@
 // prettier-ignore
 export type TurnKey =
-  | "KeyA"
-  | "KeyD"
+  | 'KeyA'
+  | 'KeyD'
 ;

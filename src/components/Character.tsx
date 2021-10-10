@@ -3,15 +3,14 @@ import { default as React } from 'react';
 import { useUiState } from 'src/state/UiState';
 import { BACKGROUND } from 'src/styles';
 import type { UiState } from 'src/typings/state/UiState';
+import { as } from 'src/utils/as';
+import { from } from 'src/utils/selectors/from';
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // * Selectors *
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromUi = ({ currentOpenMenu }: UiState) => {
-  return {
-    currentOpenMenu,
-  } as const;
-};
+const fromUi = from<UiState>().select('currentOpenMenu');
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 type Props = {
@@ -34,7 +33,7 @@ export const Character = ({}: Props) => {
 // * Styles *
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const styles = {
-  character: {
+  character: as<CSSProperties>({
     ...BACKGROUND,
     borderRadius: '1%',
     display: 'flex',
@@ -44,8 +43,8 @@ const styles = {
     padding: 20,
     pointerEvents: 'all',
     width: 525,
-  } as CSSProperties,
-  title: {
+  }),
+  title: as<CSSProperties>({
     marginTop: 0,
-  } as CSSProperties,
+  }),
 } as const;

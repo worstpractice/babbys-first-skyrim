@@ -7,15 +7,14 @@ import { Portrait } from 'src/components/Portrait';
 import { Quests } from 'src/components/Quests';
 import { useUiState } from 'src/state/UiState';
 import type { UiState } from 'src/typings/state/UiState';
+import { as } from 'src/utils/as';
+import { from } from 'src/utils/selectors/from';
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // * Selectors *
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromUi = ({ toggleCurrentOpenMenu }: UiState) => {
-  return {
-    toggleCurrentOpenMenu,
-  } as const;
-};
+const fromUi = from<UiState>().select('toggleCurrentOpenMenu');
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 type Props = {
@@ -58,25 +57,25 @@ export const Ui = ({}: Props) => {
 // * Styles *
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const styles = {
-  bottomHalf: {
+  bottomHalf: as<CSSProperties>({
     alignItems: 'flex-end',
     display: 'flex',
     gap: 10,
     height: '100%',
     justifyContent: 'center',
     width: '100%',
-  } as CSSProperties,
-  topHalf: {
+  }),
+  topHalf: as<CSSProperties>({
     display: 'flex',
     height: '100%',
     justifyContent: 'space-between',
     width: '100%',
-  } as CSSProperties,
-  ui: {
+  }),
+  ui: as<CSSProperties>({
     display: 'flex',
     flexDirection: 'column',
     height: '100%',
     justifyContent: 'space-between',
     width: '100%',
-  } as CSSProperties,
+  }),
 } as const;

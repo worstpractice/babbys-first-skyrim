@@ -1,6 +1,6 @@
 // prettier-ignore
 export type RelevantMouseButton =
-  | `LMB`
-  | `MMB`
-  | `RMB`
+  | 'LMB'
+  | 'MMB'
+  | 'RMB'
 ;

@@ -4,10 +4,9 @@ import type { AnimationMixerEvent } from 'src/game/typings/AnimationMixerEvent';
 import type { AnimationMixerListener } from 'src/game/typings/AnimationMixerListener';
 import type { Input } from 'src/game/typings/Input';
 import type { Player } from 'src/game/typings/Player';
+import { character } from 'src/lookup-tables/character';
 import { itemNameToAnimation } from 'src/lookup-tables/itemNameToAnimation';
-import { slotNumberToItemName } from 'src/lookup-tables/slotNumberToItemName';
 import type { ItemName } from 'src/typings/ItemName';
-import type { SlotNumber } from 'src/typings/phantom-types/number/SlotNumber';
 
 type Props = {
   readonly actions: Actions;
@@ -84,7 +83,7 @@ export const mapEffectsToAnimationNames = ({ actions, input, player }: Props): v
   //////////////////////////////////////////////////////////////////////
   player.activeEffects.on('add', 'using', (): void => {
     /** NOTE: We consult the currently equipped item about what pair of start/stop functions to actually call here. */
-    const currentItem = slotNumberToItemName[0 as SlotNumber] ?? '';
+    const currentItem = character.heldIn(0);
 
     const { start, stop } = itemNameToActionDuo[currentItem];
 

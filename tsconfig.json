@@ -8,9 +8,11 @@
     "disableSizeLimit": true,
     "disableSolutionSearching": false,
     "disableSourceOfProjectReferenceRedirect": false,
+    "downlevelIteration": true,
     "esModuleInterop": false,
     "exactOptionalPropertyTypes": true,
     "forceConsistentCasingInFileNames": true,
+    "importHelpers": true,
     "importsNotUsedAsValues": "error",
     "isolatedModules": true,
     "jsx": "react",
@@ -33,6 +35,7 @@
         "./*"
       ]
     },
+    "preserveValueImports": false,
     "pretty": true,
     "resolveJsonModule": true,
     "skipLibCheck": false,
@@ -47,15 +50,7 @@
     "useDefineForClassFields": true,
     "useUnknownInCatchVariables": true
   },
-  "exclude": [
-    "**/node_modules",
-    "**/.*/"
-  ],
   "include": [
     "src"
-  ],
-  "typeAcquisition": {
-    "disableFilenameBasedTypeAcquisition": true,
-    "enable": true
-  }
+  ]
 }

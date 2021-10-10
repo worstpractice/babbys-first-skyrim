@@ -8,31 +8,18 @@ import { useClickedState } from 'src/state/ClickedState';
 import { useDraggedState } from 'src/state/DraggedState';
 import { useUiState } from 'src/state/UiState';
 import { BACKGROUND } from 'src/styles';
-import type { SlotNumber } from 'src/typings/phantom-types/number/SlotNumber';
 import type { ClickedState } from 'src/typings/state/ClickedState';
 import type { DraggedState } from 'src/typings/state/DraggedState';
 import type { UiState } from 'src/typings/state/UiState';
+import { as } from 'src/utils/as';
+import { from } from 'src/utils/selectors/from';
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // * Selectors *
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromClicked = ({ setCurrentlyClickedElement }: ClickedState) => {
-  return {
-    setCurrentlyClickedElement,
-  } as const;
-};
-
-const fromDragged = ({ setCurrentlyDraggedElement }: DraggedState) => {
-  return {
-    setCurrentlyDraggedElement,
-  } as const;
-};
-
-const fromUi = ({ currentOpenMenu }: UiState) => {
-  return {
-    currentOpenMenu,
-  } as const;
-};
+const fromClicked = from<ClickedState>().select('setCurrentlyClickedElement');
+const fromDragged = from<DraggedState>().select('setCurrentlyDraggedElement');
+const fromUi = from<UiState>().select('currentOpenMenu');
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -52,14 +39,14 @@ export const Inventory = ({}: Props) => {
     setCurrentlyDraggedElement(null);
   };
 
-  let slotNumber = 0 as SlotNumber;
+  let slotNumber = 0 as number;
 
   return (
     <Flex direction="column" resetClickState={resetClickState} style={styles.inventory}>
       <Flex direction="row">
         <Flex direction="column">
           {LEFT_COLUMN.map(() => {
-            const index = slotNumber++ as SlotNumber;
+            const index = slotNumber++;
 
             return <InventorySlot index={index} key={index} />;
           })}
@@ -67,7 +54,7 @@ export const Inventory = ({}: Props) => {
         <Statue />
         <Flex direction="column">
           {RIGHT_COLUMN.map(() => {
-            const index = slotNumber++ as SlotNumber;
+            const index = slotNumber++;
 
             return <InventorySlot index={index} key={index} />;
           })}
@@ -75,21 +62,21 @@ export const Inventory = ({}: Props) => {
       </Flex>
       <Flex direction="row">
         {FIRST_ROW.map(() => {
-          const index = slotNumber++ as SlotNumber;
+          const index = slotNumber++;
 
           return <InventorySlot index={index} key={index} />;
         })}
       </Flex>
       <Flex direction="row">
         {SECOND_ROW.map(() => {
-          const index = slotNumber++ as SlotNumber;
+          const index = slotNumber++;
 
           return <InventorySlot index={index} key={index} />;
         })}
       </Flex>
       <Flex direction="row">
         {THIRD_ROW.map(() => {
-          const index = slotNumber++ as SlotNumber;
+          const index = slotNumber++;
 
           return <InventorySlot index={index} key={index} />;
         })}
@@ -102,12 +89,12 @@ export const Inventory = ({}: Props) => {
 // * Styles *
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const styles = {
-  inventory: {
+  inventory: as<CSSProperties>({
     ...BACKGROUND,
     borderRadius: '1%',
     paddingBottom: 32,
     paddingLeft: 32,
     paddingRight: 32,
     pointerEvents: 'all',
-  } as CSSProperties,
+  }),
 } as const;

@@ -1,5 +1,6 @@
 import type { CSSProperties, MouseEventHandler, ReactChild } from 'react';
 import { default as React } from 'react';
+import { as } from 'src/utils/as';
 
 type Props = {
   readonly children: ReactChild | readonly ReactChild[];
@@ -20,25 +21,25 @@ export const Flex = ({ children, direction, resetClickState, style }: Props) => 
   );
 };
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // * Styles *
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const styles = {
-  flex: {
+  flex: as<CSSProperties>({
     display: 'flex',
     flexDirection: 'row',
     gap: 6.25,
     justifyContent: 'space-evenly',
-  } as CSSProperties,
+  }),
 } as const;
 
 const directionStyles = {
-  column: {
+  column: as<CSSProperties>({
     ...styles.flex,
     flexDirection: 'column',
-  } as CSSProperties,
-  row: {
+  }),
+  row: as<CSSProperties>({
     ...styles.flex,
     flexDirection: 'row',
-  } as CSSProperties,
+  }),
 } as const;
