@@ -4,14 +4,11 @@ import type { SlotEvent } from 'src/typings/SlotEvent';
 export const handleItem = ({ item, slot }: SlotEvent): void => {
   const isBeingEquipped = slot < 8;
 
-  const weaponModel = itemNameToModel['sword'];
+  const model = itemNameToModel[item];
 
-  if (!weaponModel) {
-    console.warn(`No weapon model for sword!`);
-    return;
-  }
+  if (!model) return console.warn(`No model for ${item}!`);
 
-  weaponModel.visible = isBeingEquipped;
+  model.visible = isBeingEquipped;
 
   const verb = isBeingEquipped ? 'Equipped' : 'Moved';
 

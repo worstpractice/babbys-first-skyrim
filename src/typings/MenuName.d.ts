@@ -1,7 +1,7 @@
 // prettier-ignore
 export type MenuName =
-  | "inventory"
-  | "character"
-  | "quests"
-  | ""
+  | 'inventory'
+  | 'character'
+  | 'quests'
+  | ''
 ;

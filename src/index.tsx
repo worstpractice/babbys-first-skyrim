@@ -34,7 +34,7 @@ window.ondragstart = toFalse;
 window.addEventListener('mousedown', closeMenusOnAttack, CAPTURE_PASSIVE);
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const root = document.getElementById('root');
+const root = document.querySelector('div');
 
 render(
   <StrictMode>

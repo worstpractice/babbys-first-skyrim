@@ -1,11 +1,10 @@
+import { CANVAS } from 'src/constants/CANVAS';
 import { PCFSoftShadowMap, sRGBEncoding, WebGLRenderer } from 'three';
 
 export const createRenderer = () => {
-  const canvas = document.getElementById('canvas') as HTMLCanvasElement;
-
   const renderer = new WebGLRenderer({
     antialias: true,
-    canvas,
+    canvas: CANVAS,
     powerPreference: 'high-performance',
     precision: 'highp',
   });
