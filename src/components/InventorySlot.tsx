@@ -9,7 +9,7 @@ import type { SlotEvent } from 'src/typings/SlotEvent';
 import type { ClickedState } from 'src/typings/state/ClickedState';
 import type { DraggedState } from 'src/typings/state/DraggedState';
 import { as } from 'src/utils/as';
-import { from } from 'src/utils/selectors/from';
+import { from } from 'src/utils/from';
 import { toIconUrl } from 'src/utils/urls/toIconUrl';
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

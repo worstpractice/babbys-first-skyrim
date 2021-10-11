@@ -4,7 +4,7 @@ import { useUiState } from 'src/state/UiState';
 import { BACKGROUND } from 'src/styles';
 import type { UiState } from 'src/typings/state/UiState';
 import { as } from 'src/utils/as';
-import { from } from 'src/utils/selectors/from';
+import { from } from 'src/utils/from';
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // * Selectors *
