@@ -321,6 +321,7 @@
     ],
     "unicorn/no-array-callback-reference": "off",
     "unicorn/no-nested-ternary": "off",
+    "unicorn/no-new-array": "off",
     "unicorn/no-null": "off",
     "unicorn/no-zero-fractions": "off",
     "unicorn/number-literal-case": "off",

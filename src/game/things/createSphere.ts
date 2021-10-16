@@ -14,8 +14,16 @@ export const createSphere = (): Thing => {
 
   const body = new Body({
     mass: Math.max(10, upTo(100)), // kg
-    position: new Vec3(Math.max(10, upTo(100)), Math.max(10, upTo(100)), Math.max(10, upTo(100))),
+
+    position: new Vec3(
+      //
+      Math.max(10, upTo(100)),
+      Math.max(10, upTo(100)),
+      Math.max(10, upTo(100)),
+    ),
+
     shape: new Sphere(radius),
+
     type: Body.DYNAMIC,
   });
 

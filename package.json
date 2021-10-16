@@ -32,7 +32,7 @@
   },
   "scripts": {
     "build": "snowpack build",
-    "fmt": "prettier -u --config .prettierrc -w src/**/*.{d.ts,ts,tsx,json}",
+    "fmt": "prettier -u --config .prettierrc --plugin=prettier-plugin-jsdoc --plugin=prettier-plugin-organize-imports -w ./src/**/*.{d.ts,ts,tsx,json}",
     "lint": "eslint ./src --ext .d.ts,.ts,.tsx",
     "lint:fix": "eslint ./src --ext .d.ts,.ts,.tsx --fix",
     "nuke": "node ./nuke.mjs",

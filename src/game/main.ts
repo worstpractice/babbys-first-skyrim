@@ -57,16 +57,6 @@ export const main = async (): Promise<App> => {
         () => {
           return player;
         },
-        // createSphere,
-        // createSphere,
-        // createSphere,
-        // createSphere,
-        // createSphere,
-        // createSphere,
-        // createSphere,
-        // createSphere,
-        // createSphere,
-        // createSphere,
       ],
     },
     scene,

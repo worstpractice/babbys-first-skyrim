@@ -1,15 +1,16 @@
 import type { CSSProperties } from 'react';
 import { default as React, useRef } from 'react';
-import { handleItem } from 'src/handlers/handleItem';
 import { character } from 'src/lookup-tables/character';
 import { useClickedState } from 'src/state/ClickedState';
 import { useDraggedState } from 'src/state/DraggedState';
+import type { Slot } from 'src/typings/inventory/Slot';
+import type { SlotEvent } from 'src/typings/inventory/SlotEvent';
 import type { ItemName } from 'src/typings/ItemName';
-import type { SlotEvent } from 'src/typings/SlotEvent';
 import type { ClickedState } from 'src/typings/state/ClickedState';
 import type { DraggedState } from 'src/typings/state/DraggedState';
 import { as } from 'src/utils/as';
 import { from } from 'src/utils/from';
+import { slot } from 'src/utils/make/slot';
 import { toIconUrl } from 'src/utils/urls/toIconUrl';
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -22,11 +23,11 @@ const fromDragged = from<DraggedState>().select('currentlyDraggedElement', 'setC
 
 type Props = {
   readonly item?: ItemName;
-  readonly onItem?: (event: SlotEvent) => void;
-  readonly index: number;
+  readonly onItem: (event: SlotEvent) => void;
+  readonly index: Slot;
 };
 
-export const InventorySlot = ({ onItem = handleItem, index }: Props) => {
+export const InventorySlot = ({ onItem, index }: Props) => {
   const { currentlyClickedElement, setCurrentlyClickedElement } = useClickedState(fromClicked);
   const { currentlyDraggedElement, setCurrentlyDraggedElement } = useDraggedState(fromDragged);
   const slotRef = useRef<HTMLDivElement>(null);
@@ -54,29 +55,22 @@ export const InventorySlot = ({ onItem = handleItem, index }: Props) => {
     const them = currentlyDraggedElement;
 
     const myIndex = index;
-    const theirIndex = Number.parseInt(them.id);
+    const theirIndex = slot(Number.parseInt(them.id));
 
     const myBackgroundImage = me.style.backgroundImage;
     const theirBackgroundImage = them.style.backgroundImage;
-
-    const myItem = character.heldIn(myIndex);
-    const theirItem = character.heldIn(theirIndex);
 
     // Swap background images
     me.style.backgroundImage = theirBackgroundImage;
     them.style.backgroundImage = myBackgroundImage;
 
-    // Swap game items
-    character.equip(myItem, theirIndex);
-    character.equip(theirItem, myIndex);
-
     setCurrentlyClickedElement(null);
     setCurrentlyDraggedElement(null);
 
-    const myNewItem = theirItem;
+    character.swap(myIndex, theirIndex);
 
     onItem({
-      item: myNewItem,
+      item: character.heldIn(myIndex),
       slot: index,
     } as const);
   };

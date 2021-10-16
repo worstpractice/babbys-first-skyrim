@@ -52,5 +52,5 @@
   },
   "include": [
     "src"
-  ]
+, "src/utils/rerun/.ts"  ]
 }

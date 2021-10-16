@@ -15,7 +15,7 @@ export const loadPlayerAnimations = async (loadingManager: LoadingManager): Prom
     const handleLoading: LoadingHandler = async () => {
       const { animations } = await loader.loadAsync(path);
 
-      const animation = animations.at(0);
+      const animation = animations[0];
 
       if (!animation) throw new ReferenceError('Missing animations!');
 
