@@ -18,7 +18,6 @@ import { createAmbientLight } from 'src/game/lights/createAmbientLight';
 import { createDirectionalLight } from 'src/game/lights/createDirectionalLight';
 import { registerEventListeners } from 'src/game/listeners/registerEventListeners';
 import { createPlayer } from 'src/game/things/createPlayer';
-import { createSphere } from 'src/game/things/createSphere';
 import type { App } from 'src/game/typings/App';
 import type { AnimationMixer } from 'three';
 
@@ -58,16 +57,16 @@ export const main = async (): Promise<App> => {
         () => {
           return player;
         },
-        createSphere,
-        createSphere,
-        createSphere,
-        createSphere,
-        createSphere,
-        createSphere,
-        createSphere,
-        createSphere,
-        createSphere,
-        createSphere,
+        // createSphere,
+        // createSphere,
+        // createSphere,
+        // createSphere,
+        // createSphere,
+        // createSphere,
+        // createSphere,
+        // createSphere,
+        // createSphere,
+        // createSphere,
       ],
     },
     scene,
