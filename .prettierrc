@@ -1,9 +1,14 @@
 {
   "arrowParens": "always",
   "bracketSpacing": true,
-  "htmlWhitespaceSensitivity": "strict",
+  "htmlWhitespaceSensitivity": "ignore",
   "jsxSingleQuote": false,
+  "plugins": [
+    "prettier-plugin-jsdoc",
+    "prettier-plugin-organize-imports"
+  ],
   "printWidth": 160,
+  "proseWrap": "never",
   "semi": true,
   "singleQuote": true,
   "tabWidth": 2,

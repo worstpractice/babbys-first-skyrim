@@ -1,10 +1,13 @@
-/** A sort with 3 possible values (trinary).
+/**
+ * A sort with 3 possible values (trinary).
  *
  * Apparently enables all kinds of optimizations.
  *
- * See: https://www.youtube.com/watch?v=zVevl-K-m7Y */
+ * See: https://www.youtube.com/watch?v=zVevl-K-m7Y
+ */
 export const trinary = <T>(a: T, b: T) => {
-  /** The positive result (1) indicates a change in order is needed.
+  /**
+   * The positive result (1) indicates a change in order is needed.
    *
    * Both the negative result (-1) and the even result (0) mean no change needed.
    *

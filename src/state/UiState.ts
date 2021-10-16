@@ -1,7 +1,7 @@
-import create from 'zustand';
-import { combine } from 'zustand/middleware';
 import type { MenuName } from 'src/typings/MenuName';
 import type { UiState } from 'src/typings/state/UiState';
+import create from 'zustand';
+import { combine } from 'zustand/middleware';
 
 export type Data = {
   readonly currentOpenMenu: MenuName;

@@ -50,7 +50,7 @@
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-extra-non-null-assertion": "warn",
     "@typescript-eslint/no-implicit-any-catch": "warn",
-    "@typescript-eslint/no-inferrable-types": "warn",
+    "@typescript-eslint/no-inferrable-types": "off",
     "@typescript-eslint/no-misused-new": "warn",
     "@typescript-eslint/no-namespace": "warn",
     "@typescript-eslint/no-non-null-asserted-optional-chain": "warn",

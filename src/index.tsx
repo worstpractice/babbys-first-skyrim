@@ -21,9 +21,11 @@ window.addEventListener('keydown', handleHotkeys, CAPTURE_PASSIVE);
 /** NOTE: disables context menu. */
 window.oncontextmenu = toFalse;
 
-/** NOTE: disables kinda useless HTML Drag events, in favor of regular mouse events.
+/**
+ * NOTE: disables kinda useless HTML Drag events, in favor of regular mouse events.
  *
- * See: https://javascript.info/mouse-drag-and-drop */
+ * See: https://javascript.info/mouse-drag-and-drop
+ */
 window.ondrag = toFalse;
 window.ondragend = toFalse;
 window.ondragenter = toFalse;

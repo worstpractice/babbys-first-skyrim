@@ -39,7 +39,7 @@ export const Inventory = ({}: Props) => {
     setCurrentlyDraggedElement(null);
   };
 
-  let slotNumber = 0 as number;
+  let slotNumber: number = 0;
 
   return (
     <Flex direction="column" resetClickState={resetClickState} style={styles.inventory}>
