@@ -1,4 +1,3 @@
-import type { CSSProperties } from 'react';
 import { default as React, useRef } from 'react';
 import { character } from 'src/lookup-tables/character';
 import { useClickedState } from 'src/state/ClickedState';
@@ -8,7 +7,7 @@ import type { SlotEvent } from 'src/typings/inventory/SlotEvent';
 import type { ItemName } from 'src/typings/ItemName';
 import type { ClickedState } from 'src/typings/state/ClickedState';
 import type { DraggedState } from 'src/typings/state/DraggedState';
-import { as } from 'src/utils/as';
+import { css } from 'src/utils/css';
 import { from } from 'src/utils/from';
 import { slot } from 'src/utils/make/slot';
 import { toIconUrl } from 'src/utils/urls/toIconUrl';
@@ -87,7 +86,7 @@ export const InventorySlot = ({ onItem, index }: Props) => {
   };
 
   ///////////////////////////////////////////////////////////////////////////
-  const style: CSSProperties = item
+  const style = item
     ? ({
         ...slotStyles.occupied,
         backgroundImage: toIconUrl(item),
@@ -110,8 +109,8 @@ export const InventorySlot = ({ onItem, index }: Props) => {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // * Styles *
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const styles = {
-  slot: as<CSSProperties>({
+const styles = css({
+  slot: {
     backgroundColor: 'rgb(0, 0, 0, 1)',
     border: 'rgb(0, 0, 0, 1)',
     borderRadius: '5%',
@@ -119,16 +118,15 @@ const styles = {
     height: 60,
     padding: 12.5,
     pointerEvents: 'all',
-    width: 60,
-  }),
-} as const;
+  },
+} as const);
 
-const slotStyles = {
-  occupied: as<CSSProperties>({
+const slotStyles = css({
+  occupied: {
     ...styles.slot,
     cursor: 'pointer',
-  }),
-  vacant: as<CSSProperties>({
+  },
+  vacant: {
     ...styles.slot,
-  }),
-} as const;
+  },
+} as const);

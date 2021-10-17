@@ -1,3 +1,3 @@
-export const as = <T = never>(value: T): T => {
+export const as = <T>(value: T): T => {
   return value;
 };
