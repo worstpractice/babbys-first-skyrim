@@ -1,7 +1,7 @@
 import type { Input } from 'src/game/typings/Input';
 import { isRelevantKey } from 'src/game/utils/type-predicates/isRelevantKey';
 
-export const createHandleKeydown = ({ heldKeys }: Input) => {
+export const createHandleKeyDown = ({ heldKeys }: Input) => {
   const handleKeyDown = ({ code }: KeyboardEvent): void => {
     if (!isRelevantKey(code)) return;
 

@@ -63,6 +63,7 @@
     "@typescript-eslint/no-unnecessary-type-arguments": "warn",
     "@typescript-eslint/no-unnecessary-type-assertion": "warn",
     "@typescript-eslint/no-unnecessary-type-constraint": "warn",
+    "@typescript-eslint/no-unsafe-argument": "off",
     "@typescript-eslint/no-unsafe-assignment": "off",
     "@typescript-eslint/no-unsafe-call": "off",
     "@typescript-eslint/no-unsafe-member-access": "off",
@@ -320,6 +321,7 @@
       }
     ],
     "unicorn/no-array-callback-reference": "off",
+    "unicorn/no-for-loop": "off",
     "unicorn/no-nested-ternary": "off",
     "unicorn/no-new-array": "off",
     "unicorn/no-null": "off",
