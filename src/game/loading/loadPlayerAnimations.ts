@@ -6,6 +6,7 @@ import type { FbxFileName } from 'src/game/typings/FbxFileName';
 import type { LoadingHandler } from 'src/game/typings/LoadingHandler';
 import type { NameClipDuo } from 'src/game/typings/NameClipDuo';
 import { toPromises } from 'src/utils/mapping/toPromises';
+import { panic } from 'src/utils/panic';
 import type { LoadingManager } from 'three';
 
 export const loadPlayerAnimations = async (loadingManager: LoadingManager): Promise<readonly NameClipDuo[]> => {
@@ -15,11 +16,9 @@ export const loadPlayerAnimations = async (loadingManager: LoadingManager): Prom
     const handleLoading: LoadingHandler = async () => {
       const { animations } = await loader.loadAsync(path);
 
-      const animation = animations[0];
+      const [animation] = animations;
 
-      if (!animation) throw new ReferenceError('Missing animations!');
-
-      return [name, animation] as const;
+      return animation ? ([name, animation] as const) : panic('Missing animations!');
     };
 
     return handleLoading;

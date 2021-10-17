@@ -1,3 +1,3 @@
 export const unreachable = (nope: never): never => {
-  throw new ReferenceError(nope);
+  throw new ReferenceError(`unreachable ${nope}`);
 };
