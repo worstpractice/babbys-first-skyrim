@@ -7,7 +7,7 @@ import type { SlotEvent } from 'src/typings/inventory/SlotEvent';
 import type { ItemName } from 'src/typings/ItemName';
 import type { ClickedState } from 'src/typings/state/ClickedState';
 import type { DraggedState } from 'src/typings/state/DraggedState';
-import { css } from 'src/utils/css';
+import { css } from 'src/utils/as/css';
 import { from } from 'src/utils/from';
 import { slot } from 'src/utils/make/slot';
 import { toIconUrl } from 'src/utils/urls/toIconUrl';
@@ -78,8 +78,7 @@ export const InventorySlot = ({ onItem, index }: Props) => {
   const handleMouseLeave = (): void => {
     const { current } = slotRef;
 
-    if (!current) return;
-    if (!current.style.backgroundImage) return;
+    if (!current?.style.backgroundImage) return;
     if (currentlyClickedElement !== current) return;
 
     setCurrentlyDraggedElement(current);
@@ -109,8 +108,8 @@ export const InventorySlot = ({ onItem, index }: Props) => {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // * Styles *
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const styles = css({
-  slot: {
+const styles = {
+  slot: css({
     backgroundColor: 'rgb(0, 0, 0, 1)',
     border: 'rgb(0, 0, 0, 1)',
     borderRadius: '5%',
@@ -118,15 +117,15 @@ const styles = css({
     height: 60,
     padding: 12.5,
     pointerEvents: 'all',
-  },
-} as const);
+  } as const),
+} as const;
 
-const slotStyles = css({
-  occupied: {
+const slotStyles = {
+  occupied: css({
     ...styles.slot,
     cursor: 'pointer',
-  },
-  vacant: {
+  } as const),
+  vacant: css({
     ...styles.slot,
-  },
-} as const);
+  } as const),
+} as const;
