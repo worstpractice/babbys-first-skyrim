@@ -1,4 +1,4 @@
-import type { CSSProperties, MouseEventHandler } from 'react';
+import type { MouseEventHandler } from 'react';
 import { default as React } from 'react';
 import { BottomCard } from 'src/components/BottomCard';
 import { Character } from 'src/components/Character';
@@ -7,7 +7,7 @@ import { Portrait } from 'src/components/Portrait';
 import { Quests } from 'src/components/Quests';
 import { useUiState } from 'src/state/UiState';
 import type { UiState } from 'src/typings/state/UiState';
-import { as } from 'src/utils/as';
+import { css } from 'src/utils/as/css';
 import { from } from 'src/utils/from';
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -57,25 +57,25 @@ export const Ui = ({}: Props) => {
 // * Styles *
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const styles = {
-  bottomHalf: as<CSSProperties>({
+  bottomHalf: css({
     alignItems: 'flex-end',
     display: 'flex',
     gap: 10,
     height: '100%',
     justifyContent: 'center',
     width: '100%',
-  }),
-  topHalf: as<CSSProperties>({
+  } as const),
+  topHalf: css({
     display: 'flex',
     height: '100%',
     justifyContent: 'space-between',
     width: '100%',
-  }),
-  ui: as<CSSProperties>({
+  } as const),
+  ui: css({
     display: 'flex',
     flexDirection: 'column',
     height: '100%',
     justifyContent: 'space-between',
     width: '100%',
-  }),
+  } as const),
 } as const;

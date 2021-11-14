@@ -1,9 +1,8 @@
-import type { CSSProperties } from 'react';
 import { default as React } from 'react';
 import { useUiState } from 'src/state/UiState';
 import { BACKGROUND } from 'src/styles';
 import type { UiState } from 'src/typings/state/UiState';
-import { as } from 'src/utils/as';
+import { css } from 'src/utils/as/css';
 import { from } from 'src/utils/from';
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -33,7 +32,7 @@ export const Quests = ({}: Props) => {
 // * Styles *
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const styles = {
-  quests: as<CSSProperties>({
+  quests: css({
     ...BACKGROUND,
     borderRadius: '1%',
     display: 'flex',
@@ -43,8 +42,8 @@ const styles = {
     padding: 20,
     pointerEvents: 'all',
     width: 525,
-  }),
-  title: as<CSSProperties>({
+  } as const),
+  title: css({
     marginTop: 0,
-  }),
+  } as const),
 } as const;
