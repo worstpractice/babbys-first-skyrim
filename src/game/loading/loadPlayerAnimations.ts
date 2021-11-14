@@ -18,7 +18,7 @@ export const loadPlayerAnimations = async (loadingManager: LoadingManager): Prom
 
       const [animation] = animations;
 
-      return animation ? ([name, animation] as const) : panic('Missing animations!');
+      return animation ? [name, animation] : panic('Missing animations!');
     };
 
     return handleLoading;

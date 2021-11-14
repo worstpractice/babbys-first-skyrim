@@ -38,5 +38,5 @@ export const createInfinitePlane = (): Thing => {
   return {
     body,
     model: mesh,
-  };
+  } as const;
 };

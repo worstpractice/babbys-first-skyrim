@@ -1,4 +1,4 @@
-import cannonDebugger from 'cannon-es-debugger';
+import { default as cannonDebugger } from 'cannon-es-debugger';
 import { createActions } from 'src/game/cascade/actions/createActions';
 import { createEffects } from 'src/game/cascade/effects/createEffects';
 import { mapAnimationNamesToAnimations } from 'src/game/cascade/mapAnimationNamesToAnimations';
@@ -18,10 +18,10 @@ import { createAmbientLight } from 'src/game/lights/createAmbientLight';
 import { createDirectionalLight } from 'src/game/lights/createDirectionalLight';
 import { registerEventListeners } from 'src/game/listeners/registerEventListeners';
 import { createPlayer } from 'src/game/things/createPlayer';
-import type { App } from 'src/game/typings/App';
+import type { RunningGame } from 'src/game/typings/RunningGame';
 import type { AnimationMixer } from 'three';
 
-export const main = async (): Promise<App> => {
+export const main = async (): Promise<RunningGame> => {
   const world = createWorld();
 
   const camera = createCamera();
