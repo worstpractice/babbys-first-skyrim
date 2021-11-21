@@ -283,7 +283,6 @@
     "quotes": "off",
     "react/no-unescaped-entities": "off",
     "react/prop-types": "off",
-    "react/react-in-jsx-scope": "off",
     "require-atomic-updates": "warn",
     "require-await": "off",
     "require-unicode-regexp": "warn",

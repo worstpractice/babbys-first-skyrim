@@ -11,7 +11,7 @@ type Props = {
 export const loadPlayerModel = async ({ loadingManager }: Props): Promise<Group> => {
   const loader = new FBXLoader(loadingManager).setPath(CHARACTERS_PATH);
 
-  const model = await loader.loadAsync('castle-guard.fbx', console.debug);
+  const model = await loader.loadAsync('castle-guard.fbx');
 
   model.name = 'playerModel';
   model.scale.setScalar(0.09);

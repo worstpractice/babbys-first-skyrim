@@ -14,7 +14,7 @@ export const loadPlayerAnimations = async (loadingManager: LoadingManager): Prom
 
   const toLoadingHandler = <T extends readonly [FbxFileName, AnimationName]>([path, name]: T): LoadingHandler => {
     const handleLoading: LoadingHandler = async () => {
-      const { animations } = await loader.loadAsync(path, console.debug);
+      const { animations } = await loader.loadAsync(path);
 
       const [animation] = animations;
 

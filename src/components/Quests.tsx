@@ -43,6 +43,7 @@ const styles = {
     pointerEvents: 'all',
     width: 525,
   } as const),
+
   title: css({
     marginTop: 0,
   } as const),
