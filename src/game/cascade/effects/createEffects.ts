@@ -1,51 +1,58 @@
-import type { Effects } from 'src/game/typings/Effects';
+import type { Effects } from 'src/game/typings/commands/Effects';
+import type { Item } from 'src/game/typings/Item';
 import type { Player } from 'src/game/typings/Player';
+import { itemNameToAction } from 'src/lookup-tables/itemNameToAnimation';
 
-export const createEffects = ({ activeEffects }: Player): Effects => {
+export const createEffects = ({ actions, effects }: Player): Effects => {
   /////////////////////////////////////////////////////////////////////////////
   // * Levitating *
   /////////////////////////////////////////////////////////////////////////////
   const startLevitating = (): void => {
-    activeEffects.add('levitating');
+    effects.add('levitating');
   };
 
   const stopLevitating = (): void => {
-    activeEffects.delete('levitating');
+    effects.delete('levitating');
   };
 
   /////////////////////////////////////////////////////////////////////////////
   // * Moving *
   /////////////////////////////////////////////////////////////////////////////
   const startMoving = (): void => {
-    activeEffects.add('moving');
+    effects.add('moving');
   };
 
   const stopMoving = (): void => {
-    activeEffects.delete('moving');
+    effects.delete('moving');
   };
 
   /////////////////////////////////////////////////////////////////////////////
   // * Turning *
   /////////////////////////////////////////////////////////////////////////////
   const startTurning = (): void => {
-    activeEffects.add('turning');
+    effects.add('turning');
   };
 
   const stopTurning = (): void => {
-    activeEffects.delete('turning');
+    effects.delete('turning');
   };
 
   /////////////////////////////////////////////////////////////////////////////
   // * Using *
   /////////////////////////////////////////////////////////////////////////////
-  const startUsing = (): void => {
-    activeEffects.add('using');
+  const startUsing = ({ name }: Item): void => {
+    effects.add('using');
+
+    const action = itemNameToAction[name];
+
+    actions.once('delete', action, (): void => {
+      actions.isEmpty ? stopUsing() : actions.once('empty', stopUsing);
+    });
   };
 
   const stopUsing = (): void => {
-    activeEffects.delete('using');
+    effects.delete('using');
   };
-
   /////////////////////////////////////////////////////////////////////////////
 
   return {

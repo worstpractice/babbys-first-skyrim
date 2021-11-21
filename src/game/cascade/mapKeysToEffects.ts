@@ -1,6 +1,6 @@
-import type { Actions } from 'src/game/typings/Actions';
 import type { AnimationMixerListener } from 'src/game/typings/AnimationMixerListener';
-import type { Effects } from 'src/game/typings/Effects';
+import type { Actions } from 'src/game/typings/commands/Actions';
+import type { Effects } from 'src/game/typings/commands/Effects';
 import type { Input } from 'src/game/typings/Input';
 import type { Player } from 'src/game/typings/Player';
 
@@ -73,7 +73,7 @@ export const mapKeysToEffects = ({ actions, effects, input, player }: Props): vo
   // * Attacking *
   //////////////////////////////////////////////////////////////////////
   input.heldMouseButtons.on('add', 'LMB', (): void => {
-    startUsing();
+    startUsing(player.inventory.heldIn(0));
 
     input.heldMouseButtons.once('delete', 'LMB', stopUsing);
   });

@@ -1,7 +1,7 @@
-import type { AnimationName } from 'src/game/typings/AnimationName';
+import type { Action } from 'src/game/typings/Action';
 import type { FbxFileName } from 'src/game/typings/FbxFileName';
 
-export const ANIMATIONS: readonly (readonly [FbxFileName, AnimationName])[] = [
+export const ANIMATIONS: readonly (readonly [FbxFileName, Action])[] = [
   //
   ['slash.fbx', 'attacking'],
   ['idle.fbx', 'idling'],

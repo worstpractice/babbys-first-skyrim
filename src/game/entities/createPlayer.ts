@@ -1,12 +1,14 @@
 import { Body, Box, Vec3 } from 'cannon-es';
 import { ObSet } from 'obset';
+import { createInventory } from 'src/game/entities/createInventory';
 import { loadPlayerAnimations } from 'src/game/loading/loadPlayerAnimations';
 import { loadPlayerModel } from 'src/game/loading/loadPlayerModel';
 import { loadWeaponModel } from 'src/game/loading/loadWeaponModel';
-import type { ActionClips } from 'src/game/typings/ActionClips';
-import type { AnimationName } from 'src/game/typings/AnimationName';
+import type { Action } from 'src/game/typings/Action';
+import type { Animation } from 'src/game/typings/Animation';
 import type { Effect } from 'src/game/typings/Effect';
 import type { Player } from 'src/game/typings/Player';
+import type { Table } from 'src/game/typings/Table';
 import { snitch } from 'src/utils/snitch';
 import type { LoadingManager } from 'three';
 import { AnimationMixer, LoopOnce } from 'three';
@@ -45,21 +47,26 @@ export const createPlayer = async ({ loadingManager, mixers }: Props): Promise<P
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // * Create Action Clips *
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  const entries = nameClipDuos.map(([animationName, clip]) => {
-    clip.name = `${animationName}Clip` as const;
+  const entries = nameClipDuos.map(([action, animationClip]) => {
+    animationClip.name = `${action}Clip` as const;
 
-    const action = mixer.clipAction(clip);
+    const animationAction = mixer.clipAction(animationClip);
 
-    const shouldLoopOnce = clip.name === 'jumpingClip' || clip.name === 'attackingClip';
+    const shouldLoopOnce = animationClip.name === 'jumpingClip' || animationClip.name === 'attackingClip';
 
     if (shouldLoopOnce) {
-      action.setLoop(LoopOnce, 1);
+      animationAction.setLoop(LoopOnce, 1);
     }
 
-    return [animationName, { action, clip }] as const;
+    const animation: Animation = {
+      animationAction,
+      animationClip,
+    } as const;
+
+    return [action, animation] as const;
   });
 
-  const actionClips: ActionClips = Object.fromEntries(entries);
+  const animations: Table<Action, Animation> = Object.fromEntries(entries);
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // * Create Physics *
@@ -75,25 +82,32 @@ export const createPlayer = async ({ loadingManager, mixers }: Props): Promise<P
   // * Create ObSets *
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  const activeAnimations = new ObSet<AnimationName>()
+  const actions = new ObSet<Action>()
     //
     .on('add', snitch)
     .on('delete', snitch);
 
-  const activeEffects = new ObSet<Effect>()
+  const effects = new ObSet<Effect>()
     //
     .on('add', snitch)
     .on('delete', snitch);
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // * Create Inventory *
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  const inventory = createInventory();
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // * Create Player *
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   return {
-    actionClips,
-    activeAnimations,
-    activeEffects,
+    actions,
+    animations,
     body,
+    effects,
+    inventory,
     mixer,
     model,
   } as const;

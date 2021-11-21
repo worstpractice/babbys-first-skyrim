@@ -3,7 +3,7 @@ import type { Player } from 'src/game/typings/Player';
 import type { Vector3 } from 'three';
 
 export const movePlayer = (deltaInSeconds: number, getCurrentCameraDirection: (this: void) => Vector3, input: Input, player: Player) => {
-  if (!player.activeEffects.has('moving')) return;
+  if (!player.effects.has('moving')) return;
 
   const direction = input.heldKeys.has('KeyW') ? 25 : -25;
 

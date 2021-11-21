@@ -2,10 +2,12 @@ import { itemNameToModel } from 'src/lookup-tables/itemNameToModel';
 import type { SlotEvent } from 'src/typings/inventory/SlotEvent';
 import { isHandSlot } from 'src/utils/type-predicates/isInHands';
 
-export const handleItem = ({ item, slot }: SlotEvent): void => {
-  const model = itemNameToModel[item];
+export const handleChange = ({ item, slot }: SlotEvent): void => {
+  const { name } = item;
 
-  if (!model) return console.warn(`No model for ${item}!`);
+  const model = itemNameToModel[name];
+
+  if (!model) return console.warn(`No model for ${name}!`);
 
   const isBeingEquipped = isHandSlot(slot);
 
@@ -13,5 +15,5 @@ export const handleItem = ({ item, slot }: SlotEvent): void => {
 
   const verb = isBeingEquipped ? 'Equipped' : 'Moved';
 
-  console.log(`${verb} ${item} into slot #${slot}`);
+  console.log(`${verb} ${name} into slot #${slot}`);
 };

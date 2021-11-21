@@ -11,17 +11,17 @@ import { createLoadingManager } from 'src/game/engine/createLoadingManager';
 import { createRenderer } from 'src/game/engine/createRenderer';
 import { createScene } from 'src/game/engine/createScene';
 import { createWorld } from 'src/game/engine/createWorld';
+import { createPlayer } from 'src/game/entities/createPlayer';
 import { createInfinitePlane } from 'src/game/ground/createInfinitePlane';
 import { createInput } from 'src/game/input/createInput';
 import { createLevel } from 'src/game/level/createLevel';
 import { createAmbientLight } from 'src/game/lights/createAmbientLight';
 import { createDirectionalLight } from 'src/game/lights/createDirectionalLight';
 import { registerEventListeners } from 'src/game/listeners/registerEventListeners';
-import { createPlayer } from 'src/game/things/createPlayer';
-import type { RunningGame } from 'src/game/typings/RunningGame';
+import type { Game } from 'src/game/typings/Game';
 import type { AnimationMixer } from 'three';
 
-export const main = async (): Promise<RunningGame> => {
+export const main = async (): Promise<Game> => {
   const world = createWorld();
 
   const camera = createCamera();
@@ -88,6 +88,7 @@ export const main = async (): Promise<RunningGame> => {
   return {
     camera,
     mixers,
+    player,
     renderer,
     scene,
   } as const;

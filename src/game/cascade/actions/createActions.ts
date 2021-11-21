@@ -1,79 +1,79 @@
-import type { Actions } from 'src/game/typings/Actions';
 import type { AnimationMixerEvent } from 'src/game/typings/AnimationMixerEvent';
+import type { Actions } from 'src/game/typings/commands/Actions';
 import type { Player } from 'src/game/typings/Player';
 
-export const createActions = ({ activeAnimations, activeEffects, mixer }: Player): Actions => {
+export const createActions = ({ actions, effects, mixer }: Player): Actions => {
   /////////////////////////////////////////////////////////////////////////////
   // * Attacking *
   /////////////////////////////////////////////////////////////////////////////
   const startAttacking = (): void => {
-    const isUsing = activeEffects.has('using');
+    const isUsing = effects.has('using');
 
     if (!isUsing) return;
 
-    activeAnimations.add('attacking');
+    actions.add('attacking');
   };
 
   const stopAttacking = (): void => {
-    activeAnimations.delete('attacking');
+    actions.delete('attacking');
   };
 
   /////////////////////////////////////////////////////////////////////////////
   // * Idling *
   /////////////////////////////////////////////////////////////////////////////
   const startIdling = (): void => {
-    if (activeEffects.size) return;
+    if (effects.size) return;
 
-    activeAnimations.add('idling');
+    actions.add('idling');
   };
 
   const stopIdling = (): void => {
-    activeAnimations.delete('idling');
+    actions.delete('idling');
   };
 
   /////////////////////////////////////////////////////////////////////////////
   // * Jumping *
   /////////////////////////////////////////////////////////////////////////////
   const startJumping = (): void => {
-    const hasNothingToPushOffAgainst = activeEffects.has('levitating');
+    const hasNothingToPushOffAgainst = effects.has('levitating');
 
     if (hasNothingToPushOffAgainst) return;
 
-    activeAnimations.add('jumping');
+    actions.add('jumping');
   };
 
   const stopJumping = (): void => {
-    activeAnimations.delete('jumping');
+    actions.delete('jumping');
   };
 
   /////////////////////////////////////////////////////////////////////////////
   // * Running *
   /////////////////////////////////////////////////////////////////////////////
   const startRunning = (): void => {
-    const isMoving = activeEffects.has('moving');
+    const isMoving = effects.has('moving');
 
     if (!isMoving) return;
 
-    activeAnimations.add('running');
+    actions.add('running');
   };
 
   const stopRunning = (): void => {
-    activeAnimations.delete('running');
+    actions.delete('running');
   };
 
   /////////////////////////////////////////////////////////////////////////////
   // * Walking *
   /////////////////////////////////////////////////////////////////////////////
   const startWalking = (): void => {
-    const isMoving = activeEffects.has('moving');
+    const isMoving = effects.has('moving');
 
     if (!isMoving) return;
 
-    activeAnimations.add('walking');
+    actions.add('walking');
   };
 
   const stopWalking = (): void => {
-    activeAnimations.delete('walking');
+    actions.delete('walking');
   };
 
   /////////////////////////////////////////////////////////////////////////////

@@ -3,7 +3,8 @@ import { InventorySlot } from 'src/components/InventorySlot';
 import { Flex } from 'src/components/layout/Flex';
 import { Statue } from 'src/components/Statue';
 import { FIRST_ROW, LEFT_COLUMN, RIGHT_COLUMN, SECOND_ROW, THIRD_ROW } from 'src/constants/INVENTORY';
-import { handleItem } from 'src/handlers/handleItem';
+import type { Player } from 'src/game/typings/Player';
+import { handleChange } from 'src/handlers/handleChange';
 import { useClickedState } from 'src/state/ClickedState';
 import { useDraggedState } from 'src/state/DraggedState';
 import { useUiState } from 'src/state/UiState';
@@ -25,10 +26,10 @@ const fromUi = from<UiState>().select('currentOpenMenu');
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 type Props = {
-  readonly [key in PropertyKey]: never;
+  readonly player: Player;
 };
 
-export const Inventory = ({}: Props) => {
+export const Inventory = ({ player }: Props) => {
   const { setCurrentlyClickedElement } = useClickedState(fromClicked);
   const { setCurrentlyDraggedElement } = useDraggedState(fromDragged);
   const { currentOpenMenu } = useUiState(fromUi);
@@ -42,6 +43,8 @@ export const Inventory = ({}: Props) => {
 
   let slotNumber: Slot = 0;
 
+  const { inventory } = player;
+
   return (
     <Flex direction="column" resetClickState={resetClickState} style={styles.inventory}>
       <Flex direction="row">
@@ -49,7 +52,7 @@ export const Inventory = ({}: Props) => {
           {LEFT_COLUMN.map(() => {
             const index = slotNumber++ as Slot;
 
-            return <InventorySlot index={index} key={index} onItem={handleItem} />;
+            return <InventorySlot index={index} inventory={inventory} key={index} onChange={handleChange} />;
           })}
         </Flex>
         <Statue />
@@ -57,7 +60,7 @@ export const Inventory = ({}: Props) => {
           {RIGHT_COLUMN.map(() => {
             const index = slotNumber++ as Slot;
 
-            return <InventorySlot index={index} key={index} onItem={handleItem} />;
+            return <InventorySlot index={index} inventory={inventory} key={index} onChange={handleChange} />;
           })}
         </Flex>
       </Flex>
@@ -65,21 +68,21 @@ export const Inventory = ({}: Props) => {
         {FIRST_ROW.map(() => {
           const index = slotNumber++ as Slot;
 
-          return <InventorySlot index={index} key={index} onItem={handleItem} />;
+          return <InventorySlot index={index} inventory={inventory} key={index} onChange={handleChange} />;
         })}
       </Flex>
       <Flex direction="row">
         {SECOND_ROW.map(() => {
           const index = slotNumber++ as Slot;
 
-          return <InventorySlot index={index} key={index} onItem={handleItem} />;
+          return <InventorySlot index={index} inventory={inventory} key={index} onChange={handleChange} />;
         })}
       </Flex>
       <Flex direction="row">
         {THIRD_ROW.map(() => {
           const index = slotNumber++ as Slot;
 
-          return <InventorySlot index={index} key={index} onItem={handleItem} />;
+          return <InventorySlot index={index} inventory={inventory} key={index} onChange={handleChange} />;
         })}
       </Flex>
     </Flex>

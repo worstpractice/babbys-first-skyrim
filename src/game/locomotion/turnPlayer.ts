@@ -4,7 +4,7 @@ import type { Input } from 'src/game/typings/Input';
 import type { Player } from 'src/game/typings/Player';
 
 export const turnPlayer = (deltaInSeconds: number, input: Input, player: Player): void => {
-  if (!player.activeEffects.has('turning')) return;
+  if (!player.effects.has('turning')) return;
 
   const direction = input.heldKeys.has('KeyA') ? TO_THE_LEFT : TO_THE_RIGHT;
 

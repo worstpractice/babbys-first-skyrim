@@ -1,6 +1,6 @@
-import type { HandSlot } from 'src/typings/inventory/HandSlot';
+import type { BodySlots } from 'src/typings/Equipped';
 import type { Slot } from 'src/typings/inventory/Slot';
 
-export const isHandSlot = (slot: Slot): slot is HandSlot => {
-  return slot >= 0 && slot <= 7;
+export const isHandSlot = (slot: Slot): slot is keyof BodySlots => {
+  return Number(slot) >= 0 && Number(slot) <= 7;
 };

@@ -5,6 +5,7 @@ import { Character } from 'src/components/Character';
 import { Inventory } from 'src/components/Inventory';
 import { Portrait } from 'src/components/Portrait';
 import { Quests } from 'src/components/Quests';
+import type { Game } from 'src/game/typings/Game';
 import { useUiState } from 'src/state/UiState';
 import type { UiState } from 'src/typings/state/UiState';
 import { css } from 'src/utils/as/css';
@@ -18,10 +19,10 @@ const fromUi = from<UiState>().select('toggleCurrentOpenMenu');
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 type Props = {
-  readonly [key in PropertyKey]: never;
+  readonly game: Game;
 };
 
-export const Ui = ({}: Props) => {
+export const GameUi = ({ game }: Props) => {
   const { toggleCurrentOpenMenu } = useUiState(fromUi);
 
   const handleClickCharacter: MouseEventHandler<HTMLElement> = () => {
@@ -36,11 +37,13 @@ export const Ui = ({}: Props) => {
     toggleCurrentOpenMenu('quests');
   };
 
+  const { player } = game;
+
   return (
     <div style={styles.ui}>
       <div style={styles.topHalf}>
         <Portrait />
-        <Inventory />
+        <Inventory player={player} />
         <Character />
         <Quests />
       </div>

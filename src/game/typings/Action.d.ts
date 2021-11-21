@@ -1,5 +1,5 @@
 // prettier-ignore
-export type AnimationName =
+export type Action =
   | 'attacking'
   | 'idling'
   | 'jumping'

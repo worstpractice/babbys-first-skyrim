@@ -1,12 +1,12 @@
-import type { ItemName } from 'src/typings/ItemName';
+import type { Item } from 'src/game/typings/Item';
 
-export type Equipped = readonly [
-  ItemName, // 1
-  ItemName, // 2
-  ItemName, // 3
-  ItemName, // 4
-  ItemName, // 5
-  ItemName, // 6
-  ItemName, // 7
-  ItemName, // 8
-];
+export type BodySlots = {
+  0: Item;
+  1: Item;
+  2: Item;
+  3: Item;
+  4: Item;
+  5: Item;
+  6: Item;
+  7: Item;
+};

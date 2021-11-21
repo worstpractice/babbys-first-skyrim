@@ -1,10 +1,9 @@
 import { default as React, useRef } from 'react';
-import { character } from 'src/lookup-tables/character';
+import type { Inventory } from 'src/game/typings/Inventory';
 import { useClickedState } from 'src/state/ClickedState';
 import { useDraggedState } from 'src/state/DraggedState';
 import type { Slot } from 'src/typings/inventory/Slot';
 import type { SlotEvent } from 'src/typings/inventory/SlotEvent';
-import type { ItemName } from 'src/typings/ItemName';
 import type { ClickedState } from 'src/typings/state/ClickedState';
 import type { DraggedState } from 'src/typings/state/DraggedState';
 import { css } from 'src/utils/as/css';
@@ -21,23 +20,22 @@ const fromDragged = from<DraggedState>().select('currentlyDraggedElement', 'setC
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 type Props = {
-  readonly item?: ItemName;
-  readonly onItem: (event: SlotEvent) => void;
   readonly index: Slot;
+  readonly inventory: Inventory;
+  readonly onChange: (event: SlotEvent) => void;
 };
 
-export const InventorySlot = ({ onItem, index }: Props) => {
+export const InventorySlot = ({ index, inventory, onChange }: Props) => {
   const { currentlyClickedElement, setCurrentlyClickedElement } = useClickedState(fromClicked);
   const { currentlyDraggedElement, setCurrentlyDraggedElement } = useDraggedState(fromDragged);
   const slotRef = useRef<HTMLDivElement>(null);
-  const item = character.heldIn(index);
+  const item = inventory.heldIn(index);
 
   ///////////////////////////////////////////////////////////////////////////
   const handleMouseDown = (): void => {
     const { current } = slotRef;
 
-    if (!current) return;
-    if (!current.style.backgroundImage) return;
+    if (!current?.style.backgroundImage) return;
 
     setCurrentlyClickedElement(current);
   };
@@ -54,7 +52,7 @@ export const InventorySlot = ({ onItem, index }: Props) => {
     const them = currentlyDraggedElement;
 
     const myIndex = index;
-    const theirIndex = slot(Number.parseInt(them.id));
+    const theirIndex = slot(Number(them.id));
 
     const myBackgroundImage = me.style.backgroundImage;
     const theirBackgroundImage = them.style.backgroundImage;
@@ -66,10 +64,10 @@ export const InventorySlot = ({ onItem, index }: Props) => {
     setCurrentlyClickedElement(null);
     setCurrentlyDraggedElement(null);
 
-    character.swap(myIndex, theirIndex);
+    inventory.swap(myIndex, theirIndex);
 
-    onItem({
-      item: character.heldIn(myIndex),
+    onChange({
+      item: inventory.heldIn(myIndex),
       slot: index,
     } as const);
   };
@@ -88,7 +86,7 @@ export const InventorySlot = ({ onItem, index }: Props) => {
   const style = item
     ? ({
         ...slotStyles.occupied,
-        backgroundImage: toIconUrl(item),
+        backgroundImage: toIconUrl(item.name),
       } as const)
     : slotStyles.vacant;
 

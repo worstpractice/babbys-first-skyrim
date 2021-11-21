@@ -1,12 +1,9 @@
-import type { ActionDuo } from 'src/game/typings/ActionDuo';
-import type { Actions } from 'src/game/typings/Actions';
 import type { AnimationMixerEvent } from 'src/game/typings/AnimationMixerEvent';
 import type { AnimationMixerListener } from 'src/game/typings/AnimationMixerListener';
+import type { Actions } from 'src/game/typings/commands/Actions';
 import type { Input } from 'src/game/typings/Input';
 import type { Player } from 'src/game/typings/Player';
-import { character } from 'src/lookup-tables/character';
-import { itemNameToAnimation } from 'src/lookup-tables/itemNameToAnimation';
-import type { ItemName } from 'src/typings/ItemName';
+import { itemNameToAction } from 'src/lookup-tables/itemNameToAnimation';
 
 type Props = {
   readonly actions: Actions;
@@ -21,15 +18,15 @@ export const mapEffectsToAnimationNames = ({ actions, input, player }: Props): v
     slowToWalk,
     startAttacking,
     startIdling,
-    stopAttacking,
     startRunning,
     startWalking,
+    stopAttacking,
     stopIdling,
     stopRunning,
     stopWalking,
   } = actions;
 
-  const itemNameToActionDuo: { readonly [key in ItemName]: ActionDuo } = {
+  const itemNameToCommand = {
     /** Empty hands mean you idle on LMB. */
     '': {
       start: startIdling,
@@ -44,12 +41,12 @@ export const mapEffectsToAnimationNames = ({ actions, input, player }: Props): v
   //////////////////////////////////////////////////////////////////////
   // * From Nothing To Idling *
   //////////////////////////////////////////////////////////////////////
-  player.activeEffects.on('empty', startIdling);
+  player.effects.on('empty', startIdling);
 
   //////////////////////////////////////////////////////////////////////
   // * From Idling To Moving *
   //////////////////////////////////////////////////////////////////////
-  player.activeEffects.on('add', 'moving', (): void => {
+  player.effects.on('add', 'moving', (): void => {
     const isRunning = input.heldModifierKeys.has('ShiftLeft');
 
     if (isRunning) {
@@ -73,7 +70,7 @@ export const mapEffectsToAnimationNames = ({ actions, input, player }: Props): v
   //////////////////////////////////////////////////////////////////////
   // * From Moving To Nothing  *
   //////////////////////////////////////////////////////////////////////
-  player.activeEffects.on('delete', 'moving', (): void => {
+  player.effects.on('delete', 'moving', (): void => {
     stopRunning();
     stopWalking();
   });
@@ -81,13 +78,13 @@ export const mapEffectsToAnimationNames = ({ actions, input, player }: Props): v
   //////////////////////////////////////////////////////////////////////
   // * Start Using  *
   //////////////////////////////////////////////////////////////////////
-  player.activeEffects.on('add', 'using', (): void => {
+  player.effects.on('add', 'using', (): void => {
     /** NOTE: We consult the currently equipped item about what pair of start/stop functions to actually call here. */
-    const currentItem = character.heldIn(0);
+    const { name } = player.inventory.heldIn(0);
 
-    const { start, stop } = itemNameToActionDuo[currentItem];
+    const { start, stop } = itemNameToCommand[name];
 
-    const animation = itemNameToAnimation[currentItem];
+    const animation = itemNameToAction[name];
 
     start();
 

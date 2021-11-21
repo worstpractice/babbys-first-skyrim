@@ -3,12 +3,13 @@ import { default as React, StrictMode } from 'react';
 import { render } from 'react-dom';
 import { CAPTURE } from 'src/constants/event-listener-options/CAPTURE';
 import { CAPTURE_PASSIVE } from 'src/constants/event-listener-options/CAPTURE_PASSIVE';
-import 'src/game';
+import { ONCE_PASSIVE } from 'src/constants/event-listener-options/ONCE_PASSIVE';
+import { main } from 'src/game/main';
 import { detectLongTasks } from 'src/game/utils/detectLongTasks';
+import { GameUi } from 'src/GameUi';
 import { closeMenusOnAttack } from 'src/handlers/closeMenusOnAttack';
 import { disableSaveShortcut } from 'src/handlers/disableSaveShortcut';
 import { handleHotkeys } from 'src/handlers/handleHotkeys';
-import { Ui } from 'src/Ui';
 import { toFalse } from 'src/utils/setters/toFalse';
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -37,13 +38,28 @@ window.ondragover = toFalse;
 window.ondragstart = toFalse;
 
 window.addEventListener('mousedown', closeMenusOnAttack, CAPTURE_PASSIVE);
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const root = document.querySelector('div');
+const launch = async () => {
+  console.time('boot game');
+  const game = await main();
+  console.timeEnd('boot game');
 
-render(
-  <StrictMode>
-    <Ui />
-  </StrictMode>,
-  root,
+  const root = document.querySelector('div');
+
+  render(
+    <StrictMode>
+      <GameUi game={game} />
+    </StrictMode>,
+    root,
+  );
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+window.addEventListener(
+  'DOMContentLoaded',
+  launch, // eslint-disable-line @typescript-eslint/no-misused-promises
+  ONCE_PASSIVE,
 );

@@ -1,18 +1,17 @@
 import { ANIMATIONS } from 'src/game/constants/ANIMATIONS';
 import { ANIMATIONS_PATH } from 'src/game/constants/ANIMATIONS_PATH';
 import { FBXLoader } from 'src/game/shims/FbxLoader';
-import type { AnimationName } from 'src/game/typings/AnimationName';
+import type { Action } from 'src/game/typings/Action';
 import type { FbxFileName } from 'src/game/typings/FbxFileName';
 import type { LoadingHandler } from 'src/game/typings/LoadingHandler';
-import type { NameClipDuo } from 'src/game/typings/NameClipDuo';
 import { toPromises } from 'src/utils/mapping/toPromises';
 import { panic } from 'src/utils/panic';
-import type { LoadingManager } from 'three';
+import type { AnimationClip, LoadingManager } from 'three';
 
-export const loadPlayerAnimations = async (loadingManager: LoadingManager): Promise<readonly NameClipDuo[]> => {
+export const loadPlayerAnimations = async (loadingManager: LoadingManager): Promise<readonly (readonly [Action, AnimationClip])[]> => {
   const loader = new FBXLoader(loadingManager).setPath(ANIMATIONS_PATH);
 
-  const toLoadingHandler = <T extends readonly [FbxFileName, AnimationName]>([path, name]: T): LoadingHandler => {
+  const toLoadingHandler = <T extends readonly [FbxFileName, Action]>([path, name]: T): LoadingHandler => {
     const handleLoading: LoadingHandler = async () => {
       const { animations } = await loader.loadAsync(path);
 
@@ -26,7 +25,7 @@ export const loadPlayerAnimations = async (loadingManager: LoadingManager): Prom
 
   const handlers: readonly LoadingHandler[] = ANIMATIONS.map(toLoadingHandler);
 
-  const promises: readonly Promise<NameClipDuo>[] = handlers.map(toPromises);
+  const promises: readonly Promise<readonly [Action, AnimationClip]>[] = handlers.map(toPromises);
 
   return Promise.all(promises);
 };

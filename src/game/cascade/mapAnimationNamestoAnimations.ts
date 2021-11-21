@@ -1,15 +1,12 @@
+import type { Action } from 'src/game/typings/Action';
 import type { Player } from 'src/game/typings/Player';
 
-export const mapAnimationNamesToAnimations = ({ activeAnimations, actionClips }: Player): void => {
-  activeAnimations.on('add', (animationName): void => {
-    const { action } = actionClips[animationName];
-
-    action.play();
+export const mapAnimationNamesToAnimations = ({ actions, animations }: Player): void => {
+  actions.on('add', (action: Action): void => {
+    animations[action].animationAction.play();
   });
 
-  activeAnimations.on('delete', (animationName): void => {
-    const { action } = actionClips[animationName];
-
-    action.stop();
+  actions.on('delete', (action: Action): void => {
+    animations[action].animationAction.stop();
   });
 };

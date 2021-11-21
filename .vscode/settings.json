@@ -3,5 +3,5 @@
   "javascript.preferences.importModuleSpecifier": "non-relative",
   "npm.packageManager": "pnpm",
   "typescript.preferences.importModuleSpecifier": "non-relative",
-  "typescript.tsserver.experimental.enableProjectDiagnostics": false
+  "typescript.tsserver.experimental.enableProjectDiagnostics": true
 }
