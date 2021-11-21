@@ -3,7 +3,7 @@ import { useUiState } from 'src/state/UiState';
 import { BACKGROUND } from 'src/styles';
 import type { UiState } from 'src/typings/state/UiState';
 import { css } from 'src/utils/as/css';
-import { from } from 'src/utils/from';
+import { from } from 'src/utils/state/from';
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // * Selectors *

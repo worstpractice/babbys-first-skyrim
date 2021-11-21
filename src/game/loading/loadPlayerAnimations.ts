@@ -12,13 +12,13 @@ import type { LoadingManager } from 'three';
 export const loadPlayerAnimations = async (loadingManager: LoadingManager): Promise<readonly NameClipDuo[]> => {
   const loader = new FBXLoader(loadingManager).setPath(ANIMATIONS_PATH);
 
-  const toLoadingHandler = ([path, name]: readonly [FbxFileName, AnimationName]): LoadingHandler => {
+  const toLoadingHandler = <T extends readonly [FbxFileName, AnimationName]>([path, name]: T): LoadingHandler => {
     const handleLoading: LoadingHandler = async () => {
-      const { animations } = await loader.loadAsync(path);
+      const { animations } = await loader.loadAsync(path, console.debug);
 
       const [animation] = animations;
 
-      return animation ? [name, animation] : panic('Missing animations!');
+      return animation ? [name, animation] : panic(`Missing animation "${name}"!`);
     };
 
     return handleLoading;

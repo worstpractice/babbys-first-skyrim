@@ -1,11 +1,12 @@
 html,
 body {
+  background-color: rgb(0, 0, 0);
   background-size: cover;
+  color: rgb(255, 255, 255);
   overflow: clip;
   shape-rendering: geometricPrecision;
   text-rendering: optimizeLegibility;
   user-select: none;
-  background-color: rgb(0, 0, 0);
 }
 
 .root {

@@ -4,15 +4,18 @@ import { render } from 'react-dom';
 import { CAPTURE } from 'src/constants/event-listener-options/CAPTURE';
 import { CAPTURE_PASSIVE } from 'src/constants/event-listener-options/CAPTURE_PASSIVE';
 import 'src/game';
+import { detectLongTasks } from 'src/game/utils/detectLongTasks';
 import { closeMenusOnAttack } from 'src/handlers/closeMenusOnAttack';
 import { disableSaveShortcut } from 'src/handlers/disableSaveShortcut';
 import { handleHotkeys } from 'src/handlers/handleHotkeys';
 import { Ui } from 'src/Ui';
-import { toFalse } from 'src/utils/state-setters/toFalse';
+import { toFalse } from 'src/utils/setters/toFalse';
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // * Register Event Listeners *
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+detectLongTasks();
+
 /** NOTE: DX improvement. */
 window.addEventListener('keydown', disableSaveShortcut, CAPTURE);
 

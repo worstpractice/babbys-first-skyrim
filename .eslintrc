@@ -1,7 +1,4 @@
 {
-  "env": {
-    "es2021": true
-  },
   "extends": [
     "eslint:recommended",
     "plugin:unicorn/recommended",
@@ -15,7 +12,7 @@
     "ecmaFeatures": {
       "jsx": true
     },
-    "ecmaVersion": 2021,
+    "ecmaVersion": "latest",
     "project": "./tsconfig.json",
     "sourceType": "module",
     "tsconfigRootDir": "."
@@ -40,7 +37,7 @@
     ],
     "@typescript-eslint/ban-tslint-comment": "warn",
     "@typescript-eslint/ban-types": "off",
-    "@typescript-eslint/consistent-type-imports": "warn",
+    "@typescript-eslint/consistent-type-imports": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/method-signature-style": "warn",
     "@typescript-eslint/no-base-to-string": "warn",
@@ -306,6 +303,7 @@
       }
     ],
     "symbol-description": "warn",
+    "unicorn/catch-error-name": "off",
     "unicorn/empty-brace-spaces": "off",
     "unicorn/explicit-length-check": "off",
     "unicorn/filename-case": [

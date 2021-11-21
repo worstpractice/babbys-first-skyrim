@@ -29,5 +29,5 @@ const styles = {
     padding: 10,
     pointerEvents: 'all',
     width: 75,
-  }),
+  } as const),
 } as const;

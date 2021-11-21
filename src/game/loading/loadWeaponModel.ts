@@ -9,11 +9,9 @@ import type { Group, LoadingManager } from 'three';
 import { Vector3 } from 'three';
 
 export const loadWeaponModel = async (loadingManager: LoadingManager, playerModel: Group): Promise<void> => {
-  const loader = new FBXLoader(loadingManager);
+  const loader = new FBXLoader(loadingManager).setPath(WEAPONS_PATH);
 
-  loader.setPath(WEAPONS_PATH);
-
-  const model = await loader.loadAsync(`${ITEM_NAME}.fbx`);
+  const model = await loader.loadAsync(`${ITEM_NAME}.fbx`, console.debug);
 
   model.name = ITEM_NAME;
   model.scale.setScalar(0.021);

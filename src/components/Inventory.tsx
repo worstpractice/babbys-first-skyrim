@@ -13,7 +13,7 @@ import type { ClickedState } from 'src/typings/state/ClickedState';
 import type { DraggedState } from 'src/typings/state/DraggedState';
 import type { UiState } from 'src/typings/state/UiState';
 import { css } from 'src/utils/as/css';
-import { from } from 'src/utils/from';
+import { from } from 'src/utils/state/from';
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // * Selectors *

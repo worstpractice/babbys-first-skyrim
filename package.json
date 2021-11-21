@@ -6,7 +6,7 @@
     "obset": "4.0.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "three": "github:mrdoob/three.js#5d3e4ece",
+    "three": "github:mrdoob/three.js#a6afa4a7",
     "zustand": "3.6.5"
   },
   "devDependencies": {
@@ -14,21 +14,21 @@
     "@snowpack/plugin-react-refresh": "2.5.0",
     "@snowpack/plugin-typescript": "1.2.1",
     "@types/dat.gui": "0.7.7",
-    "@types/react": "17.0.34",
+    "@types/react": "17.0.36",
     "@types/react-dom": "17.0.11",
     "@types/snowpack-env": "2.3.4",
     "@types/three": "0.134.0",
-    "@typescript-eslint/eslint-plugin": "5.3.1",
-    "@typescript-eslint/parser": "5.3.1",
-    "eslint": "8.2.0",
-    "eslint-plugin-react": "7.27.0",
+    "@typescript-eslint/eslint-plugin": "5.4.0",
+    "@typescript-eslint/parser": "5.4.0",
+    "eslint": "8.3.0",
+    "eslint-plugin-react": "7.27.1",
     "eslint-plugin-react-hooks": "4.3.0",
-    "eslint-plugin-unicorn": "38.0.1",
+    "eslint-plugin-unicorn": "39.0.0",
     "prettier": "2.4.1",
     "prettier-plugin-jsdoc": "0.3.30",
     "prettier-plugin-organize-imports": "2.3.4",
     "snowpack": "3.8.8",
-    "typescript": "4.6.0-dev.20211113"
+    "typescript": "4.6.0-dev.20211121"
   },
   "scripts": {
     "build": "snowpack build",
