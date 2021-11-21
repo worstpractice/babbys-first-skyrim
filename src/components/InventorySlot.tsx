@@ -8,8 +8,8 @@ import type { ItemName } from 'src/typings/ItemName';
 import type { ClickedState } from 'src/typings/state/ClickedState';
 import type { DraggedState } from 'src/typings/state/DraggedState';
 import { css } from 'src/utils/as/css';
-import { from } from 'src/utils/state/from';
 import { slot } from 'src/utils/make/slot';
+import { from } from 'src/utils/state/from';
 import { toIconUrl } from 'src/utils/urls/toIconUrl';
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
