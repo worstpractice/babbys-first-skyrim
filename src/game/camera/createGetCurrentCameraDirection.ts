@@ -1,5 +1,5 @@
-import type { BasicVec3 } from 'src/game/typings/compatibility/BasicVec3';
 import type { Actor } from 'src/game/typings/Actor';
+import type { BasicVec3 } from 'src/game/typings/compatibility/BasicVec3';
 import type { PerspectiveCamera } from 'three';
 import { Ray, Vector3 } from 'three';
 

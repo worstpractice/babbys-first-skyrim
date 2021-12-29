@@ -1,6 +1,6 @@
+import type { Actor } from 'src/game/typings/Actor';
 import type { AnimationMixerEvent } from 'src/game/typings/AnimationMixerEvent';
 import type { Actions } from 'src/game/typings/commands/Actions';
-import type { Actor } from 'src/game/typings/Actor';
 
 export const registerActionHandlers = ({ actions, effects, mixer }: Actor): Actions => {
   /////////////////////////////////////////////////////////////////////////////

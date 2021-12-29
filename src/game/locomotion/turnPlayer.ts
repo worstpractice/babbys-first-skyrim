@@ -1,5 +1,5 @@
-import type { Input } from 'src/game/typings/Input';
 import type { Actor } from 'src/game/typings/Actor';
+import type { Input } from 'src/game/typings/Input';
 
 export const turnPlayer = (deltaInSeconds: number, input: Input, player: Actor): void => {
   if (!player.effects.has('turning')) return;

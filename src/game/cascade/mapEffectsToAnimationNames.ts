@@ -1,8 +1,8 @@
+import type { Actor } from 'src/game/typings/Actor';
 import type { AnimationMixerEvent } from 'src/game/typings/AnimationMixerEvent';
 import type { AnimationMixerListener } from 'src/game/typings/AnimationMixerListener';
 import type { Actions } from 'src/game/typings/commands/Actions';
 import type { Input } from 'src/game/typings/Input';
-import type { Actor } from 'src/game/typings/Actor';
 import { itemNameToAction } from 'src/lookup-tables/itemNameToAnimation';
 
 type Props = {

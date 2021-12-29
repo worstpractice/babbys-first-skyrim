@@ -1,6 +1,6 @@
+import type { Actor } from 'src/game/typings/Actor';
 import type { Effects } from 'src/game/typings/commands/Effects';
 import type { Item } from 'src/game/typings/Item';
-import type { Actor } from 'src/game/typings/Actor';
 import { itemNameToAction } from 'src/lookup-tables/itemNameToAnimation';
 
 export const registerEffectHandlers = ({ actions, effects }: Actor): Effects => {
