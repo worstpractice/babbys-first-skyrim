@@ -1,11 +1,11 @@
 import { calculateCurrentLookAt } from 'src/game/camera/calculateCurrentLookAt';
 import { calculateFrameRateIndependentLerpCoefficient } from 'src/game/camera/calculateFrameRateIndependentLerpCoefficient';
 import { calculateIdealFrom } from 'src/game/camera/calculateIdealFrom';
-import type { Player } from 'src/game/typings/Player';
+import type { Actor } from 'src/game/typings/Actor';
 import type { PerspectiveCamera } from 'three';
 import { Vector3 } from 'three';
 
-export const tickCamera = (deltaInSeconds: number, camera: PerspectiveCamera, player: Player): void => {
+export const tickCamera = (deltaInSeconds: number, camera: PerspectiveCamera, player: Actor): void => {
   /** NOTE: places the camera a little bit behind the player and above their shoulder. */
   const baseOffset: Vector3 = new Vector3(-15, 20, -15);
 

@@ -1,6 +1,6 @@
 import { default as cannonDebugger } from 'cannon-es-debugger';
-import { createActions } from 'src/game/cascade/actions/createActions';
-import { createEffects } from 'src/game/cascade/effects/createEffects';
+import { registerActionHandlers } from 'src/game/cascade/actions/registerActionHandlers';
+import { registerEffectHandlers } from 'src/game/cascade/effects/registerEffectHandlers';
 import { mapAnimationNamesToAnimations } from 'src/game/cascade/mapAnimationNamesToAnimations';
 import { mapEffectsToAnimationNames } from 'src/game/cascade/mapEffectsToAnimationNames';
 import { mapInputToKeys } from 'src/game/cascade/mapInputToKeys';
@@ -8,10 +8,12 @@ import { mapKeysToEffects } from 'src/game/cascade/mapKeysToEffects';
 import { createCamera } from 'src/game/engine/createCamera';
 import { createGameLoop } from 'src/game/engine/createGameLoop';
 import { createLoadingManager } from 'src/game/engine/createLoadingManager';
+import { createPlayer } from 'src/game/engine/createPlayer';
 import { createRenderer } from 'src/game/engine/createRenderer';
 import { createScene } from 'src/game/engine/createScene';
 import { createWorld } from 'src/game/engine/createWorld';
-import { createPlayer } from 'src/game/entities/createPlayer';
+import { createActor } from 'src/game/entities/createActor';
+import { createSphere } from 'src/game/entities/createSphere';
 import { createInfinitePlane } from 'src/game/ground/createInfinitePlane';
 import { createInput } from 'src/game/input/createInput';
 import { createLevel } from 'src/game/level/createLevel';
@@ -32,52 +34,77 @@ export const main = async (): Promise<Game> => {
 
   const loadingManager = createLoadingManager();
 
-  const scene = createScene({ loadingManager });
+  const scene = createScene({
+    loadingManager,
+  });
 
   const mixers: AnimationMixer[] = [];
 
-  const player = await createPlayer({ loadingManager, mixers });
+  const player = await createPlayer({
+    actor: await createActor({
+      loadingManager,
+      mixers,
+    }),
+    camera,
+    input,
+  });
 
-  const actions = createActions(player);
+  const actions = registerActionHandlers(player.actor);
 
-  const effects = createEffects(player);
+  const effects = registerEffectHandlers(player.actor);
 
   const level = createLevel({
     constructors: {
+      gameObjects: [
+        //
+        () => createInfinitePlane(),
+        ...new Array(10).fill(() => createSphere()),
+        () => player.actor,
+      ],
       lights: [
         //
         createAmbientLight,
         createDirectionalLight,
       ],
-      things: [
-        //
-        () => {
-          return createInfinitePlane();
-        },
-        () => {
-          return player;
-        },
-      ],
     },
     scene,
     world,
-  });
+  } as const);
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // * Essential Side Effects 🤦‍♂️ *
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  loadingManager.onLoad = createGameLoop({ camera, input, level, mixers, player, renderer, scene, world });
+  loadingManager.onLoad = createGameLoop({
+    level,
+    mixers,
+    player,
+    renderer,
+    scene,
+    world,
+  });
 
-  mapInputToKeys(input);
+  mapInputToKeys(player);
 
-  mapKeysToEffects({ actions, effects, input, player });
+  mapKeysToEffects({
+    actions,
+    effects,
+    player,
+  });
 
-  mapEffectsToAnimationNames({ actions, input, player });
+  mapEffectsToAnimationNames({
+    actions,
+    actor: player.actor,
+    input,
+  });
 
-  mapAnimationNamesToAnimations(player);
+  mapAnimationNamesToAnimations(player.actor);
 
-  registerEventListeners({ camera, input, renderer });
+  registerEventListeners({
+    camera,
+    input,
+    renderer,
+  });
 
   actions.startIdling();
 
@@ -86,7 +113,6 @@ export const main = async (): Promise<Game> => {
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   return {
-    camera,
     mixers,
     player,
     renderer,

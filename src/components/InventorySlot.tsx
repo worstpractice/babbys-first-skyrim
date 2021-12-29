@@ -31,7 +31,6 @@ export const InventorySlot = ({ index, inventory, onChange }: Props) => {
   const slotRef = useRef<HTMLDivElement>(null);
   const item = inventory.heldIn(index);
 
-  ///////////////////////////////////////////////////////////////////////////
   const handleMouseDown = (): void => {
     const { current } = slotRef;
 
@@ -40,7 +39,6 @@ export const InventorySlot = ({ index, inventory, onChange }: Props) => {
     setCurrentlyClickedElement(current);
   };
 
-  ///////////////////////////////////////////////////////////////////////////
   const handleMouseUp = (): void => {
     const { current } = slotRef;
 
@@ -72,7 +70,6 @@ export const InventorySlot = ({ index, inventory, onChange }: Props) => {
     } as const);
   };
 
-  ///////////////////////////////////////////////////////////////////////////
   const handleMouseLeave = (): void => {
     const { current } = slotRef;
 
@@ -82,7 +79,6 @@ export const InventorySlot = ({ index, inventory, onChange }: Props) => {
     setCurrentlyDraggedElement(current);
   };
 
-  ///////////////////////////////////////////////////////////////////////////
   const style = item
     ? ({
         ...slotStyles.occupied,

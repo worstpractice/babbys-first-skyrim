@@ -1,12 +1,12 @@
 import type { World } from 'cannon-es';
 import { ObSet } from 'obset';
-import type { Thing } from 'src/game/typings/Thing';
+import type { GameObject } from 'src/game/typings/GameObject';
 import type { Level } from 'src/typings/Level';
 import type { AmbientLight, DirectionalLight, Scene } from 'three';
 
 type Props = {
   readonly constructors: {
-    readonly things: readonly ((this: void) => Thing)[];
+    readonly gameObjects: readonly ((this: void) => GameObject)[];
     readonly lights: readonly ((this: void) => AmbientLight | DirectionalLight)[];
   };
   readonly scene: Scene;
@@ -14,7 +14,7 @@ type Props = {
 };
 
 export const createLevel = ({ constructors, scene, world }: Props): Level => {
-  const things = new ObSet<Thing>();
+  const gameObjects = new ObSet<GameObject>();
 
   /////////////////////////////////////////////////////////////////////////////
   // * Lights *
@@ -26,14 +26,14 @@ export const createLevel = ({ constructors, scene, world }: Props): Level => {
   }
 
   /////////////////////////////////////////////////////////////////////////////
-  // * Things *
+  // * GameObjects *
   /////////////////////////////////////////////////////////////////////////////
-  for (const constructor of constructors.things) {
-    const thing = constructor();
+  for (const constructor of constructors.gameObjects) {
+    const gameObject = constructor();
 
-    things.add(thing);
+    gameObjects.add(gameObject);
 
-    const { body, model } = thing;
+    const { body, model } = gameObject;
 
     scene.add(model);
     world.addBody(body);
@@ -42,8 +42,8 @@ export const createLevel = ({ constructors, scene, world }: Props): Level => {
   /////////////////////////////////////////////////////////////////////////////
 
   return {
+    gameObjects,
     scene,
-    things,
     world,
   };
 };

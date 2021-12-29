@@ -3,7 +3,7 @@ import { InventorySlot } from 'src/components/InventorySlot';
 import { Flex } from 'src/components/layout/Flex';
 import { Statue } from 'src/components/Statue';
 import { FIRST_ROW, LEFT_COLUMN, RIGHT_COLUMN, SECOND_ROW, THIRD_ROW } from 'src/constants/INVENTORY';
-import type { Player } from 'src/game/typings/Player';
+import type { Inventory as I } from 'src/game/typings/Inventory';
 import { handleChange } from 'src/handlers/handleChange';
 import { useClickedState } from 'src/state/ClickedState';
 import { useDraggedState } from 'src/state/DraggedState';
@@ -26,10 +26,10 @@ const fromUi = from<UiState>().select('currentOpenMenu');
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 type Props = {
-  readonly player: Player;
+  readonly inventory: I;
 };
 
-export const Inventory = ({ player }: Props) => {
+export const Inventory = ({ inventory }: Props) => {
   const { setCurrentlyClickedElement } = useClickedState(fromClicked);
   const { setCurrentlyDraggedElement } = useDraggedState(fromDragged);
   const { currentOpenMenu } = useUiState(fromUi);
@@ -42,8 +42,6 @@ export const Inventory = ({ player }: Props) => {
   };
 
   let slotNumber: Slot = 0;
-
-  const { inventory } = player;
 
   return (
     <Flex direction="column" resetClickState={resetClickState} style={styles.inventory}>

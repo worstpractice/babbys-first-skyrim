@@ -1,14 +1,15 @@
 import { Body, Box, Vec3 } from 'cannon-es';
 import { ObSet } from 'obset';
 import { createInventory } from 'src/game/entities/createInventory';
-import { loadPlayerAnimations } from 'src/game/loading/loadPlayerAnimations';
-import { loadPlayerModel } from 'src/game/loading/loadPlayerModel';
+import { loadKnightAnimations } from 'src/game/loading/loadKnightAnimations';
+import { loadKnightModel } from 'src/game/loading/loadKnightModel';
 import { loadWeaponModel } from 'src/game/loading/loadWeaponModel';
 import type { Action } from 'src/game/typings/Action';
 import type { Animation } from 'src/game/typings/Animation';
 import type { Effect } from 'src/game/typings/Effect';
-import type { Player } from 'src/game/typings/Player';
+import type { Actor } from 'src/game/typings/Actor';
 import type { Table } from 'src/game/typings/Table';
+import { uuid } from 'src/game/utils/uuid';
 import { snitch } from 'src/utils/snitch';
 import type { LoadingManager } from 'three';
 import { AnimationMixer, LoopOnce } from 'three';
@@ -18,12 +19,12 @@ type Props = {
   readonly mixers: AnimationMixer[];
 };
 
-export const createPlayer = async ({ loadingManager, mixers }: Props): Promise<Player> => {
+export const createActor = async ({ loadingManager, mixers }: Props): Promise<Actor> => {
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // * Load Model *
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // Loading player model must complete before loading weapon model may commence
-  const model = await loadPlayerModel({ loadingManager }); // Every model has one mixer
+  const model = await loadKnightModel({ loadingManager }); // Every model has one mixer
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // * Create Mixer *
@@ -37,7 +38,7 @@ export const createPlayer = async ({ loadingManager, mixers }: Props): Promise<P
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   const promises = [
     //
-    loadPlayerAnimations(loadingManager),
+    loadKnightAnimations(loadingManager),
     loadWeaponModel(loadingManager, model),
   ] as const;
 
@@ -81,7 +82,6 @@ export const createPlayer = async ({ loadingManager, mixers }: Props): Promise<P
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // * Create ObSets *
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
   const actions = new ObSet<Action>()
     //
     .on('add', snitch)
@@ -95,18 +95,17 @@ export const createPlayer = async ({ loadingManager, mixers }: Props): Promise<P
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // * Create Inventory *
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
   const inventory = createInventory();
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // * Create Player *
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
   return {
     actions,
     animations,
     body,
     effects,
+    id: uuid(),
     inventory,
     mixer,
     model,

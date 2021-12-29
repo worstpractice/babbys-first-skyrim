@@ -1,17 +1,22 @@
 import type { Input } from 'src/game/typings/Input';
-import type { Player } from 'src/game/typings/Player';
+import type { Actor } from 'src/game/typings/Actor';
 import type { Vector3 } from 'three';
 
-export const movePlayer = (deltaInSeconds: number, getCurrentCameraDirection: (this: void) => Vector3, input: Input, player: Player) => {
+export const movePlayer = (deltaInSeconds: number, getCurrentCameraDirection: (this: void) => Vector3, input: Input, player: Actor) => {
   if (!player.effects.has('moving')) return;
 
-  const direction = input.heldKeys.has('KeyW') ? 25 : -25;
+  let { x, z } = getCurrentCameraDirection();
 
-  const velocity = input.heldModifierKeys.has('ShiftLeft') ? direction * 2 : direction;
+  if (input.heldModifierKeys.has('ShiftLeft')) {
+    x *= 2;
+    z *= 2;
+  }
 
-  const { x, z } = getCurrentCameraDirection();
+  if (input.heldKeys.has('KeyS')) {
+    x = -x;
+    z = -z;
+  }
 
-  player.body.quaternion.w = 1;
-  player.body.velocity.x = x * velocity;
-  player.body.velocity.z = z * velocity;
+  player.body.position.x += x * 0.5;
+  player.body.position.z += z * 0.5;
 };

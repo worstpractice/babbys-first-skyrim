@@ -8,12 +8,12 @@ type Props = {
   readonly loadingManager: LoadingManager;
 };
 
-export const loadPlayerModel = async ({ loadingManager }: Props): Promise<Group> => {
+export const loadKnightModel = async ({ loadingManager }: Props): Promise<Group> => {
   const loader = new FBXLoader(loadingManager).setPath(CHARACTERS_PATH);
 
   const model = await loader.loadAsync('castle-guard.fbx');
 
-  model.name = 'playerModel';
+  model.name = 'knightModel';
   model.scale.setScalar(0.09);
 
   model.traverse(enableShadows);

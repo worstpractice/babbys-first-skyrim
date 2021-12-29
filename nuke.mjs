@@ -1,6 +1,6 @@
-import { rm } from 'fs/promises';
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
+import { rm } from 'node:fs/promises';
+import { dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const getProjectRoot = () => {
   // @ts-ignore

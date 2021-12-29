@@ -1,6 +1,5 @@
 import type { Mutable } from 'src/game/typings/Mutable';
-import type { CubeTexture, LoadingManager } from 'three';
-import { CubeTextureLoader, Scene, sRGBEncoding } from 'three';
+import { CubeTexture, CubeTextureLoader, LoadingManager, Scene, sRGBEncoding } from 'three';
 
 type Props = {
   readonly loadingManager: LoadingManager;

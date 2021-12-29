@@ -15,7 +15,6 @@ import { from } from 'src/utils/state/from';
 // * Selectors *
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const fromUi = from<UiState>().select('toggleCurrentOpenMenu');
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 type Props = {
@@ -37,13 +36,13 @@ export const GameUi = ({ game }: Props) => {
     toggleCurrentOpenMenu('quests');
   };
 
-  const { player } = game;
+  const { inventory } = game.player.actor;
 
   return (
     <div style={styles.ui}>
       <div style={styles.topHalf}>
         <Portrait />
-        <Inventory player={player} />
+        <Inventory inventory={inventory} />
         <Character />
         <Quests />
       </div>

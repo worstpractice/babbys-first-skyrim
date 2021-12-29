@@ -11,7 +11,7 @@ export type Actions = {
   readonly stopAttacking: (this: void) => void;
   readonly stopIdling: (this: void) => void;
   readonly stopJumping: (this: void) => void;
-  readonly stopJumpingAndCleanUp: ({ action }: AnimationMixerEvent) => void;
+  readonly stopJumpingAndCleanUp: (this: void, { action }: AnimationMixerEvent) => void;
   readonly stopRunning: (this: void) => void;
   readonly stopWalking: (this: void) => void;
 };

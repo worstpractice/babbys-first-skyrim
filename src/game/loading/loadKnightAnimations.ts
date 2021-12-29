@@ -8,7 +8,7 @@ import { toPromises } from 'src/utils/mapping/toPromises';
 import { panic } from 'src/utils/panic';
 import type { AnimationClip, LoadingManager } from 'three';
 
-export const loadPlayerAnimations = async (loadingManager: LoadingManager): Promise<readonly (readonly [Action, AnimationClip])[]> => {
+export const loadKnightAnimations = async (loadingManager: LoadingManager): Promise<readonly (readonly [Action, AnimationClip])[]> => {
   const loader = new FBXLoader(loadingManager).setPath(ANIMATIONS_PATH);
 
   const toLoadingHandler = <T extends readonly [FbxFileName, Action]>([path, name]: T): LoadingHandler => {

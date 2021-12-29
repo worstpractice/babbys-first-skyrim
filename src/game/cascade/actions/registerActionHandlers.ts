@@ -1,8 +1,8 @@
 import type { AnimationMixerEvent } from 'src/game/typings/AnimationMixerEvent';
 import type { Actions } from 'src/game/typings/commands/Actions';
-import type { Player } from 'src/game/typings/Player';
+import type { Actor } from 'src/game/typings/Actor';
 
-export const createActions = ({ actions, effects, mixer }: Player): Actions => {
+export const registerActionHandlers = ({ actions, effects, mixer }: Actor): Actions => {
   /////////////////////////////////////////////////////////////////////////////
   // * Attacking *
   /////////////////////////////////////////////////////////////////////////////

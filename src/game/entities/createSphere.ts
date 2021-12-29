@@ -1,9 +1,10 @@
 import { Body, Sphere, Vec3 } from 'cannon-es';
-import type { Thing } from 'src/game/typings/Thing';
+import type { GameObject } from 'src/game/typings/GameObject';
+import { uuid } from 'src/game/utils/uuid';
 import { upTo } from 'src/utils/math/upTo';
 import { Mesh, MeshNormalMaterial, SphereGeometry } from 'three';
 
-export const createSphere = (): Thing => {
+export const createSphere = (): GameObject => {
   const radius = Math.max(3, upTo(12)); // meters
 
   const model = new Mesh(
@@ -13,17 +14,14 @@ export const createSphere = (): Thing => {
   );
 
   const body = new Body({
-    mass: Math.max(10, upTo(100)), // kg
-
+    mass: 0.1, // kg
     position: new Vec3(
       //
       Math.max(10, upTo(100)),
       Math.max(10, upTo(100)),
       Math.max(10, upTo(100)),
     ),
-
     shape: new Sphere(radius),
-
     type: Body.DYNAMIC,
   });
 
@@ -31,6 +29,7 @@ export const createSphere = (): Thing => {
 
   return {
     body,
+    id: uuid(),
     model,
-  };
+  } as const;
 };

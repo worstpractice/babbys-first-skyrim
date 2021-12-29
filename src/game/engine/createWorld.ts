@@ -21,7 +21,7 @@ export const createWorld = () => {
   world.defaultContactMaterial.contactEquationRelaxation = 4;
 
   // Disable friction by default
-  world.defaultContactMaterial.friction = 0;
+  // world.defaultContactMaterial.friction = 0;
 
   // Sweep and prune broadphase
   world.broadphase = new SAPBroadphase(world);

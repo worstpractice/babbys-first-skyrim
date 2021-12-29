@@ -1,17 +1,17 @@
 import type { AnimationMixerListener } from 'src/game/typings/AnimationMixerListener';
 import type { Actions } from 'src/game/typings/commands/Actions';
 import type { Effects } from 'src/game/typings/commands/Effects';
-import type { Input } from 'src/game/typings/Input';
 import type { Player } from 'src/game/typings/Player';
 
 type Props = {
   readonly actions: Actions;
   readonly effects: Effects;
-  readonly input: Input;
   readonly player: Player;
 };
 
-export const mapKeysToEffects = ({ actions, effects, input, player }: Props): void => {
+export const mapKeysToEffects = ({ actions, effects, player }: Props): void => {
+  const { actor, input } = player;
+
   const {
     //
     startJumping,
@@ -64,7 +64,7 @@ export const mapKeysToEffects = ({ actions, effects, input, player }: Props): vo
   // * Jumping *
   //////////////////////////////////////////////////////////////////////
   input.heldActionKeys.on('add', 'Space', (): void => {
-    (player.mixer.addEventListener as AnimationMixerListener)('finished', stopJumpingAndCleanUp);
+    (actor.mixer.addEventListener as AnimationMixerListener)('finished', stopJumpingAndCleanUp);
 
     startJumping();
   });
@@ -73,7 +73,7 @@ export const mapKeysToEffects = ({ actions, effects, input, player }: Props): vo
   // * Attacking *
   //////////////////////////////////////////////////////////////////////
   input.heldMouseButtons.on('add', 'LMB', (): void => {
-    startUsing(player.inventory.heldIn(0));
+    startUsing(actor.inventory.heldIn(0));
 
     input.heldMouseButtons.once('delete', 'LMB', stopUsing);
   });
