@@ -1,4 +1,5 @@
-import { Constructors, GameEngine } from 'src/engine/GameEngine';
+import { GameEngine } from 'src/engine/GameEngine';
+import { GameObject } from 'src/engine/GameObject';
 import { PHYSICS_TIME_STEP } from 'src/game/constants/PHYSICS_TIME_STEP';
 import type { BasicQuat } from 'src/game/typings/compatibility/BasicQuat';
 import type { BasicVec3 } from 'src/game/typings/compatibility/BasicVec3';
@@ -9,8 +10,8 @@ export class GameLoop extends GameEngine {
 
   private deltaInSeconds: number = 0;
 
-  constructor(loadingManager: LoadingManager, constructors: Constructors) {
-    super(loadingManager, constructors);
+  constructor(loadingManager: LoadingManager) {
+    super(loadingManager);
     window.requestAnimationFrame(this.gameLoop);
   }
 
@@ -38,7 +39,7 @@ export class GameLoop extends GameEngine {
   }
 
   private tickPhysics(this: this): void {
-    for (const { body, mesh } of this.gameObjects) {
+    for (const { body, mesh } of GameObject.instances) {
       mesh.position.copy(body.position as BasicVec3 as Vector3);
       mesh.quaternion.copy(body.quaternion as BasicQuat as Quaternion);
     }

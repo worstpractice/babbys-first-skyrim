@@ -1,7 +1,9 @@
 import 'modern-normalize';
 import { default as React, StrictMode } from 'react';
 import { render } from 'react-dom';
+import type { Constructors } from 'src/engine/GameEngine';
 import { GameLoop } from 'src/engine/GameLoop';
+import { GameObject } from 'src/engine/GameObject';
 import { Ground } from 'src/game/lib/Ground';
 import { Pawn } from 'src/game/lib/Pawn';
 import { Sphere } from 'src/game/lib/Sphere';
@@ -71,28 +73,39 @@ const launch = async () => {
   const pawnDeps1 = await loadNameClipDuos({ loadingManager });
   const pawnDeps2 = await loadNameClipDuos({ loadingManager });
 
+  const constructors: Constructors = {
+    gameObjects: [
+      //
+      () => new Ground(),
+      () => new Pawn(...pawnDeps1),
+      () => new Pawn(...pawnDeps2),
+      ...(new Array(10).fill(() => new Sphere()) as readonly (() => Sphere)[]),
+    ],
+    lights: [
+      //
+      createAmbientLight,
+      createDirectionalLight,
+    ],
+  } as const;
+
+  const stuff = constructors.gameObjects.map((fn) => fn());
+
   console.time('boot game');
-  const game = new GameLoop(
-    //
-    loadingManager,
-    {
-      gameObjects: [
-        //
-        () => new Ground(),
-        () => new Pawn(...pawnDeps1),
-        () => new Pawn(...pawnDeps2),
-        ...(new Array(10).fill(() => new Sphere()) as readonly (() => Sphere)[]),
-      ],
-      lights: [
-        //
-        createAmbientLight,
-        createDirectionalLight,
-      ],
-    } as const,
-  );
+  const game = new GameLoop(loadingManager);
+
+  /////////////////////////////////////////////////////////////////////////////
+  // * Lights *
+  /////////////////////////////////////////////////////////////////////////////
+  for (const constructor of constructors.lights) {
+    const light = constructor();
+
+    game.scene.add(light);
+  }
+  /////////////////////////////////////////////////////////////////////////////
+
   console.timeEnd('boot game');
 
-  const { inventory } = ([...game.gameObjects] as const).find((go) => go instanceof Pawn) as Pawn;
+  const { inventory } = ([...GameObject.instances] as const).find((go) => go instanceof Pawn) as Pawn;
 
   render(
     <StrictMode>

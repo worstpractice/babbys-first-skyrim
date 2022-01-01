@@ -1,7 +1,7 @@
 import { GSSolver, NaiveBroadphase, SAPBroadphase, SplitSolver, World } from 'cannon-es';
 import cannonDebugger from 'cannon-es-debugger';
 import { ObSet } from 'obset';
-import type { GameObject } from 'src/engine/GameObject';
+import { GameObject } from 'src/engine/GameObject';
 import { CAMERA_FAR } from 'src/game/constants/CAMERA_FAR';
 import { CAMERA_FOV } from 'src/game/constants/CAMERA_FOV';
 import { CAMERA_NEAR } from 'src/game/constants/CAMERA_NEAR';
@@ -25,7 +25,7 @@ import {
   PerspectiveCamera,
   Scene,
   sRGBEncoding,
-  WebGLRenderer
+  WebGLRenderer,
 } from 'three';
 
 export type Constructors = {
@@ -38,8 +38,6 @@ export abstract class GameEngine {
 
   readonly input: Input;
 
-  readonly gameObjects: ObSet<GameObject> = new ObSet<GameObject>();
-
   readonly loadingManager: LoadingManager;
 
   readonly mixers: Set<AnimationMixer> = new Set<AnimationMixer>();
@@ -51,46 +49,32 @@ export abstract class GameEngine {
   readonly world: World;
 
   // prettier-ignore
-  constructor(loadingManager: LoadingManager, constructors: Constructors) {
+  constructor(loadingManager: LoadingManager) {
     this.loadingManager = loadingManager;
     this.world = this.setupWorld();
     this.camera = this.setupCamera();
     this.input = this.setupInput();
     this.renderer = this.setupRenderer();
     this.scene = this.setupScene();
-    this.populateScene(constructors);
+    this.handleExistingGameObjects();
+    GameObject.instances.on('add', this.handleAddGameObject);
     registerEventListeners(this);
     cannonDebugger(this.scene, this.world.bodies);
   }
 
-  // prettier-ignore
-  private populateScene(this: this, constructors: Constructors): void {
-    /////////////////////////////////////////////////////////////////////////////
-    // * Lights *
-    /////////////////////////////////////////////////////////////////////////////
-    for (const constructor of constructors.lights) {
-      const light = constructor();
+  private readonly handleAddGameObject = (gameObject: GameObject): void => {
+    const { body, mesh } = gameObject;
 
-      this.scene.add(light);
-    }
+    this.scene.add(mesh);
+    this.world.addBody(body);
 
-    /////////////////////////////////////////////////////////////////////////////
-    // * GameObjects *
-    /////////////////////////////////////////////////////////////////////////////
-    for (const constructorThunk of constructors.gameObjects) {
-      const instance = constructorThunk();
+    // @ts-expect-error I know dat, don have to tell me dat
+    gameObject.onBeginPlay();
+  };
 
-      this.gameObjects.add(instance);
-
-      const { body, mesh } = instance;
-
-      this.scene.add(mesh);
-      this.world.addBody(body);
-    }
-
-    for (const gameObject of this.gameObjects) {
-      // @ts-expect-error I know dat, don have to tell me dat
-      gameObject.onBeginPlay();
+  private handleExistingGameObjects(this: this): void {
+    for (const gameObject of GameObject.instances) {
+      this.handleAddGameObject(gameObject);
     }
   }
 
@@ -194,4 +178,7 @@ export abstract class GameEngine {
 
     return world;
   }
+}
+function loadNameClipDuos(arg0: { loadingManager: any }) {
+  throw new Error('Function not implemented.');
 }
