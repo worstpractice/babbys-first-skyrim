@@ -4,8 +4,8 @@ import { FBXLoader } from 'src/game/shims/FbxLoader';
 import type { Action } from 'src/game/typings/Action';
 import type { FbxFileName } from 'src/game/typings/FbxFileName';
 import type { LoadingHandler } from 'src/game/typings/LoadingHandler';
-import { toPromises } from 'src/utils/mapping/toPromises';
-import { panic } from 'src/utils/panic';
+import { toPromises } from 'src/views/utils/mapping/toPromises';
+import { panic } from 'src/views/utils/panic';
 import type { AnimationClip, LoadingManager } from 'three';
 
 export const loadKnightAnimations = async (loadingManager: LoadingManager): Promise<readonly (readonly [Action, AnimationClip])[]> => {

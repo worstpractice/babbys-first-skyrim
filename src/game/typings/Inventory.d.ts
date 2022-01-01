@@ -1,5 +1,5 @@
 import type { Item } from 'src/game/typings/Item';
-import type { Slot } from 'src/typings/inventory/Slot';
+import type { Slot } from 'src/views/typings/inventory/Slot';
 
 export type Inventory = {
   readonly equip: (this: Inventory, item: Item, slot: Slot) => Item;

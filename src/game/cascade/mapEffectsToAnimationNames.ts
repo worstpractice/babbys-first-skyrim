@@ -3,7 +3,7 @@ import type { AnimationMixerEvent } from 'src/game/typings/AnimationMixerEvent';
 import type { AnimationMixerListener } from 'src/game/typings/AnimationMixerListener';
 import type { Actions } from 'src/game/typings/commands/Actions';
 import type { Input } from 'src/game/typings/Input';
-import { itemNameToAction } from 'src/lookup-tables/itemNameToAnimation';
+import { itemNameToAction } from 'src/views/lookup-tables/itemNameToAnimation';
 
 type Props = {
   readonly actor: Actor;

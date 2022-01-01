@@ -75,7 +75,7 @@ export const main = async (): Promise<Game> => {
   // * Essential Side Effects 🤦‍♂️ *
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  loadingManager.onLoad = createGameLoop({
+  const gameLoop = createGameLoop({
     level,
     mixers,
     player,
@@ -109,6 +109,8 @@ export const main = async (): Promise<Game> => {
   actions.startIdling();
 
   cannonDebugger(scene, world.bodies);
+
+  gameLoop();
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

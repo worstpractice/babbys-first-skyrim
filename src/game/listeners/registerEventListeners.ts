@@ -1,10 +1,10 @@
-import { PASSIVE } from 'src/constants/event-listener-options/PASSIVE';
 import { createHandleKeyDown } from 'src/game/handlers/createHandleKeyDown';
 import { createHandleKeyUp } from 'src/game/handlers/createHandleKeyUp';
 import { createHandleMouseDown } from 'src/game/handlers/createHandleMouseDown';
 import { createHandleMouseUp } from 'src/game/handlers/createHandleMouseUp';
 import { createHandleResize } from 'src/game/handlers/createHandleResize';
 import type { Input } from 'src/game/typings/Input';
+import { PASSIVE } from 'src/views/constants/event-listener-options/PASSIVE';
 import type { PerspectiveCamera, WebGLRenderer } from 'three';
 
 type Props = {
@@ -14,15 +14,6 @@ type Props = {
 };
 
 export const registerEventListeners = ({ camera, input, renderer }: Props): void => {
-  const foo = [
-    //
-    ['keydown', createHandleKeyDown(input)],
-    ['keyup', createHandleKeyUp(input)],
-    ['mousedown', createHandleMouseDown(input, renderer)],
-    ['mouseup', createHandleMouseUp(input, renderer)],
-    ['resize', createHandleResize(camera, renderer)],
-  ] as const;
-
   const handleKeyDown = createHandleKeyDown(input);
   const handleKeyUp = createHandleKeyUp(input);
   const handleMouseDown = createHandleMouseDown(input, renderer);

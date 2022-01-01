@@ -1,13 +1,12 @@
 import { Body, Sphere, Vec3 } from 'cannon-es';
 import type { GameObject } from 'src/game/typings/GameObject';
-import { uuid } from 'src/game/utils/uuid';
-import { upTo } from 'src/utils/math/upTo';
+import { upTo } from 'src/views/utils/math/upTo';
 import { Mesh, MeshNormalMaterial, SphereGeometry } from 'three';
 
 export const createSphere = (): GameObject => {
   const radius = Math.max(3, upTo(12)); // meters
 
-  const model = new Mesh(
+  const mesh = new Mesh(
     //
     new SphereGeometry(radius),
     new MeshNormalMaterial(),
@@ -25,11 +24,10 @@ export const createSphere = (): GameObject => {
     type: Body.DYNAMIC,
   });
 
-  model.position.set(body.position.x, body.position.y, body.position.z);
+  mesh.position.set(body.position.x, body.position.y, body.position.z);
 
   return {
     body,
-    id: uuid(),
-    model,
+    mesh,
   } as const;
 };

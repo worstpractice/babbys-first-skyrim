@@ -3,7 +3,7 @@ import { createItem } from 'src/game/entities/createItem';
 import type { Inventory } from 'src/game/typings/Inventory';
 import type { Item } from 'src/game/typings/Item';
 import type { Slots } from 'src/game/typings/Slots';
-import type { Slot } from 'src/typings/inventory/Slot';
+import type { Slot } from 'src/views/typings/inventory/Slot';
 
 export const createInventory = (): Inventory => {
   // 24 in total (slot 0-23)

@@ -9,8 +9,7 @@ import type { Actor } from 'src/game/typings/Actor';
 import type { Animation } from 'src/game/typings/Animation';
 import type { Effect } from 'src/game/typings/Effect';
 import type { Table } from 'src/game/typings/Table';
-import { uuid } from 'src/game/utils/uuid';
-import { snitch } from 'src/utils/snitch';
+import { snitch } from 'src/views/utils/snitch';
 import type { LoadingManager } from 'three';
 import { AnimationMixer, LoopOnce } from 'three';
 
@@ -24,12 +23,12 @@ export const createActor = async ({ loadingManager, mixers }: Props): Promise<Ac
   // * Load Model *
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // Loading player model must complete before loading weapon model may commence
-  const model = await loadKnightModel({ loadingManager }); // Every model has one mixer
+  const mesh = await loadKnightModel({ loadingManager }); // Every model has one mixer
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // * Create Mixer *
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  const mixer = new AnimationMixer(model); // Every mixer has one model
+  const mixer = new AnimationMixer(mesh); // Every mixer has one model
 
   mixers.push(mixer);
 
@@ -39,7 +38,7 @@ export const createActor = async ({ loadingManager, mixers }: Props): Promise<Ac
   const promises = [
     //
     loadKnightAnimations(loadingManager),
-    loadWeaponModel(loadingManager, model),
+    loadWeaponModel(loadingManager, mesh),
   ] as const;
 
   // Run in parallell, but purposefully ignore the 2nd result (which is void)
@@ -105,9 +104,8 @@ export const createActor = async ({ loadingManager, mixers }: Props): Promise<Ac
     animations,
     body,
     effects,
-    id: uuid(),
     inventory,
+    mesh,
     mixer,
-    model,
   } as const;
 };

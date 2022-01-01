@@ -1,4 +1,4 @@
-import { CANVAS } from 'src/constants/CANVAS';
+import { CANVAS } from 'src/views/constants/CANVAS';
 import { PCFSoftShadowMap, sRGBEncoding, WebGLRenderer } from 'three';
 
 export const createRenderer = () => {

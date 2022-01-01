@@ -4,7 +4,7 @@ import { WEAPONS_PATH } from 'src/game/constants/WEAPONS_PATH';
 import { FBXLoader } from 'src/game/shims/FbxLoader';
 import { enableShadows } from 'src/game/utils/traverse/enableShadows';
 import { enableSrgbEncoding } from 'src/game/utils/traverse/enableSrgbEncoding';
-import { itemNameToModel } from 'src/lookup-tables/itemNameToModel';
+import { itemNameToModel } from 'src/views/lookup-tables/itemNameToModel';
 import type { Group, LoadingManager } from 'three';
 import { Vector3 } from 'three';
 

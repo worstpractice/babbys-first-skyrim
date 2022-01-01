@@ -1,7 +1,7 @@
 import type { World } from 'cannon-es';
 import { ObSet } from 'obset';
 import type { GameObject } from 'src/game/typings/GameObject';
-import type { Level } from 'src/typings/Level';
+import type { Level } from 'src/views/typings/Level';
 import type { AmbientLight, DirectionalLight, Scene } from 'three';
 
 type Props = {
@@ -33,9 +33,9 @@ export const createLevel = ({ constructors, scene, world }: Props): Level => {
 
     gameObjects.add(gameObject);
 
-    const { body, model } = gameObject;
+    const { body, mesh } = gameObject;
 
-    scene.add(model);
+    scene.add(mesh);
     world.addBody(body);
   }
 
