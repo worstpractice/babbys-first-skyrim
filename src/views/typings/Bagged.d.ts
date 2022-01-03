@@ -1,20 +1,20 @@
-import type { Item } from 'src/game/typings/Item';
+import type { InventoryItem } from 'src/game/typings/InventoryItem';
 
 export type BagSlots = {
-  8: Item;
-  9: Item;
-  10: Item;
-  11: Item;
-  12: Item;
-  13: Item;
-  14: Item;
-  15: Item;
-  16: Item;
-  17: Item;
-  18: Item;
-  19: Item;
-  20: Item;
-  21: Item;
-  22: Item;
-  23: Item;
+  8: InventoryItem;
+  9: InventoryItem;
+  10: InventoryItem;
+  11: InventoryItem;
+  12: InventoryItem;
+  13: InventoryItem;
+  14: InventoryItem;
+  15: InventoryItem;
+  16: InventoryItem;
+  17: InventoryItem;
+  18: InventoryItem;
+  19: InventoryItem;
+  20: InventoryItem;
+  21: InventoryItem;
+  22: InventoryItem;
+  23: InventoryItem;
 };

@@ -1,48 +1,30 @@
 import { Body, Box, Vec3 } from 'cannon-es';
 import { ObSet } from 'obset';
-import { createInventory } from 'src/game/entities/createInventory';
-import { loadKnightAnimations } from 'src/game/loading/loadKnightAnimations';
-import { loadKnightModel } from 'src/game/loading/loadKnightModel';
-import { loadWeaponModel } from 'src/game/loading/loadWeaponModel';
 import type { Action } from 'src/game/typings/Action';
 import type { Actor } from 'src/game/typings/Actor';
 import type { Animation } from 'src/game/typings/Animation';
 import type { Effect } from 'src/game/typings/Effect';
+import type { Inventory } from 'src/game/typings/Inventory';
 import type { Table } from 'src/game/typings/Table';
 import { snitch } from 'src/views/utils/snitch';
-import type { LoadingManager } from 'three';
+import type { AnimationClip, Mesh } from 'three';
 import { AnimationMixer, LoopOnce } from 'three';
 
 type Props = {
-  readonly loadingManager: LoadingManager;
+  readonly inventory: Inventory;
+  readonly mesh: Mesh;
   readonly mixers: AnimationMixer[];
+  readonly nameClipDuos: readonly (readonly [Action, AnimationClip])[];
+  readonly position: Vec3;
 };
 
-export const createActor = async ({ loadingManager, mixers }: Props): Promise<Actor> => {
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  // * Load Model *
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  // Loading player model must complete before loading weapon model may commence
-  const mesh = await loadKnightModel({ loadingManager }); // Every model has one mixer
-
+export const createActor = async ({ inventory, mesh, mixers, nameClipDuos, position }: Props): Promise<Actor> => {
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // * Create Mixer *
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  const mixer = new AnimationMixer(mesh); // Every mixer has one model
+  const mixer = new AnimationMixer(mesh); // Every mesh has one mixer, every mixer has one mesh
 
   mixers.push(mixer);
-
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  // * Load Assets *
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  const promises = [
-    //
-    loadKnightAnimations(loadingManager),
-    loadWeaponModel(loadingManager, mesh),
-  ] as const;
-
-  // Run in parallell, but purposefully ignore the 2nd result (which is void)
-  const [nameClipDuos] = await Promise.all(promises);
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // * Create Action Clips *
@@ -73,7 +55,7 @@ export const createActor = async ({ loadingManager, mixers }: Props): Promise<Ac
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   const body = new Body({
     mass: 80, // kg
-    position: new Vec3(0, 20, 0),
+    position,
     shape: new Box(new Vec3(6, 12, 6)),
     type: Body.DYNAMIC,
   });
@@ -90,11 +72,6 @@ export const createActor = async ({ loadingManager, mixers }: Props): Promise<Ac
     //
     .on('add', snitch)
     .on('delete', snitch);
-
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  // * Create Inventory *
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  const inventory = createInventory();
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // * Create Player *

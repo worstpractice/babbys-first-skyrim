@@ -3,7 +3,7 @@
   "bracketSpacing": true,
   "htmlWhitespaceSensitivity": "ignore",
   "jsxSingleQuote": false,
-  "printWidth": 140,
+  "printWidth": 160,
   "proseWrap": "never",
   "semi": true,
   "singleQuote": true,

@@ -2,10 +2,9 @@ import { Body, Plane, Quaternion, Vec3 } from 'cannon-es';
 import { COLOR_GROUND } from 'src/game/constants/COLOR_GROUND';
 import { FACING_UPRIGHT } from 'src/game/constants/FACING_UPRIGHT';
 import { GROUND_PLANE_SIDE } from 'src/game/constants/GROUND_PLANE_SIDE';
-import type { GameObject } from 'src/game/typings/GameObject';
 import { Mesh, MeshStandardMaterial, PlaneGeometry } from 'three';
 
-export const createInfinitePlane = (): GameObject => {
+export const createGround = () => {
   /////////////////////////////////////////////////////////////////////////////
   // * 3D *
   /////////////////////////////////////////////////////////////////////////////

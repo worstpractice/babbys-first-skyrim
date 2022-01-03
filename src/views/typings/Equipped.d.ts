@@ -1,12 +1,12 @@
-import type { Item } from 'src/game/typings/Item';
+import type { InventoryItem } from 'src/game/typings/InventoryItem';
 
 export type BodySlots = {
-  0: Item;
-  1: Item;
-  2: Item;
-  3: Item;
-  4: Item;
-  5: Item;
-  6: Item;
-  7: Item;
+  0: InventoryItem;
+  1: InventoryItem;
+  2: InventoryItem;
+  3: InventoryItem;
+  4: InventoryItem;
+  5: InventoryItem;
+  6: InventoryItem;
+  7: InventoryItem;
 };

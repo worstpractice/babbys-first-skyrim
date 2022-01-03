@@ -1,8 +1,10 @@
 import type { MouseEventHandler } from 'react';
 import { default as React } from 'react';
+import type { Actor } from 'src/game/typings/Actor';
 import type { Game } from 'src/game/typings/Game';
 import { BottomCard } from 'src/views/components/BottomCard';
 import { Character } from 'src/views/components/Character';
+import { Inventory } from 'src/views/components/Inventory';
 import { Portrait } from 'src/views/components/Portrait';
 import { Quests } from 'src/views/components/Quests';
 import { useUiState } from 'src/views/state/UiState';
@@ -35,11 +37,13 @@ export const GameUi = ({ game }: Props) => {
     toggleCurrentOpenMenu('quests');
   };
 
+  const { inventory } = game.actors[0] as Actor;
+
   return (
     <div style={styles.ui}>
       <div style={styles.topHalf}>
         <Portrait />
-        {/* <Inventory inventory={inventory} /> */}
+        <Inventory inventory={inventory} />
         <Character />
         <Quests />
       </div>

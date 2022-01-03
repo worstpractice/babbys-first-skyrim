@@ -2,4 +2,4 @@
 export type Hotkey =
   | 'KeyI'
   | 'KeyC'
-  | 'KeyQ';
+  | 'KeyQ'

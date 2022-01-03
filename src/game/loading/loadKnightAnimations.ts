@@ -1,15 +1,19 @@
-import { ANIMATIONS } from 'src/game/constants/ANIMATIONS';
-import { ANIMATIONS_PATH } from 'src/game/constants/ANIMATIONS_PATH';
-import { FBXLoader } from 'src/game/shims/FbxLoader';
 import type { Action } from 'src/game/typings/Action';
 import type { FbxFileName } from 'src/game/typings/FbxFileName';
 import type { LoadingHandler } from 'src/game/typings/LoadingHandler';
+import { FBXLoader } from 'src/game/utils/shims/FbxLoader';
 import { toPromises } from 'src/views/utils/mapping/toPromises';
 import { panic } from 'src/views/utils/panic';
 import type { AnimationClip, LoadingManager } from 'three';
 
-export const loadKnightAnimations = async (loadingManager: LoadingManager): Promise<readonly (readonly [Action, AnimationClip])[]> => {
-  const loader = new FBXLoader(loadingManager).setPath(ANIMATIONS_PATH);
+type Props = {
+  readonly fileNameToAction: readonly (readonly [FbxFileName, Action])[];
+  readonly filePath: `./assets/animations/${string}/`;
+  readonly loadingManager: LoadingManager;
+};
+
+export const loadKnightAnimations = async ({ fileNameToAction, filePath, loadingManager }: Props): Promise<readonly (readonly [Action, AnimationClip])[]> => {
+  const loader = new FBXLoader(loadingManager).setPath(filePath);
 
   const toLoadingHandler = <T extends readonly [FbxFileName, Action]>([path, name]: T): LoadingHandler => {
     const handleLoading: LoadingHandler = async () => {
@@ -23,7 +27,7 @@ export const loadKnightAnimations = async (loadingManager: LoadingManager): Prom
     return handleLoading;
   };
 
-  const handlers: readonly LoadingHandler[] = ANIMATIONS.map(toLoadingHandler);
+  const handlers: readonly LoadingHandler[] = fileNameToAction.map(toLoadingHandler);
 
   const promises: readonly Promise<readonly [Action, AnimationClip]>[] = handlers.map(toPromises);
 

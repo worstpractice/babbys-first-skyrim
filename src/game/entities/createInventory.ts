@@ -1,13 +1,16 @@
 import { DE_NADA } from 'src/game/constants/DE_NADA';
-import { createItem } from 'src/game/entities/createItem';
 import type { Inventory } from 'src/game/typings/Inventory';
-import type { Item } from 'src/game/typings/Item';
+import type { InventoryItem } from 'src/game/typings/InventoryItem';
 import type { Slots } from 'src/game/typings/Slots';
 import type { Slot } from 'src/views/typings/inventory/Slot';
 
-export const createInventory = (): Inventory => {
+type Props = {
+  readonly startingItems: readonly InventoryItem[];
+};
+
+export const createInventory = ({ startingItems }: Props): Inventory => {
   // 24 in total (slot 0-23)
-  const INVENTORY: Slots = {
+  const inventory: Slots = {
     // 8 equipped (slot 0-7)
     0: DE_NADA, // mainhand
     1: DE_NADA, // offhand
@@ -19,7 +22,7 @@ export const createInventory = (): Inventory => {
     7: DE_NADA, // neck
 
     // 16 bagged (slot 8-23)
-    8: createItem('sword'),
+    8: DE_NADA, // starta
     9: DE_NADA,
     10: DE_NADA,
     11: DE_NADA,
@@ -37,27 +40,38 @@ export const createInventory = (): Inventory => {
     23: DE_NADA,
   };
 
-  const equip = (item: Item, slot: Slot): Item => {
-    const previouslyEquippedItem = INVENTORY[slot];
+  // eslint-disable-next-line no-lone-blocks
+  {
+    let slot = 8;
 
-    INVENTORY[slot] = item;
+    for (const startingItem of startingItems) {
+      inventory[slot++ as Slot] = startingItem;
+    }
+  }
+
+  ////////////////////////////////////////////////////////////////////
+
+  const equip = (item: InventoryItem, slot: Slot): InventoryItem => {
+    const previouslyEquippedItem = inventory[slot];
+
+    inventory[slot] = item;
 
     return previouslyEquippedItem;
   };
 
-  const heldIn = (slot: Slot): Item => {
-    return INVENTORY[slot];
+  const heldIn = (slot: Slot): InventoryItem => {
+    return inventory[slot];
   };
 
   const swap = (slotA: Slot, slotB: Slot): void => {
-    const itemA = INVENTORY[slotA];
-    const itemB = INVENTORY[slotB];
+    const itemA = inventory[slotA];
+    const itemB = inventory[slotB];
 
     equip(itemA, slotB);
     equip(itemB, slotA);
   };
 
-  const unequip = (slot: Slot): Item => {
+  const unequip = (slot: Slot): InventoryItem => {
     return equip(DE_NADA, slot);
   };
 

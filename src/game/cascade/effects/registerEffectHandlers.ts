@@ -1,6 +1,6 @@
 import type { Actor } from 'src/game/typings/Actor';
 import type { Effects } from 'src/game/typings/commands/Effects';
-import type { Item } from 'src/game/typings/Item';
+import type { InventoryItem } from 'src/game/typings/InventoryItem';
 import { itemNameToAction } from 'src/views/lookup-tables/itemNameToAnimation';
 
 export const registerEffectHandlers = ({ actions, effects }: Actor): Effects => {
@@ -40,7 +40,7 @@ export const registerEffectHandlers = ({ actions, effects }: Actor): Effects => 
   /////////////////////////////////////////////////////////////////////////////
   // * Using *
   /////////////////////////////////////////////////////////////////////////////
-  const startUsing = ({ name }: Item): void => {
+  const startUsing = ({ name }: InventoryItem): void => {
     effects.add('using');
 
     const action = itemNameToAction[name];

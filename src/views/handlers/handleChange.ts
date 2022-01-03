@@ -1,11 +1,11 @@
-import { itemNameToModel } from 'src/views/lookup-tables/itemNameToModel';
+import { itemNameToMesh } from 'src/views/lookup-tables/itemNameToMesh';
 import type { SlotEvent } from 'src/views/typings/inventory/SlotEvent';
 import { isHandSlot } from 'src/views/utils/type-predicates/isInHands';
 
 export const handleChange = ({ item, slot }: SlotEvent): void => {
   const { name } = item;
 
-  const model = itemNameToModel[name];
+  const model = itemNameToMesh[name];
 
   if (!model) return console.warn(`No model for ${name}!`);
 
