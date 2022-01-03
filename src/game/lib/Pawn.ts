@@ -1,6 +1,6 @@
 import { Body, Box, Vec3 } from 'cannon-es';
 import { ObSet } from 'obset';
-import { GameActor } from 'src/engine/GameActor';
+import { GameObject } from 'src/engine/GameObject';
 import { createInventory } from 'src/game/entities/createInventory';
 import type { Action } from 'src/game/typings/Action';
 import type { Animation } from 'src/game/typings/Animation';
@@ -12,7 +12,7 @@ import { snitch } from 'src/views/utils/snitch';
 import type { AnimationClip, Object3D } from 'three';
 import { AnimationMixer, LoopOnce } from 'three';
 
-export class Pawn extends GameActor {
+export class Pawn extends GameObject {
   readonly actions: ObSet<Action> = new ObSet<Action>()
     //
     .on('add', snitch)

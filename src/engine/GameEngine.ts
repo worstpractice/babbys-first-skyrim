@@ -16,10 +16,8 @@ import type { TurnKey } from 'src/game/typings/keys/TurnKey';
 import type { RelevantMouseButton } from 'src/game/typings/RelevantMouseButton';
 import { CANVAS } from 'src/views/constants/CANVAS';
 import {
-  AnimationMixer,
   CubeTexture,
   CubeTextureLoader,
-  Light,
   LoadingManager,
   PCFSoftShadowMap,
   PerspectiveCamera,
@@ -28,11 +26,6 @@ import {
   WebGLRenderer,
 } from 'three';
 
-export type Constructors = {
-  readonly gameObjects: readonly (() => GameObject)[];
-  readonly lights: readonly (() => Light)[];
-};
-
 export abstract class GameEngine {
   readonly camera: PerspectiveCamera;
 
@@ -40,15 +33,12 @@ export abstract class GameEngine {
 
   readonly loadingManager: LoadingManager;
 
-  readonly mixers: Set<AnimationMixer> = new Set<AnimationMixer>();
-
   readonly renderer: WebGLRenderer;
 
   readonly scene: Scene;
 
   readonly world: World;
 
-  // prettier-ignore
   constructor(loadingManager: LoadingManager) {
     this.loadingManager = loadingManager;
     this.world = this.setupWorld();
@@ -56,8 +46,9 @@ export abstract class GameEngine {
     this.input = this.setupInput();
     this.renderer = this.setupRenderer();
     this.scene = this.setupScene();
-    this.handleExistingGameObjects();
-    GameObject.instances.on('add', this.handleAddGameObject);
+
+    this.revUpGameEngine();
+
     registerEventListeners(this);
     cannonDebugger(this.scene, this.world.bodies);
   }
@@ -65,17 +56,20 @@ export abstract class GameEngine {
   private readonly handleAddGameObject = (gameObject: GameObject): void => {
     const { body, mesh } = gameObject;
 
-    this.scene.add(mesh);
-    this.world.addBody(body);
+    if (mesh) this.scene.add(mesh);
+    if (body) this.world.addBody(body);
 
-    // @ts-expect-error I know dat, don have to tell me dat
-    gameObject.onBeginPlay();
+    GameObject.beginPlay(gameObject);
   };
 
-  private handleExistingGameObjects(this: this): void {
-    for (const gameObject of GameObject.instances) {
-      this.handleAddGameObject(gameObject);
+  private revUpGameEngine(this: this): void {
+    for (const preExistingGameObject of GameObject.instances) {
+      // retroactively handle pre-existing instances
+      this.handleAddGameObject(preExistingGameObject);
     }
+
+    // begin handling future additions
+    GameObject.instances.on('add', this.handleAddGameObject);
   }
 
   private setupCamera(this: this): PerspectiveCamera {
@@ -178,7 +172,4 @@ export abstract class GameEngine {
 
     return world;
   }
-}
-function loadNameClipDuos(arg0: { loadingManager: any }) {
-  throw new Error('Function not implemented.');
 }

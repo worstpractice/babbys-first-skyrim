@@ -1,34 +1,35 @@
 import type { Body } from 'cannon-es';
 import { ObSet } from 'obset';
+import { createSnitch } from 'src/engine/utils/createSnitch';
 import { panic } from 'src/engine/utils/panic';
-import { uuid } from 'src/engine/utils/uuid';
-import { snitch } from 'src/views/utils/snitch';
-import type { Object3D } from 'three';
+import type { AnimationMixer, Object3D } from 'three';
 
 export abstract class GameObject {
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // * Static *
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  static readonly instances = new ObSet<GameObject>() //
+    .on('add', createSnitch('GameObject'))
+    .on('delete', createSnitch('GameObject'));
+
+  static beginPlay(this: typeof GameObject, instance: GameObject): void {
+    instance.onBeginPlay();
+  }
+
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  private static readonly id = 'e92e56c9-f9ab-49de-a002-c63671551710';
 
-  static readonly instances: ObSet<GameObject> = new ObSet<GameObject>()
-    //
-    .on('add', snitch)
-    .on('delete', snitch);
+  readonly body: Body | null = null;
 
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  // * Instance *
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  abstract readonly body: Body;
+  readonly mixer?: AnimationMixer | null = null;
 
-  readonly kind = (this.constructor as typeof GameObject).id;
-
-  readonly id = uuid();
-
-  abstract readonly mesh: Object3D;
+  readonly mesh: Object3D | null = null;
 
   constructor() {
     GameObject.instances.add(this);
+  }
+
+  private onBeginPlay(this: this): void {
+    console.log('onBeginPlay', this);
   }
 
   private [Symbol.toPrimitive](this: this, hint: 'default' | 'number' | 'string'): string | never {
@@ -36,9 +37,5 @@ export abstract class GameObject {
     return (hint === 'number')
       ? panic(new TypeError(`${this.constructor.name} instance cannot be coerced into a number`))
       : this.constructor.name
-  }
-
-  private onBeginPlay(this: this): void {
-    console.log('onBeginPlay', this);
   }
 }

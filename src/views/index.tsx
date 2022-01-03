@@ -1,9 +1,9 @@
 import 'modern-normalize';
 import { default as React, StrictMode } from 'react';
 import { render } from 'react-dom';
-import type { Constructors } from 'src/engine/GameEngine';
 import { GameLoop } from 'src/engine/GameLoop';
 import { GameObject } from 'src/engine/GameObject';
+import type { Constructors } from 'src/engine/typings/Constructors';
 import { Ground } from 'src/game/lib/Ground';
 import { Pawn } from 'src/game/lib/Pawn';
 import { Sphere } from 'src/game/lib/Sphere';
@@ -89,6 +89,8 @@ const launch = async () => {
   } as const;
 
   const stuff = constructors.gameObjects.map((fn) => fn());
+
+  console.log(stuff);
 
   console.time('boot game');
   const game = new GameLoop(loadingManager);
