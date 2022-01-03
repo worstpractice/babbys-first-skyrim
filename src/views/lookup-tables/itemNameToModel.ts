@@ -1,4 +1,4 @@
 import type { ItemName } from 'src/views/typings/ItemName';
-import type { Group } from 'three';
+import type { Mesh } from 'three';
 
-export const itemNameToModel: { [key in ItemName]?: Group } = {};
+export const itemNameToModel: { [key in ItemName]?: Mesh } = {};

@@ -2,10 +2,14 @@ import { GSSolver, NaiveBroadphase, SAPBroadphase, SplitSolver, World } from 'ca
 import cannonDebugger from 'cannon-es-debugger';
 import { ObSet } from 'obset';
 import { GameObject } from 'src/engine/GameObject';
+import { GAME_OBJECTS } from 'src/engine/globals/GAME_OBJECTS';
+import { LOADING_MANAGER } from 'src/engine/globals/LOADING_MANAGER';
 import { CAMERA_FAR } from 'src/game/constants/CAMERA_FAR';
 import { CAMERA_FOV } from 'src/game/constants/CAMERA_FOV';
 import { CAMERA_NEAR } from 'src/game/constants/CAMERA_NEAR';
+import { COLOR_SKY } from 'src/game/constants/COLOR_SKY';
 import { GRAVITY_OF_YOLO } from 'src/game/constants/GRAVITY_OF_YOLO';
+import { GROUND_PLANE_SIDE } from 'src/game/constants/GROUND_PLANE_SIDE';
 import { registerEventListeners } from 'src/game/listeners/registerEventListeners';
 import type { Input } from 'src/game/typings/Input';
 import type { ActionKey } from 'src/game/typings/keys/ActionKey';
@@ -16,9 +20,10 @@ import type { TurnKey } from 'src/game/typings/keys/TurnKey';
 import type { RelevantMouseButton } from 'src/game/typings/RelevantMouseButton';
 import { CANVAS } from 'src/views/constants/CANVAS';
 import {
+  AmbientLight,
   CubeTexture,
   CubeTextureLoader,
-  LoadingManager,
+  DirectionalLight,
   PCFSoftShadowMap,
   PerspectiveCamera,
   Scene,
@@ -31,26 +36,62 @@ export abstract class GameEngine {
 
   readonly input: Input;
 
-  readonly loadingManager: LoadingManager;
-
   readonly renderer: WebGLRenderer;
 
   readonly scene: Scene;
 
   readonly world: World;
 
-  constructor(loadingManager: LoadingManager) {
-    this.loadingManager = loadingManager;
+  constructor() {
+    console.count(`constructor: ${new.target.name}`);
     this.world = this.setupWorld();
     this.camera = this.setupCamera();
     this.input = this.setupInput();
     this.renderer = this.setupRenderer();
     this.scene = this.setupScene();
 
+    this.addAmbientLight();
+    this.addDirectionalLight();
+
     this.revUpGameEngine();
 
     registerEventListeners(this);
     cannonDebugger(this.scene, this.world.bodies);
+  }
+
+  private addAmbientLight(this: this): void {
+    const light = new AmbientLight(COLOR_SKY, 1);
+
+    light.name = 'ambientLight';
+
+    /** See: https://discoverthreejs.com/tips-and-tricks/#accurate-colors */
+    light.color.convertSRGBToLinear();
+
+    this.scene.add(light);
+  }
+
+  private addDirectionalLight(this: this): void {
+    const light = new DirectionalLight(COLOR_SKY, 1);
+
+    light.name = 'directionalLight';
+
+    /** See: https://discoverthreejs.com/tips-and-tricks/#accurate-colors */
+    light.color.convertSRGBToLinear();
+
+    light.position.set(20, 100, -10);
+    light.target.position.set(0, 0, 0);
+    light.castShadow = true;
+    light.shadow.bias = -0.0001;
+
+    light.shadow.mapSize.width = 16_384;
+    light.shadow.mapSize.height = 16_384;
+
+    light.shadow.camera.left = GROUND_PLANE_SIDE;
+    light.shadow.camera.right = -GROUND_PLANE_SIDE;
+    light.shadow.camera.top = GROUND_PLANE_SIDE;
+    light.shadow.camera.bottom = -GROUND_PLANE_SIDE;
+
+    this.scene.add(light);
   }
 
   private readonly handleAddGameObject = (gameObject: GameObject): void => {
@@ -63,13 +104,13 @@ export abstract class GameEngine {
   };
 
   private revUpGameEngine(this: this): void {
-    for (const preExistingGameObject of GameObject.instances) {
+    for (const preExistingGameObject of GAME_OBJECTS) {
       // retroactively handle pre-existing instances
       this.handleAddGameObject(preExistingGameObject);
     }
 
     // begin handling future additions
-    GameObject.instances.on('add', this.handleAddGameObject);
+    GAME_OBJECTS.on('add', this.handleAddGameObject);
   }
 
   private setupCamera(this: this): PerspectiveCamera {
@@ -104,13 +145,6 @@ export abstract class GameEngine {
     /** See: https://discoverthreejs.com/tips-and-tricks/#accurate-colors */
     renderer.outputEncoding = sRGBEncoding;
 
-    /**
-     * NOTE: Not actually deprecated. Lol.
-     *
-     * See: https://discourse.threejs.org/t/why-is-gammafactor-deprecated-in-webglrenderer-dev-branch/8140/2
-     */
-    renderer.gammaFactor = 2.2;
-
     /** See: https://discoverthreejs.com/book/first-steps/physically-based-rendering/#enable-physically-correct-lighting */
     renderer.physicallyCorrectLights = true;
 
@@ -134,7 +168,7 @@ export abstract class GameEngine {
       './assets/textures/skybox/negz.jpg',
     ];
 
-    const loader = new CubeTextureLoader(this.loadingManager);
+    const loader = new CubeTextureLoader(LOADING_MANAGER);
 
     const skybox: CubeTexture = loader.load(skyboxTexturePaths);
 

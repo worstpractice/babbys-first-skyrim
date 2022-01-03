@@ -1,15 +1,15 @@
 import { Body, Plane, Quaternion, Vec3 } from 'cannon-es';
 import { GameObject } from 'src/engine/GameObject';
+import type { HasPhysics } from 'src/engine/utils/hasPhysics';
 import { COLOR_GROUND } from 'src/game/constants/COLOR_GROUND';
 import { FACING_UPRIGHT } from 'src/game/constants/FACING_UPRIGHT';
 import { GROUND_PLANE_SIDE } from 'src/game/constants/GROUND_PLANE_SIDE';
-import type { Object3D } from 'three';
-import { Mesh, MeshStandardMaterial, PlaneGeometry } from 'three';
+import { BufferGeometry, Mesh, MeshStandardMaterial, PlaneGeometry } from 'three';
 
-export class Ground extends GameObject {
+export class Ground extends GameObject implements HasPhysics {
   readonly body: Body;
 
-  readonly mesh: Object3D;
+  readonly mesh: Mesh<BufferGeometry, MeshStandardMaterial>;
 
   constructor() {
     super();

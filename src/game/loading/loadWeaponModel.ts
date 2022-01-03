@@ -5,35 +5,35 @@ import { FBXLoader } from 'src/game/shims/FbxLoader';
 import { enableShadows } from 'src/game/utils/traverse/enableShadows';
 import { enableSrgbEncoding } from 'src/game/utils/traverse/enableSrgbEncoding';
 import { itemNameToModel } from 'src/views/lookup-tables/itemNameToModel';
-import type { Group, LoadingManager } from 'three';
+import type { LoadingManager, Mesh } from 'three';
 import { Vector3 } from 'three';
 
-export const loadWeaponModel = async (loadingManager: LoadingManager, playerModel: Group): Promise<void> => {
+export const loadWeaponModel = async (loadingManager: LoadingManager, playerMesh: Mesh): Promise<void> => {
   const loader = new FBXLoader(loadingManager).setPath(WEAPONS_PATH);
 
-  const model = await loader.loadAsync(`${ITEM_NAME}.fbx`);
+  const mesh = (await loader.loadAsync(`${ITEM_NAME}.fbx`)) as any as Mesh;
 
-  model.name = ITEM_NAME;
-  model.scale.setScalar(0.021);
-  model.traverse(enableShadows);
-  model.traverse(enableSrgbEncoding);
+  mesh.name = ITEM_NAME;
+  mesh.scale.setScalar(0.021);
+  mesh.traverse(enableShadows);
+  mesh.traverse(enableSrgbEncoding);
 
   // Align to player
-  model.rotateY(Math.PI);
-  model.rotateX(FACING_UPRIGHT);
-  model.rotateY(-1);
-  model.position.add(new Vector3(-10, 13.37, -0.5));
+  mesh.rotateY(Math.PI);
+  mesh.rotateX(FACING_UPRIGHT);
+  mesh.rotateY(-1);
+  mesh.position.add(new Vector3(-10, 13.37, -0.5));
 
-  itemNameToModel[ITEM_NAME] = model;
+  itemNameToModel[ITEM_NAME] = mesh;
 
-  const [root] = playerModel.children;
+  const [root] = playerMesh.children;
 
   root?.traverse((child): void => {
     if (child.name !== 'RightHandIndex1') return;
 
-    child.attach(model);
+    child.attach(mesh);
   });
 
   // Hide for now, unhide via inventory equip
-  model.visible = false;
+  mesh.visible = false;
 };

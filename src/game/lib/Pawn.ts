@@ -1,6 +1,8 @@
 import { Body, Box, Vec3 } from 'cannon-es';
 import { ObSet } from 'obset';
 import { GameObject } from 'src/engine/GameObject';
+import type { HasMixer } from 'src/engine/utils/hasMixer';
+import type { HasPhysics } from 'src/engine/utils/hasPhysics';
 import { createInventory } from 'src/game/entities/createInventory';
 import type { Action } from 'src/game/typings/Action';
 import type { Animation } from 'src/game/typings/Animation';
@@ -9,10 +11,10 @@ import type { Inventory } from 'src/game/typings/Inventory';
 import type { Table } from 'src/game/typings/Table';
 import { upTo } from 'src/views/utils/math/upTo';
 import { snitch } from 'src/views/utils/snitch';
-import type { AnimationClip, Object3D } from 'three';
+import type { AnimationClip, Mesh } from 'three';
 import { AnimationMixer, LoopOnce } from 'three';
 
-export class Pawn extends GameObject {
+export class Pawn extends GameObject implements HasMixer, HasPhysics {
   readonly actions: ObSet<Action> = new ObSet<Action>()
     //
     .on('add', snitch)
@@ -29,11 +31,11 @@ export class Pawn extends GameObject {
 
   readonly inventory: Inventory = createInventory();
 
-  readonly mesh: Object3D;
+  readonly mesh: Mesh;
 
   readonly mixer: AnimationMixer;
 
-  constructor(mesh: Object3D, nameClipDuos: readonly (readonly [Action, AnimationClip])[]) {
+  constructor(mesh: Mesh, nameClipDuos: readonly (readonly [Action, AnimationClip])[]) {
     super();
 
     this.mesh = mesh;

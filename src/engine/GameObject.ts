@@ -1,17 +1,12 @@
 import type { Body } from 'cannon-es';
-import { ObSet } from 'obset';
-import { createSnitch } from 'src/engine/utils/createSnitch';
+import { GAME_OBJECTS } from 'src/engine/globals/GAME_OBJECTS';
 import { panic } from 'src/engine/utils/panic';
-import type { AnimationMixer, Object3D } from 'three';
+import type { AnimationMixer, Mesh } from 'three';
 
 export abstract class GameObject {
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // * Static *
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  static readonly instances = new ObSet<GameObject>() //
-    .on('add', createSnitch('GameObject'))
-    .on('delete', createSnitch('GameObject'));
-
   static beginPlay(this: typeof GameObject, instance: GameObject): void {
     instance.onBeginPlay();
   }
@@ -20,12 +15,16 @@ export abstract class GameObject {
 
   readonly body: Body | null = null;
 
-  readonly mixer?: AnimationMixer | null = null;
+  readonly class: typeof GameObject;
 
-  readonly mesh: Object3D | null = null;
+  readonly mixer: AnimationMixer | null = null;
+
+  readonly mesh: Mesh | null = null;
 
   constructor() {
-    GameObject.instances.add(this);
+    this.class = new.target;
+    console.count(`constructor: ${new.target.name}`);
+    GAME_OBJECTS.add(this);
   }
 
   private onBeginPlay(this: this): void {

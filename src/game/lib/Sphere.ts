@@ -1,12 +1,12 @@
 import { Body, Sphere as CannonSphere, Vec3 } from 'cannon-es';
 import { GameObject } from 'src/engine/GameObject';
 import { upTo } from 'src/views/utils/math/upTo';
-import { Mesh, MeshNormalMaterial, Object3D, SphereGeometry } from 'three';
+import { Mesh, MeshNormalMaterial, SphereGeometry } from 'three';
 
 export class Sphere extends GameObject {
   readonly body: Body;
 
-  readonly mesh: Object3D;
+  readonly mesh: Mesh<SphereGeometry, MeshNormalMaterial>;
 
   readonly radius = Math.max(3, upTo(12)); // meters
 
