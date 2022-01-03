@@ -26,8 +26,8 @@ export const mapInputToKeys = ({ input }: Player): void => {
     }
   });
 
-  input.heldKeys.on('delete', (key): void => {
-    console.count('delete');
+  input.heldKeys.on('remove', (key): void => {
+    console.count('remove');
 
     for (const [test, obset] of testSetPairs) {
       if (!test(key)) continue;

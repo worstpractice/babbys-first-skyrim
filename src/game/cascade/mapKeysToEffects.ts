@@ -37,7 +37,7 @@ export const mapKeysToEffects = ({ actions, effects, player }: Props): void => {
     isTreadingWater ? stopMoving() : startMoving();
   });
 
-  input.heldMovementKeys.on('delete', (): void => {
+  input.heldMovementKeys.on('remove', (): void => {
     const isTreadingWater = input.heldMovementKeys.hasEvery('KeyS', 'KeyW');
 
     if (!isTreadingWater) startMoving();
@@ -57,8 +57,8 @@ export const mapKeysToEffects = ({ actions, effects, player }: Props): void => {
   input.heldActionKeys.on('add', 'KeyA', turn);
   input.heldActionKeys.on('add', 'KeyD', turn);
 
-  input.heldActionKeys.on('delete', 'KeyA', turn);
-  input.heldActionKeys.on('delete', 'KeyD', turn);
+  input.heldActionKeys.on('remove', 'KeyA', turn);
+  input.heldActionKeys.on('remove', 'KeyD', turn);
 
   //////////////////////////////////////////////////////////////////////
   // * Jumping *
@@ -75,6 +75,6 @@ export const mapKeysToEffects = ({ actions, effects, player }: Props): void => {
   input.heldMouseButtons.on('add', 'LMB', (): void => {
     startUsing(actor.inventory.heldIn(0));
 
-    input.heldMouseButtons.once('delete', 'LMB', stopUsing);
+    input.heldMouseButtons.once('remove', 'LMB', stopUsing);
   });
 };

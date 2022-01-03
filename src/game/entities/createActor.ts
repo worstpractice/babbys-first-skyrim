@@ -66,12 +66,12 @@ export const createActor = async ({ inventory, mesh, mixers, nameClipDuos, posit
   const actions = new ObSet<Action>()
     //
     .on('add', snitch)
-    .on('delete', snitch);
+    .on('remove', snitch);
 
   const effects = new ObSet<Effect>()
     //
     .on('add', snitch)
-    .on('delete', snitch);
+    .on('remove', snitch);
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // * Create Player *

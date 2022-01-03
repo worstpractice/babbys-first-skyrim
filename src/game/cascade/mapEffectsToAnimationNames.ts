@@ -51,7 +51,7 @@ export const mapEffectsToAnimationNames = ({ actions, input, actor }: Props): vo
 
     if (isRunning) {
       startRunning();
-      input.heldModifierKeys.once('delete', 'ShiftLeft', slowToWalk);
+      input.heldModifierKeys.once('remove', 'ShiftLeft', slowToWalk);
     } else {
       startWalking();
       input.heldModifierKeys.once('add', 'ShiftLeft', quickenToRun);
@@ -64,13 +64,13 @@ export const mapEffectsToAnimationNames = ({ actions, input, actor }: Props): vo
   input.heldModifierKeys.on('add', 'ShiftLeft', (): void => {
     startRunning();
 
-    input.heldModifierKeys.once('delete', 'ShiftLeft', slowToWalk);
+    input.heldModifierKeys.once('remove', 'ShiftLeft', slowToWalk);
   });
 
   //////////////////////////////////////////////////////////////////////
   // * From Moving To Nothing  *
   //////////////////////////////////////////////////////////////////////
-  actor.effects.on('delete', 'moving', (): void => {
+  actor.effects.on('remove', 'moving', (): void => {
     stopRunning();
     stopWalking();
   });

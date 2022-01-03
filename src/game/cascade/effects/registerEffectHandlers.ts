@@ -45,7 +45,7 @@ export const registerEffectHandlers = ({ actions, effects }: Actor): Effects => 
 
     const action = itemNameToAction[name];
 
-    actions.once('delete', action, (): void => {
+    actions.once('remove', action, (): void => {
       actions.isEmpty ? stopUsing() : actions.once('empty', stopUsing);
     });
   };

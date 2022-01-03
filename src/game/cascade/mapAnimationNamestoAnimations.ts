@@ -6,7 +6,7 @@ export const mapAnimationNamesToAnimations = ({ actions, animations }: Actor): v
     animations[action].animationAction.play();
   });
 
-  actions.on('delete', (action: Action): void => {
+  actions.on('remove', (action: Action): void => {
     animations[action].animationAction.stop();
   });
 };
