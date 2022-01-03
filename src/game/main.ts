@@ -50,17 +50,6 @@ export const main = async (): Promise<Game> => {
 
   const mixers: AnimationMixer[] = [];
 
-  const playerMesh = await loadMesh({
-    fileName: 'castle-guard.fbx',
-    filePath: './assets/models/castle-guard/',
-    loadingManager,
-    name: 'knight',
-    tweaks: [
-      //
-      setMeshScalar(0.09),
-    ],
-  });
-
   // AIIFE to make it extra clear that `playerMesh` is a shared dependency
   const player = await (async () => {
     const playerMesh = await loadMesh({
