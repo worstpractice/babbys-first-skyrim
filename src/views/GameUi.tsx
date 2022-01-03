@@ -1,9 +1,8 @@
 import type { MouseEventHandler } from 'react';
 import { default as React } from 'react';
-import type { Inventory as InventoryType } from 'src/game/typings/Inventory';
+import type { Game } from 'src/game/typings/Game';
 import { BottomCard } from 'src/views/components/BottomCard';
 import { Character } from 'src/views/components/Character';
-import { Inventory } from 'src/views/components/Inventory';
 import { Portrait } from 'src/views/components/Portrait';
 import { Quests } from 'src/views/components/Quests';
 import { useUiState } from 'src/views/state/UiState';
@@ -18,10 +17,10 @@ const fromUi = from<UiState>().select('toggleCurrentOpenMenu');
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 type Props = {
-  readonly inventory: InventoryType;
+  readonly game: Game;
 };
 
-export const GameUi = ({ inventory }: Props) => {
+export const GameUi = ({ game }: Props) => {
   const { toggleCurrentOpenMenu } = useUiState(fromUi);
 
   const handleClickCharacter: MouseEventHandler<HTMLElement> = () => {
@@ -40,7 +39,7 @@ export const GameUi = ({ inventory }: Props) => {
     <div style={styles.ui}>
       <div style={styles.topHalf}>
         <Portrait />
-        <Inventory inventory={inventory} />
+        {/* <Inventory inventory={inventory} /> */}
         <Character />
         <Quests />
       </div>
